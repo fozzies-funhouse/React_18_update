@@ -1,0 +1,11 @@
+[
+  {
+    "name": "star fighter",
+    "type": "shoe",
+    "price": 200,
+    "inventory": 1,
+    "image_url": "path to pic",
+    "model_url": "path to model"
+  }
+]
+
