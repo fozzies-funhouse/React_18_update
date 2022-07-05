@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Image from 'react-bootstrap/Image';
 import Container from '@mui/material/Container';
+// import Card from '@mui/material/Card';
 
 const SignUpForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
