@@ -37,8 +37,8 @@ export const authenticate =
 
 export const logout = () => async (dispatch) => {
   try {
-    const res = await axios.delete('/auth');
     dispatch(setAuth({}));
+    const res = await axios.delete('/auth');
     return history.push('/');
   } catch (err) {
     console.error(err);
