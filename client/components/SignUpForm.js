@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from '../store';
-import Container from 'react-bootstrap/Container';
+// import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
@@ -9,12 +9,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Image from 'react-bootstrap/Image';
+import Container from '@mui/material/Container';
 
 const SignUpForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
 
   return (
-    <Container>
+    <Container maxWidth="sm">
       <h1
         style={{
           display: 'flex',
@@ -30,9 +31,9 @@ const SignUpForm = (props) => {
       <hr></hr>
       <Container>
         <CardGroup>
-          <Col className='d-flex'>
+          <Col className="d-flex">
             <Card
-              className='flex-fill'
+              className="flex-fill"
               style={{
                 width: '40rem',
                 height: '30rem',
@@ -45,27 +46,30 @@ const SignUpForm = (props) => {
               <Form onSubmit={handleSubmit} name={name}>
                 <Form.Group>
                   <Col style={{ width: '16rem' }}>
-                    <Form.Label htmlFor='firstname'>First Name</Form.Label>
-                    <Form.Control name='firstname' type='text'></Form.Control>
+                    <Form.Label htmlFor="firstname">First Name</Form.Label>
+                    <Form.Control name="firstname" type="text"></Form.Control>
                   </Col>
                   <Col style={{ width: '16rem' }}>
-                    <Form.Label htmlFor='lastName'>Last Name</Form.Label>
-                    <Form.Control name='lastname' type='text'></Form.Control>
+                    <Form.Label htmlFor="lastName">Last Name</Form.Label>
+                    <Form.Control name="lastname" type="text"></Form.Control>
                   </Col>
                   <Row>
-                    <Form.Label htmlFor='email'>Email</Form.Label>
-                    <Form.Control name='email' type='text'></Form.Control>
-                    <Form.Label htmlFor='password'>Password</Form.Label>
-                    <Form.Control name='password' type='password'></Form.Control>
+                    <Form.Label htmlFor="email">Email</Form.Label>
+                    <Form.Control name="email" type="text"></Form.Control>
+                    <Form.Label htmlFor="password">Password</Form.Label>
+                    <Form.Control
+                      name="password"
+                      type="password"
+                    ></Form.Control>
                     <Button
-                      variant='secondary'
-                      className='mt-auto'
+                      variant="secondary"
+                      className="mt-auto"
                       style={{
                         width: '40rem',
                         position: 'absolute',
                         bottom: 0,
                       }}
-                      type='submit'
+                      type="submit"
                     >
                       {displayName}
                     </Button>
