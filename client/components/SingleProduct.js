@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useRef } from 'react';
+import React, { Fragment, useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { fetchProduct, addToCart } from '../store/singleProduct';
 import { fetchCart } from '../store/cart';
@@ -7,6 +7,11 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+
+// import BottomNavigation from '@material-ui/core/BottomNavigation';
+// import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+// import { Restore, AddAPhoto } from '@material-ui/icons';
+import { jsonMock } from './assets/mockData';
 
 import { createRoot } from 'react-dom/client';
 import { Canvas, useFrame } from '@react-three/fiber';
@@ -38,10 +43,43 @@ function Box(props) {
 function SingleProduct(props) {
   const [count, setCount] = useState(0);
   const { getCart, getProduct, product, addItemToCart, user } = props;
+
+  const [modelGLB, setModelGLB] = useState(jsonMock.linksGLB[0]);
+  const [modelUSDZ, setModelUSDZ] = useState(jsonMock.linksUSDZ[0]);
+
+  const onSelectModel = (glb, usdz) => {
+    setModelGLB(glb);
+    setModelUSDZ(usdz);
+  };
+
   useEffect(() => {
     getProduct(props.match.params.id);
   }, []);
 
+  //rock
+  const modelRef = useRef();
+  const [annots, setAnnots] = useState([]);
+
+  const handleClick = (event) => {
+    const { clientX, clientY } = event;
+
+    if (modelRef.current) {
+      let hit = modelRef.current.positionAndNormalFromPoint(clientX, clientY);
+      if (hit) {
+        setAnnots((annots) => {
+          return [...annots, hit];
+        });
+      }
+    }
+  };
+
+  const getDataPosition = (annot) => {
+    return `${annot.position.x} ${annot.position.y} ${annot.position.z}`;
+  };
+
+  const getDataNormal = (annot) => {
+    return `${annot.normal.x} ${annot.normal.y} ${annot.normal.z}`;
+  };
   return (
     <Container>
       <h1
@@ -55,7 +93,45 @@ function SingleProduct(props) {
       >
         Welcome {user.first_name || 'Guest'}
       </h1>
-
+      <Fragment>
+        <model-viewer
+          ar
+          modes="scene-viewer quick-look webxr"
+          src={
+            'https://raw.githubusercontent.com/dwqdaiwenqi/react-3d-viewer/master/site/src/lib/model/DamagedHelmet.gltf'
+          } // AR Android/Web
+          ios-src={modelUSDZ} // AR iOS
+          auto-rotate
+          camera-controls
+          style={{ width: '100vw', height: '90vh' }}
+        >
+          <div>
+            {jsonMock.linksGLB.map((link, index) => {
+              return (
+                <div
+                  key={index}
+                  showLabel={true}
+                  label={`model ${index + 1}`}
+                  icon={<div />}
+                  onClick={() =>
+                    onSelectModel(
+                      jsonMock.linksGLB[index],
+                      jsonMock.linksUSDZ[index]
+                    )
+                  }
+                />
+              );
+            })}
+            {/* <button slot="ar-button">
+            <BottomNavigationAction
+              showLabel={true}
+              label="View AR"
+              icon={<AddAPhoto />}
+            />
+          </button> */}
+          </div>
+        </model-viewer>
+      </Fragment>
       <h3 style={{ color: '#808080' }}>Product Details</h3>
       <CardGroup>
         <Col>
@@ -68,14 +144,13 @@ function SingleProduct(props) {
               border: 'none',
             }}
           >
-            <div>
-              <Canvas>
-                <ambientLight />
-                <pointLight position={[10, 10, 10]} />
-                <Box position={[-1.2, 0, 0]} />
-                <Box position={[1.2, 0, 0]} />
-              </Canvas>
-            </div>
+            <Canvas>
+              <ambientLight />
+              <pointLight position={[10, 10, 10]} />
+              <Box position={[-1.2, 0, 0]} />
+              <Box position={[1.2, 0, 0]} />
+            </Canvas>
+
             {/* <Card.Img variant="top" src={product.image_url} /> */}
             <Card.Title>{product.name}</Card.Title>
             <Card.Text>${product.price}</Card.Text>
