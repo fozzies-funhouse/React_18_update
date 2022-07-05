@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react';
+import React, { Suspense, useRef, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchProduct, addToCart } from '../store/singleProduct';
 import { fetchCart } from '../store/cart';
@@ -8,70 +8,39 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-// import BottomNavigation from '@material-ui/core/BottomNavigation';
-// import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-// import { Restore, AddAPhoto } from '@material-ui/icons';
-import { jsonMock } from './assets/mockData';
-
-import { createRoot } from 'react-dom/client';
 import { Canvas, useFrame } from '@react-three/fiber';
+import {
+  ContactShadows,
+  Environment,
+  useGLTF,
+  OrbitControls,
+} from '@react-three/drei';
+import { HexColorPicker } from 'react-colorful';
+import { proxy, useSnapshot } from 'valtio';
 
-function Box(props) {
-  // This reference will give us direct access to the mesh
-  const mesh = useRef();
-  // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false);
-  const [active, setActive] = useState(false);
-  // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (mesh.current.rotation.x += 0.01));
-  // Return view, these are regular three.js elements expressed in JSX
-  return (
-    <mesh
-      {...props}
-      ref={mesh}
-      scale={active ? 1.5 : 1}
-      onClick={(event) => setActive(!active)}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-    </mesh>
-  );
-}
+import Shoe from './3dShoe';
+import Picker from './3dShoePicker';
+
+const state = proxy({
+  current: null,
+  items: {
+    laces: '#ffffff',
+    mesh: '#ffffff',
+    caps: '#ffffff',
+    inner: '#ffffff',
+    sole: '#ffffff',
+    stripes: '#ffffff',
+    band: '#ffffff',
+    patch: '#ffffff',
+  },
+});
 
 function SingleProduct(props) {
   const [count, setCount] = useState(0);
   const { getCart, getProduct, product, addItemToCart, user } = props;
-
-  const [modelGLB, setModelGLB] = useState(jsonMock.linksGLB[0]);
-  const [modelUSDZ, setModelUSDZ] = useState(jsonMock.linksUSDZ[0]);
-
-  const onSelectModel = (glb, usdz) => {
-    setModelGLB(glb);
-    setModelUSDZ(usdz);
-  };
-
   useEffect(() => {
     getProduct(props.match.params.id);
   }, []);
-
-  //rock
-  const modelRef = useRef();
-  const [annots, setAnnots] = useState([]);
-
-  const handleClick = (event) => {
-    const { clientX, clientY } = event;
-
-    if (modelRef.current) {
-      let hit = modelRef.current.positionAndNormalFromPoint(clientX, clientY);
-      if (hit) {
-        setAnnots((annots) => {
-          return [...annots, hit];
-        });
-      }
-    }
-  };
 
   const getDataPosition = (annot) => {
     return `${annot.position.x} ${annot.position.y} ${annot.position.z}`;
@@ -93,45 +62,7 @@ function SingleProduct(props) {
       >
         Welcome {user.first_name || 'Guest'}
       </h1>
-      <Fragment>
-        <model-viewer
-          ar
-          modes="scene-viewer quick-look webxr"
-          src={
-            'https://raw.githubusercontent.com/dwqdaiwenqi/react-3d-viewer/master/site/src/lib/model/DamagedHelmet.gltf'
-          } // AR Android/Web
-          ios-src={modelUSDZ} // AR iOS
-          auto-rotate
-          camera-controls
-          style={{ width: '100vw', height: '90vh' }}
-        >
-          <div>
-            {jsonMock.linksGLB.map((link, index) => {
-              return (
-                <div
-                  key={index}
-                  showLabel={true}
-                  label={`model ${index + 1}`}
-                  icon={<div />}
-                  onClick={() =>
-                    onSelectModel(
-                      jsonMock.linksGLB[index],
-                      jsonMock.linksUSDZ[index]
-                    )
-                  }
-                />
-              );
-            })}
-            {/* <button slot="ar-button">
-            <BottomNavigationAction
-              showLabel={true}
-              label="View AR"
-              icon={<AddAPhoto />}
-            />
-          </button> */}
-          </div>
-        </model-viewer>
-      </Fragment>
+
       <h3 style={{ color: '#808080' }}>Product Details</h3>
       <CardGroup>
         <Col>
@@ -144,12 +75,42 @@ function SingleProduct(props) {
               border: 'none',
             }}
           >
-            <Canvas>
-              <ambientLight />
-              <pointLight position={[10, 10, 10]} />
-              <Box position={[-1.2, 0, 0]} />
-              <Box position={[1.2, 0, 0]} />
-            </Canvas>
+            <>
+              <Canvas
+                shadows
+                dpr={[1, 2]}
+                camera={{ position: [0, 0, 7], fov: 75 }}
+              >
+                <ambientLight intensity={0.7} />
+                <spotLight
+                  intensity={0.5}
+                  angle={0.1}
+                  penumbra={1}
+                  position={[10, 15, 10]}
+                  castShadow
+                />
+                <Suspense fallback={null}>
+                  <Shoe state={state} />
+                  <Environment preset="city" />
+                  <ContactShadows
+                    rotation-x={Math.PI / 2}
+                    position={[0, -0.8, 0]}
+                    opacity={0.25}
+                    width={10}
+                    height={10}
+                    blur={1.5}
+                    far={0.8}
+                  />
+                </Suspense>
+                <OrbitControls
+                  minPolarAngle={Math.PI / 2}
+                  maxPolarAngle={Math.PI / 2}
+                  enableZoom={false}
+                  enablePan={false}
+                />
+              </Canvas>
+              <Picker state={state} />
+            </>
 
             {/* <Card.Img variant="top" src={product.image_url} /> */}
             <Card.Title>{product.name}</Card.Title>
