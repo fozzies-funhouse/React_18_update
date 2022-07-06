@@ -1,6 +1,6 @@
 import { HexColorPicker } from 'react-colorful';
 import { proxy, useSnapshot } from 'valtio';
-import Shoe from './3dShoe';
+
 import React from 'react';
 
 export default function Picker(props) {
