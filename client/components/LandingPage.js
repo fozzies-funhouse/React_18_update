@@ -12,6 +12,8 @@ import {
   Grid,
 } from '@mui/material';
 
+import Landing3D from './LandingScene/Landing3D';
+
 const Landing = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,13 +24,14 @@ const Landing = (props) => {
   const products = [product1, product2, product3];
   return (
     <Container>
-      <Typography
+      <Landing3D />
+      {/* <Typography
         variant='h2'
         component='div'
         sx={{ textAlign: 'center', m: 5, border: 5 }}
       >
         3D Interactive Canvas
-      </Typography>
+      </Typography> */}
       <Grid item xs={12} container>
         <Grid item xs={6} spacing={3} container>
           {products.length === 0 || product1 === undefined
