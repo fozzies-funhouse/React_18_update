@@ -1,199 +1,159 @@
-import React, { Component } from 'react';
-import * as THREE from 'three';
-import * as dat from 'lil-gui'; // gui debugger
-import gsap from 'gsap';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchProducts } from '../store/products';
+import {
+  Container,
+  Avatar,
+  Card,
+  CardHeader,
+  CardContent,
+  CardMedia,
+  Typography,
+  Grid,
+} from '@mui/material';
 
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+const Landing = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+  const productList = useSelector((state) => state.products);
+  const [product1, product2, product3] = productList;
+  const products = [product1, product2, product3];
+  return (
+    <Container>
+      <Typography
+        variant='h2'
+        component='div'
+        sx={{ textAlign: 'center', m: 5, border: 5 }}
+      >
+        3D Interactive Canvas
+      </Typography>
+      <Grid item xs={12} container>
+        <Grid item xs={6} spacing={3} container>
+          {products.length === 0 || product1 === undefined
+            ? 'Loading'
+            : products.map((product, idx) =>
+                idx > 1 ? (
+                  <Grid item key={product.id} xs={8} sx={{ ml: 7, mb: 5 }}>
+                    <Card>
+                      <CardMedia
+                        component='img'
+                        image={product.image_url}
+                        height={300}
+                        width={300}
+                      />
+                      <CardContent>
+                        <Typography
+                          gutterBottom
+                          sx={{ fontSize: 16 }}
+                          width={150}
+                          color='text.secondary'
+                        >
+                          {product.name}
+                        </Typography>
+                        <Typography variant='body2' color='text.secondary'>
+                          ${product.price}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ) : (
+                  <Grid item key={product.id} xs={5}>
+                    <Card>
+                      <CardMedia
+                        component='img'
+                        image={product.image_url}
+                        height={300}
+                        width={300}
+                      />
+                      <CardContent>
+                        <Typography
+                          gutterBottom
+                          sx={{ fontSize: 16 }}
+                          width={150}
+                          color='text.secondary'
+                        >
+                          {product.name}
+                        </Typography>
+                        <Typography variant='body2' color='text.secondary'>
+                          ${product.price}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                )
+              )}
+        </Grid>
+        <Grid item xs={6}>
+          <Card sx={{ textAlign: 'center' }}>
+            <CardContent>
+              <CardHeader title='About the product' />
+              <Typography
+                sx={{ fontSize: 12 }}
+                color='text.secondary'
+                paragraph
+              >
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Commodi
+                <br />
+                officiis ipsa, culpa non quos nulla, nisi sequi distinctio
+                minima
+                <br />
+                vitae in quod adipisci, rem dolore?
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+      <Grid item xs={12} container>
+        <Grid item xs={3}>
+          <Avatar
+            alt='Allah Jackson'
+            src='/allah.png'
+            sx={{ height: 100, width: 100, mt: 5, ml: 3 }}
+          />
+          <Typography variant='bio' color='text.secondary' paragraph>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius ullam
+            earum esse numquam?
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Avatar
+            alt='Allah Jackson'
+            src='/allah.png'
+            sx={{ height: 100, width: 100, mt: 5, ml: 3 }}
+          />
+          <Typography variant='bio' color='text.secondary' paragraph>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius ullam
+            earum esse numquam?
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Avatar
+            alt='Allah Jackson'
+            src='/allah.png'
+            sx={{ height: 100, width: 100, mt: 5, ml: 3 }}
+          />
+          <Typography variant='bio' color='text.secondary' paragraph>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius ullam
+            earum esse numquam?
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Avatar
+            alt='Allah Jackson'
+            src='/allah.png'
+            sx={{ height: 100, width: 100, mt: 5, ml: 3 }}
+          />
+          <Typography variant='bio' color='text.secondary' paragraph>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius ullam
+            earum esse numquam?
+          </Typography>
+        </Grid>
+      </Grid>
+    </Container>
+  );
+};
 
-class LandingPage extends Component {
-  componentDidMount() {
-    //Editor gui
-    const gui = new dat.GUI();
-
-    // Scene
-
-    this.scene = new THREE.Scene();
-
-    // Renderer
-
-    this.renderer = new THREE.WebGLRenderer();
-    this.renderer.setSize(window.innerWidth * 0.5, window.innerHeight * 0.5);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    this.mount.appendChild(this.renderer.domElement);
-
-    // Camera
-    this.camera = new THREE.PerspectiveCamera(
-      75, // fov
-      (window.innerWidth * 0.5) / (window.innerHeight * 0.5),
-      0.5, // near
-      1000 // far
-    );
-    this.camera.position.z = 5;
-    this.camera.position.x = 5;
-    this.camera.position.y = 5;
-
-    // Test Box
-    // const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-    // const boxMaterial = new THREE.MeshBasicMaterial({
-    //   color: 0xff0000,
-    // });
-    // this.cube = new THREE.Mesh(boxGeometry, boxMaterial);
-
-    // Adding cube to scene
-    // this.scene.add(this.cube);
-
-    // Loading 3D Model
-
-    const gltfLoader = new GLTFLoader();
-
-    gltfLoader.load(
-      '../../jedi_star_fighter/scene.gltf',
-      (gltf) => {
-        console.log(gltf);
-        gltf.scene.scale.set(0.02, 0.02, 0.02);
-        this.scene.add(gltf.scene);
-      },
-      () => {
-        console.log('Processing');
-      },
-      () => {
-        console.log('couldnt load');
-      }
-    );
-
-    // Ambiant Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 5);
-    // ambientLight.castShadow = true;
-
-    // Directional light
-
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 4);
-    directionalLight.castShadow = true;
-    directionalLight.shadow.mapSize.set(1024, 1024);
-    directionalLight.shadow.camera.far = 15;
-    directionalLight.shadow.camera.left = -7;
-    directionalLight.shadow.camera.top = 7;
-    directionalLight.shadow.camera.right = 7;
-    directionalLight.shadow.camera.bottom = -7;
-    directionalLight.position.set(5, 5, 5);
-    this.scene.add(directionalLight);
-
-    this.scene.add(ambientLight);
-
-    // Call Animation function
-    this.animation();
-
-    // Render Scene
-    this.renderer.render(this.scene, this.camera);
-
-    // Orbit Controls
-    const controls = new OrbitControls(this.camera, this.renderer.domElement);
-
-    // Window resizing event handler
-    window.addEventListener('resize', this.handleWindowResize);
-
-    controls.update();
-  }
-
-  // Animaton
-  animation = () => {
-    requestAnimationFrame(this.animation);
-    // this.cube.rotation.x += 0.01;
-    // this.cube.rotation.y += 0.01;
-    // this.scene.rotation.y += 0.003;
-
-    this.renderer.render(this.scene, this.camera);
-  };
-
-  handleWindowResize = () => {
-    this.camera.aspect = (window.innerWidth * 0.8) / (window.innerHeight * 0.6);
-    this.camera.updateProjectionMatrix();
-
-    this.renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.6);
-    this.renderer.render(this.scene, this.camera);
-  };
-
-  render() {
-    return (
-      <div>
-        <div
-          ref={(mount) => {
-            this.mount = mount;
-          }}
-        />
-      </div>
-    );
-  }
-}
-
-export default LandingPage;
-
-// import { Link } from 'react-router-dom';
-// import Button from 'react-bootstrap/Button';
-// import Container from 'react-bootstrap/Container';
-
-// const Landing = (props) => {
-//   return (
-//     <div>Hello</div>
-
-// <div
-//   className='container-fluid'
-//   style={{
-//     backgroundImage:
-//       'url(https://cdn.pixabay.com/photo/2017/02/26/09/43/beatenberg-2099823_960_720.jpg)',
-//     height: '100vh',
-//     backgroundPosition: 'center',
-//     backgroundRepeat: 'no-repeat',
-//     backgroundSize: 'cover',
-//   }}
-// >
-//   <h1
-//     style={{
-//       display: 'flex',
-//       justifyContent: 'center',
-//       alignItems: 'center',
-//       color: '#808080',
-//     }}
-//   >
-//     Welcome to Trekkies Snowboards and Skis!
-//   </h1>
-//   <Container
-//     style={{
-//       display: 'flex',
-//       justifyContent: 'center',
-//       alignItems: 'center',
-//       marginTop: '27rem',
-//     }}
-//   >
-//     <Link to='/login'>
-//       <Button
-//         style={{ marginRight: '5rem', width: '15rem', height: '3rem' }}
-//         variant='secondary'
-//       >
-//         Login
-//       </Button>
-//     </Link>
-//     <Link to='/signup'>
-//       <Button
-//         style={{ marginRight: '5rem', width: '15rem', height: '3rem' }}
-//         variant='secondary'
-//       >
-//         Sign Up
-//       </Button>
-//     </Link>
-//     <Link to='/products'>
-//       <Button
-//         style={{ marginRight: '5rem', width: '15rem', height: '3rem' }}
-//         variant='secondary'
-//       >
-//         Guest
-//       </Button>
-//     </Link>
-//   </Container>
-// </div>
-//   );
-// };
-
-// export default Landing;
+export default Landing;
