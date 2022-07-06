@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useRef } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import {
   Environment,
@@ -9,6 +9,7 @@ import {
 import {
   Canvas, // Canvaas element
   useLoader, // #3D model loader
+  useFrame, // useFrame  hook for getting the animation loop each frame
 } from '@react-three/fiber';
 
 import './Landing3D.css';
@@ -16,12 +17,19 @@ import './Landing3D.css';
 // Shoe Component
 
 const Shoe = () => {
+  const shoeRef = useRef(); // useRef hook
+
   const gltf = useLoader(GLTFLoader, '../Sneaker/scene.gltf');
   // console.log(gltf.scene);
   gltf.scene.scale.set(0.005, 0.005, 0.005);
   gltf.scene.rotation.y = Math.PI;
 
-  return <primitive object={gltf.scene} />;
+  // Animation
+  useFrame(() => {
+    shoeRef.current.rotation.y += 0.003;
+  });
+
+  return <primitive ref={shoeRef} object={gltf.scene} />;
 };
 
 // React Functional Component
