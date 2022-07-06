@@ -36,7 +36,7 @@ const Landing = (props) => {
             : products.map((product, idx) =>
                 idx > 1 ? (
                   <Grid item key={product.id} xs={8} sx={{ ml: 7, mb: 5 }}>
-                    <Card>
+                    <Card elevation={5}>
                       <CardMedia
                         component='img'
                         image={product.image_url}
@@ -60,7 +60,7 @@ const Landing = (props) => {
                   </Grid>
                 ) : (
                   <Grid item key={product.id} xs={5}>
-                    <Card>
+                    <Card elevation={5}>
                       <CardMedia
                         component='img'
                         image={product.image_url}
@@ -86,7 +86,7 @@ const Landing = (props) => {
               )}
         </Grid>
         <Grid item xs={6}>
-          <Card sx={{ textAlign: 'center' }}>
+          <Card sx={{ textAlign: 'center' }} elevation={5}>
             <CardContent>
               <CardHeader title='About the product' />
               <Typography
