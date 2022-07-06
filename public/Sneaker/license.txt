@@ -1,0 +1,11 @@
+Model Information:
+* title:	#RTFKTChallenge Doodles! RTFKT rtfkt
+* source:	https://sketchfab.com/3d-models/rtfktchallenge-doodles-rtfkt-rtfkt-bb7da6cc59894a95b8c302937711e174
+* author:	Eduardo Kuhn (https://sketchfab.com/eduardokuhn)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "#RTFKTChallenge Doodles! RTFKT rtfkt" (https://sketchfab.com/3d-models/rtfktchallenge-doodles-rtfkt-rtfkt-bb7da6cc59894a95b8c302937711e174) by Eduardo Kuhn (https://sketchfab.com/eduardokuhn) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
