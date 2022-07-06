@@ -88,7 +88,7 @@ const Landing = (props) => {
                 )
               )}
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} sx={{ alignSelf: 'center' }}>
           <Card sx={{ textAlign: 'center' }} elevation={5}>
             <CardContent>
               <CardHeader title='About the product' />
@@ -121,7 +121,7 @@ const Landing = (props) => {
             earum esse numquam?
           </Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={3} sx={{ mb: 10 }}>
           <Avatar
             alt='Allah Jackson'
             src='/allah.png'
