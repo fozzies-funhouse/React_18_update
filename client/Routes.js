@@ -12,7 +12,7 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import Confirmation from './components/ConfirmationPage';
 import AllUsers from './components/AllUsers';
-
+import Sandbox from './components/Stripe/Sandbox';
 
 // current build uses react-router-dom-v5-compat
 // to fully upgrade to v6 we need to make these changes:
@@ -26,7 +26,6 @@ import AllUsers from './components/AllUsers';
 //  { withRouter } is straight up gone.  Gotta rewrite using hooks.
 // docs:  https://reactrouter.com/docs/en/v6/upgrading/v5
 // https://stackoverflow.com/questions/66465750/withrouter-is-not-exported-from-react-router-dom
-
 
 /**
  * COMPONENT
@@ -60,7 +59,7 @@ class Routes extends Component {
             <Route path="/products" exact component={AllProducts} />
             <Route path="/products/:id" component={SingleProduct} />
             <Route path="/cart" component={Cart} />
-            <Route path="/checkout" component={Checkout} />
+            <Route path="/checkout" component={Sandbox} />
             <Route path="/confirmation" component={Confirmation} />
           </Switch>
         )}
