@@ -1,3 +1,18 @@
+// import React, {useEffect, useState}from 'react';
+
+// const SingleProduct = (props) => {
+//   const [ count, setCount] = useState(0);
+//   const { match, getProduct, product, addItemToCart, user, getCart} = props
+
+//   useEffect(()=>{
+//     getProduct(match.params.id);
+//   }, [])
+
+//   return (  );
+// }
+
+// export default SingleProduct;
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchProduct, addToCart } from '../store/singleProduct';
@@ -16,7 +31,7 @@ class SingleProduct extends Component {
   }
   async componentDidMount() {
     this.props.getProduct(this.props.match.params.id);
-    this.props.getCart(101);
+    // this.props.getCart(101);
   }
 
   render() {
@@ -41,7 +56,7 @@ class SingleProduct extends Component {
               className='mb-2'
               style={{
                 width: '30rem',
-                height: '50rem',
+                height: '30rem',
                 color: '#4e4c4b',
                 border: 'none',
               }}

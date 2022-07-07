@@ -1,14 +1,12 @@
 import React, { Suspense, useRef } from 'react';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import {
   Environment,
   PresentationControls,
   MeshReflectorMaterial,
+  useGLTF,
 } from '@react-three/drei';
 import {
   Canvas, // Canvaas element
-  useLoader, // #3D model loader
-  useThree,
   useFrame, // useFrame  hook for getting the animation loop each frame
 } from '@react-three/fiber';
 
@@ -18,8 +16,8 @@ import './Landing3D.css';
 
 const Shoe = () => {
   const shoeRef = useRef(); // useRef hook
+  const gltf = useGLTF('../Shoes/Shoe1.glb');
 
-  const gltf = useLoader(GLTFLoader, '../Sneaker/scene.gltf');
   // console.log(gltf.scene);
   gltf.scene.scale.set(0.005, 0.005, 0.005);
   gltf.scene.rotation.y = Math.PI;
