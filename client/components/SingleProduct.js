@@ -65,7 +65,7 @@ function SingleProduct(props) {
                 <>
                   <Canvas
                     shadows
-                    camera={{ position: [0, 0, 40], fov: 75 }}
+                    camera={{ position: [0, 0, 200], fov: 75 }}
                     style={{ height: '100%', width: '100%' }}
                   >
                     <ambientLight intensity={0.7} />

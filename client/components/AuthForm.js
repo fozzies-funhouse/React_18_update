@@ -31,35 +31,39 @@ const AuthForm = (props) => {
       </h1>
       <Container>
         <CardGroup>
-          <Col className='d-flex'>
+          <Col className="d-flex">
             <Card
-            className='flex-fill'
-            style={{
-              width: '40rem',
-              height: '30rem',
-              color: '#4e4c4b',
-              border: 'none',
-              textAlign: 'center'
-            }}>
+              className="flex-fill"
+              style={{
+                width: '40rem',
+                height: '30rem',
+                color: '#4e4c4b',
+                border: 'none',
+                textAlign: 'center',
+              }}
+            >
               <Form onSubmit={handleSubmit} name={name}>
                 <Form.Group>
                   <Col style={{ width: '16rem' }}>
-                    <Form.Label htmlFor='email'>Email</Form.Label>
-                    <Form.Control name='email' type='text'></Form.Control>
+                    <Form.Label htmlFor="email">Email</Form.Label>
+                    <Form.Control name="email" type="text"></Form.Control>
                   </Col>
                   <Col style={{ width: '16rem' }}>
-                    <Form.Label htmlFor='password'>Password</Form.Label>
-                    <Form.Control name='password' type='password'></Form.Control>
+                    <Form.Label htmlFor="password">Password</Form.Label>
+                    <Form.Control
+                      name="password"
+                      type="password"
+                    ></Form.Control>
                   </Col>
                   <Row>
                     <Button
-                      variant='secondary'
-                      className='mt-auto'
+                      variant="secondary"
+                      className="mt-auto"
                       style={{
                         width: '38rem',
                         position: 'absolute',
                       }}
-                      type='submit'
+                      type="submit"
                     >
                       {displayName}
                     </Button>

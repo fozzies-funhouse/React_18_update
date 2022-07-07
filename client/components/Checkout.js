@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Image from 'react-bootstrap/Image';
-import { stripeCheckout } from "../store/stripeCheckout";
+import { stripeCheckout } from '../store/stripeCheckout';
 
 class Checkout extends Component {
   constructor() {
@@ -75,9 +75,9 @@ class Checkout extends Component {
         </h3>
         <Container>
           <CardGroup>
-            <Col className='d-flex'>
+            <Col className="d-flex">
               <Card
-                className='flex-fill'
+                className="flex-fill"
                 style={{
                   width: '40rem',
                   height: '30rem',
@@ -85,60 +85,60 @@ class Checkout extends Component {
                   border: 'none',
                 }}
               >
-                <Card.Title className='text-center'>
+                <Card.Title className="text-center">
                   Contact Information
                 </Card.Title>
                 <Form>
                   <Form.Group>
                     <Col style={{ width: '16rem' }}>
-                      <Form.Label htmlFor='firstName'>First Name</Form.Label>
+                      <Form.Label htmlFor="firstName">First Name</Form.Label>
                       <Form.Control
-                        type='text'
+                        type="text"
                         defaultValue={firstName}
                         onChange={this.handleChange}
                       ></Form.Control>
                     </Col>
                     <Col style={{ width: '16rem' }}>
-                      <Form.Label htmlFor='lastName'>Last Name</Form.Label>
+                      <Form.Label htmlFor="lastName">Last Name</Form.Label>
                       <Form.Control
-                        type='text'
+                        type="text"
                         defaultValue={lastName}
                         onChange={this.handleChange}
                       ></Form.Control>
                     </Col>
                     <Row>
-                      <Form.Label htmlFor='email'>Email</Form.Label>
+                      <Form.Label htmlFor="email">Email</Form.Label>
                       <Form.Control
-                        name='email'
-                        type='text'
+                        name="email"
+                        type="text"
                         defaultValue={email}
                         onChange={this.handleChange}
                       ></Form.Control>
-                      <Form.Label htmlFor='lastName'>Address</Form.Label>
+                      <Form.Label htmlFor="lastName">Address</Form.Label>
                       <Form.Control
-                        type='text'
+                        type="text"
                         defaultValue={address}
                         onChange={this.handleChange}
                       ></Form.Control>
-                      <Form.Label htmlFor='zipCode'>ZIP Code</Form.Label>
+                      <Form.Label htmlFor="zipCode">ZIP Code</Form.Label>
                       <Form.Control
-                        type='text'
+                        type="text"
                         defaultValue={zipCode}
                         onChange={this.handleChange}
                       ></Form.Control>
-                      <Form.Label htmlFor='lastName'>State</Form.Label>
+                      <Form.Label htmlFor="lastName">State</Form.Label>
                       <Form.Control
-                        type='text'
+                        type="text"
                         defaultValue={state}
                         onChange={this.handleChange}
                       ></Form.Control>
                     </Row>
                   </Form.Group>
                 </Form>
-                <Link to='/confirmation'>
+                <Link to="/confirmation">
                   <Button
-                    variant='primary'
-                    className='mt-auto'
+                    variant="primary"
+                    className="mt-auto"
                     style={{
                       width: '40rem',
                       position: 'absolute',
@@ -157,7 +157,7 @@ class Checkout extends Component {
                 </Card> */}
               </Card>
               <Card
-                className='flex-fill'
+                className="flex-fill"
                 style={{
                   width: '40rem',
                   marginLeft: '5rem',
@@ -174,7 +174,7 @@ class Checkout extends Component {
                         <Image
                           src={item.product.image_url}
                           style={{ height: '250px' }}
-                          fluid='true'
+                          fluid="true"
                         />
                         <li>{item.product.name}</li>
                         <li>
@@ -199,7 +199,8 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   getCart: (userId) => dispatch(fetchCart(userId)),
-  checkout: (orderTotal, userId, email) => dispatch(checkoutCart(orderTotal, userId, email)),
+  checkout: (orderTotal, userId, email) =>
+    dispatch(checkoutCart(orderTotal, userId, email)),
   stripeCheckout: () => dispatch(stripeCheckout()),
 });
 
