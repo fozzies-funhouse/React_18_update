@@ -22,8 +22,8 @@ function SingleProduct3D() {
         camera={{ position: [-5, 14, 20], fov: 50 }}
         gl={{ alpha: true }}
       >
-        <fog attach='fog' args={['#17171b', 30, 40]} />
-        <color attach='background' args={['#17171b']} />
+        <fog attach='fog' args={['white', 30, 40]} />
+        <color attach='background' args={['white']} />
         <ambientLight intensity={0.25} />
         <directionalLight
           castShadow
@@ -50,11 +50,11 @@ function SingleProduct3D() {
               blur={[400, 100]}
               resolution={1024}
               mixBlur={1}
-              mixStrength={15}
+              mixStrength={6}
               depthScale={1}
               minDepthThreshold={0.85}
-              color='#151515'
-              metalness={0.6}
+              color='#c0c0c0'
+              metalness={0.4}
               roughness={1}
             />
           </mesh>
