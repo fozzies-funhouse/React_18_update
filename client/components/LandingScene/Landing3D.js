@@ -19,7 +19,8 @@ import './Landing3D.css';
 const Shoe = () => {
   const shoeRef = useRef(); // useRef hook
 
-  const gltf = useLoader(GLTFLoader, '../Sneaker/scene.gltf');
+  const gltf = useLoader(GLTFLoader, 'https://firebasestorage.googleapis.com/v0/b/sql-to-nosql-test.appspot.com/o/fancyshoe.glb?alt=media&token=575de05c-2509-49b6-9b64-fc5b3afa910a
+  ');
   // console.log(gltf.scene);
   gltf.scene.scale.set(0.005, 0.005, 0.005);
   gltf.scene.rotation.y = Math.PI;
