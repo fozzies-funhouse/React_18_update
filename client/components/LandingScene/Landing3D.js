@@ -3,12 +3,12 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import {
   Environment,
   PresentationControls,
-  Text,
   MeshReflectorMaterial,
 } from '@react-three/drei';
 import {
   Canvas, // Canvaas element
   useLoader, // #3D model loader
+  useThree,
   useFrame, // useFrame  hook for getting the animation loop each frame
 } from '@react-three/fiber';
 
@@ -66,7 +66,7 @@ function Landing3D() {
           </PresentationControls>
 
           <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[50, 50]} />
+            <planeGeometry args={[80, 80]} />
             <MeshReflectorMaterial
               blur={[400, 100]}
               resolution={1024}
