@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import SingleProduct3D from './SingleProduct/SingleProduct3D';
 
 class SingleProduct extends Component {
   constructor() {
@@ -37,7 +38,7 @@ class SingleProduct extends Component {
         <CardGroup>
           <Col>
             <Card
-              className="mb-2"
+              className='mb-2'
               style={{
                 width: '30rem',
                 height: '50rem',
@@ -45,13 +46,14 @@ class SingleProduct extends Component {
                 border: 'none',
               }}
             >
-              <Card.Img variant="top" src={product.image_url} />
+              <SingleProduct3D />
+              {/* <Card.Img variant="top" src={product.image_url} /> */}
               <Card.Title>{product.name}</Card.Title>
               <Card.Text>${product.price}</Card.Text>
               <Card.Text>Inventory: {product.inventory}</Card.Text>
               <Button
-                className="mt-auto"
-                variant="secondary"
+                className='mt-auto'
+                variant='secondary'
                 onMouseDown={async () => {
                   await this.props.getProduct(this.props.match.params.id);
                 }}

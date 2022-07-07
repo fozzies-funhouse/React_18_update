@@ -7,8 +7,8 @@ const App = () => {
   return (
     <div>
       <Navigation />
-      <Footer />
       <Routes />
+      <Footer />
     </div>
   );
 };
