@@ -11,7 +11,7 @@ import Button from 'react-bootstrap/Button';
 import Shoe from './3dShoe';
 import Picker from './3dShoePicker';
 
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import {
   ContactShadows,
   Environment,
@@ -56,49 +56,42 @@ function SingleProduct(props) {
               className="mb-2"
               style={{
                 width: '30rem',
-                height: '50rem',
+                height: '40rem',
                 color: '#4e4c4b',
-                border: 'none',
+                border: 'solid',
               }}
             >
-              <div style={{ height: '500px', width: '600px' }}>
-                <>
-                  <Canvas
-                    shadows
-                    camera={{ position: [0, 0, 200], fov: 75 }}
-                    style={{ height: '100%', width: '100%' }}
-                  >
-                    <ambientLight intensity={0.7} />
-                    <spotLight
-                      intensity={0.5}
-                      angle={0.1}
-                      penumbra={1}
-                      position={[10, 15, 10]}
-                      castShadow
-                    />
+              <Canvas shadows camera={{ position: [0, 0, 0], fov: 75 }}>
+                <ambientLight intensity={0.7} />
+                <spotLight
+                  intensity={0.5}
+                  angle={0.1}
+                  penumbra={1}
+                  position={[10, 15, 10]}
+                  castShadow
+                />
 
-                    <Suspense fallback={null}>
-                      <Shoe state={state} product={product} />
-                      <Environment preset="city" />
-                      <ContactShadows
-                        position={[0, -0.8, 0]}
-                        opacity={0.25}
-                        scale={10}
-                        blur={1.5}
-                        far={0.8}
-                      />
-                    </Suspense>
+                <Suspense fallback={null}>
+                  <Shoe state={state} product={product} />
+                  <Environment preset="city" />
+                  <ContactShadows
+                    position={[0, -0.8, 0]}
+                    opacity={0.25}
+                    scale={10}
+                    blur={1.5}
+                    far={0.8}
+                  />
+                </Suspense>
 
-                    <OrbitControls
-                      minPolarAngle={Math.PI / 2}
-                      maxPolarAngle={Math.PI / 2}
-                      enableZoom={true}
-                      enablePan={true}
-                    />
-                  </Canvas>
-                  <Picker state={state} />
-                </>
-              </div>
+                <OrbitControls
+                  minPolarAngle={Math.PI / 2}
+                  maxPolarAngle={Math.PI / 2}
+                  enableZoom={true}
+                  enablePan={true}
+                />
+              </Canvas>
+              <Picker state={state} />
+
               <Card.Title>{product.name}</Card.Title>
               <Card.Text>${product.price}</Card.Text>
               <Card.Text>Inventory: {product.inventory}</Card.Text>
@@ -121,6 +114,7 @@ function SingleProduct(props) {
     </div>
   );
 }
+
 // useGLTF.preload('../../SportShoe/scene.glb');
 // class SingleProduct extends Component {
 //   constructor() {

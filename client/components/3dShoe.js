@@ -6,13 +6,13 @@ import { SingleProductContext } from './SingleProduct';
 
 export default function Shoe({ ...props }) {
   const { state, product } = props;
-  console.log('product l 9', product);
   const ref = useRef();
   const snap = useSnapshot(state);
-  const { nodes, materials } = useGLTF('../../FancyShoe/fancyshoe.glb');
+  // const scene = useGLTF('../../SportShoe/scene.glb');
+  const { nodes, materials, scene } = useGLTF('../../SportShoe/scene.glb');
 
   // Animate model
-
+  scene.scale.set(0.005, 0.005, 0.005);
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     ref.current.rotation.z = -0.2 - (1 + Math.sin(t / 1.5)) / 20;
@@ -49,20 +49,20 @@ export default function Shoe({ ...props }) {
       )}
     >
       <group rotation={[-Math.PI / 2, 0, 0]}>
-        <group rotation={[Math.PI / 2, 0, 0]}>
-          <mesh
-            geometry={nodes.Shoes_Shoes_0.geometry}
-            material={materials.Shoes}
-          />
-          <mesh
-            geometry={nodes.Shoes_Shoes_0_1.geometry}
-            material={materials.Shoes}
-          />
-          <mesh
-            geometry={nodes.Shoes_Shoes_0_2.geometry}
-            material={materials.Shoes}
-          />
-        </group>
+        <mesh
+          receiveShadow
+          castShadow
+          geometry={nodes.Object_2.geometry}
+          material={materials.CL_HR_002}
+          material-color={snap.items.CL_HR_002}
+        />
+        <mesh
+          receiveShadow
+          castShadow
+          geometry={nodes.Object_3.geometry}
+          material={materials.CL_HR_002}
+          material-color={snap.items.CL_HR_002}
+        />
       </group>
     </group>
   );
@@ -81,20 +81,24 @@ export default function Shoe({ ...props }) {
     </group>
 
 
-    <group rotation={[-Math.PI / 2, 0, 0]}>
-    <mesh
-      receiveShadow
-      castShadow
-      geometry={nodes.Object_2.geometry}
-      material={materials.CL_HR_002}
-      material-color={snap.items.CL_HR_002}
-    />
-    <mesh
-      receiveShadow
-      castShadow
-      geometry={nodes.Object_3.geometry}
-      material={materials.CL_HR_002}
-      material-color={snap.items.CL_HR_002}
-    />
-  </group> */
+
+}
+
+{
+  /* <group rotation={[-Math.PI / 2, 0, 0]}>
+<group rotation={[Math.PI / 2, 0, 0]}>
+  <mesh
+    geometry={nodes.Shoes_Shoes_0.geometry}
+    material={materials.Shoes}
+  />
+  <mesh
+    geometry={nodes.Shoes_Shoes_0_1.geometry}
+    material={materials.Shoes}
+  />
+  <mesh
+    geometry={nodes.Shoes_Shoes_0_2.geometry}
+    material={materials.Shoes}
+  />
+</group>
+</group> */
 }
