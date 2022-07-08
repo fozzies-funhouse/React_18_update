@@ -42,25 +42,26 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Home} />
-            <Route exact path="/products" component={AllProducts} />
-            <Route exact path="/products/:id" component={SingleProduct} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/checkout" component={Checkout} />
-            <Route path="/confirmation" component={Confirmation} />
-            <Route path="/allusers" component={AllUsers} />
-            <Redirect to="/products" />
+            <Route path='/' exact component={Landing} />
+            <Route path='/home' component={Home} />
+            <Route exact path='/products' component={AllProducts} />
+            <Route exact path='/products/:id' component={SingleProduct} />
+            <Route path='/cart' component={Cart} />
+            <Route path='/checkout' component={Checkout} />
+            <Route path='/confirmation' component={Confirmation} />
+            <Route path='/allusers' component={AllUsers} />
+            <Redirect to='/products' />
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Landing} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/products" exact component={AllProducts} />
-            <Route path="/products/:id" component={SingleProduct} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/checkout" component={Sandbox} />
-            <Route path="/confirmation" component={Confirmation} />
+            <Route path='/' exact component={Landing} />
+            <Route path='/login' component={Login} />
+            <Route path='/signup' component={Signup} />
+            <Route path='/products' exact component={AllProducts} />
+            <Route path='/products/:id' component={SingleProduct} />
+            <Route path='/cart' component={Cart} />
+            <Route path='/checkout' component={Sandbox} />
+            <Route path='/confirmation' component={Confirmation} />
           </Switch>
         )}
       </div>
