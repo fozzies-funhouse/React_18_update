@@ -12,8 +12,6 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import Confirmation from './components/ConfirmationPage';
 import AllUsers from './components/AllUsers';
-import Sandbox from './components/Stripe/Sandbox';
-import { Checkbox } from '@mui/material';
 
 // current build uses react-router-dom-v5-compat
 // to fully upgrade to v6 we need to make these changes:

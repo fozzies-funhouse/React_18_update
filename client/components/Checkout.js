@@ -24,7 +24,7 @@ import {
 
 import { stripeCheckout } from '../store/stripeCheckout';
 
-import Sandbox from './Stripe/Sandbox';
+import StripeContainer from './Stripe/StripeContainer';
 
 function Checkout(props) {
   const [firstName, setFirstName] = useState('');
@@ -188,7 +188,7 @@ function Checkout(props) {
                 </Button>
               </Link>
             </Grid>
-            <Sandbox />
+            <StripeContainer />
           </Card>
           <Card
             className="flex-fill"

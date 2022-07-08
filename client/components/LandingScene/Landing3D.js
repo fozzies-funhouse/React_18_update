@@ -41,8 +41,8 @@ function Landing3D() {
         camera={{ position: [-5, 14, 20], fov: 50 }}
         gl={{ alpha: true }}
       >
-        <fog attach='fog' args={['#17171b', 30, 40]} />
-        <color attach='background' args={['#17171b']} />
+        <fog attach="fog" args={['#17171b', 30, 40]} />
+        <color attach="background" args={['#17171b']} />
         <ambientLight intensity={0.25} />
         <directionalLight
           castShadow
@@ -51,7 +51,7 @@ function Landing3D() {
           shadow-mapSize={[1024, 1024]}
         >
           <orthographicCamera
-            attach='shadow-camera'
+            attach="shadow-camera"
             left={-20}
             right={20}
             top={20}
@@ -72,12 +72,12 @@ function Landing3D() {
               mixStrength={15}
               depthScale={1}
               minDepthThreshold={0.85}
-              color='#151515'
+              color="#151515"
               metalness={0.6}
               roughness={1}
             />
           </mesh>
-          <Environment preset='dawn' />
+          <Environment preset="dawn" />
         </Suspense>
       </Canvas>
     </>
