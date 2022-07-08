@@ -2,14 +2,26 @@ import React, { Component, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCart, checkoutCart } from '../store/cart';
-import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Image from 'react-bootstrap/Image';
+
+// import Form from 'react-bootstrap/Form';
+
+import {
+  Container,
+  // Avatar,
+  Card,
+  CardHeader,
+  CardMedia,
+  Typography,
+  Grid,
+  Button,
+  FormControl,
+  FormLabel,
+  FormGroup,
+  InputLabel,
+  FormHelperText,
+  Input,
+} from '@mui/material';
+
 import { stripeCheckout } from '../store/stripeCheckout';
 
 import Sandbox from './Stripe/Sandbox';
@@ -76,78 +88,98 @@ function Checkout(props) {
         Secure Checkout
       </h1>
       <hr></hr>
-      <h3 style={{ color: '#876218', marginBottom: '2rem' }}>
-        Sign in to use your saved info and save time!
-      </h3>
+
       <Container>
-        <CardGroup>
-          <Col className="d-flex">
-            <Card
-              className="flex-fill"
-              style={{
-                width: '40rem',
-                height: '30rem',
-                color: '#4e4c4b',
-                border: 'none',
-              }}
-            >
-              <Card.Title className="text-center">
-                Contact Information
-              </Card.Title>
-              <Form>
-                <Form.Group>
-                  <Col style={{ width: '16rem' }}>
-                    <Form.Label htmlFor="firstName">First Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      defaultValue={firstName}
-                      onChange={handleChange}
-                    ></Form.Control>
-                  </Col>
-                  <Col style={{ width: '16rem' }}>
-                    <Form.Label htmlFor="lastName">Last Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      defaultValue={lastName}
-                      onChange={handleChange}
-                    ></Form.Control>
-                  </Col>
-                  <Row>
-                    <Form.Label htmlFor="email">Email</Form.Label>
-                    <Form.Control
-                      name="email"
-                      type="text"
-                      defaultValue={email}
-                      onChange={handleChange}
-                    ></Form.Control>
-                    <Form.Label htmlFor="lastName">Address</Form.Label>
-                    <Form.Control
-                      type="text"
-                      defaultValue={address}
-                      onChange={handleChange}
-                    ></Form.Control>
-                    <Form.Label htmlFor="zipCode">ZIP Code</Form.Label>
-                    <Form.Control
-                      type="text"
-                      defaultValue={zipCode}
-                      onChange={handleChange}
-                    ></Form.Control>
-                    <Form.Label htmlFor="lastName">State</Form.Label>
-                    <Form.Control
-                      type="text"
-                      defaultValue={state}
-                      onChange={handleChange}
-                    ></Form.Control>
-                  </Row>
-                </Form.Group>
-              </Form>
+        <Grid className="d-flex">
+          <Card
+            className="flex-fill"
+            style={{
+              width: '40rem',
+              height: '50rem',
+              color: '#4e4c4b',
+              border: 'none',
+            }}
+          >
+            <CardHeader className="text-center">Contact Information</CardHeader>
+            <Grid>
+              <FormGroup>
+                <Grid>
+                  <FormControl
+                    type="text"
+                    defaultValue={firstName}
+                    onChange={handleChange}
+                  >
+                    <InputLabel htmlFor="first-name">First Name</InputLabel>
+                    <Input id="first-name" aria-describedby="first-name" />
+                  </FormControl>
+                  <FormControl
+                    type="text"
+                    defaultValue={lastName}
+                    onChange={handleChange}
+                  >
+                    <InputLabel htmlFor="last-name">Last Name</InputLabel>
+                    <Input id="last-name" aria-describedby="last-name" />
+                  </FormControl>
+
+                  <FormControl
+                    name="email"
+                    type="text"
+                    defaultValue={email}
+                    onChange={handleChange}
+                  >
+                    <InputLabel htmlFor="email">Email</InputLabel>
+                    <Input id="email" aria-describedby="email" />
+                  </FormControl>
+                  <FormControl
+                    type="text"
+                    defaultValue={phoneNumber}
+                    onChange={handleChange}
+                  >
+                    <InputLabel htmlFor="phoneNumber">Phone Number</InputLabel>
+                    <Input id="phoneNumber" aria-describedby="Phone Number" />
+                  </FormControl>
+                  {/* <FormLabel htmlFor="lastName">Address</FormLabel> */}
+                  <FormControl
+                    type="text"
+                    defaultValue={address}
+                    onChange={handleChange}
+                  >
+                    <InputLabel htmlFor="address">Address</InputLabel>
+                    <Input id="address" aria-describedby="address" />
+                  </FormControl>
+                  <FormControl
+                    type="text"
+                    defaultValue={city}
+                    onChange={handleChange}
+                  >
+                    <InputLabel htmlFor="city">City</InputLabel>
+                    <Input id="city" aria-describedby="city" />
+                  </FormControl>
+
+                  <FormControl
+                    type="text"
+                    defaultValue={state}
+                    onChange={handleChange}
+                  >
+                    <InputLabel htmlFor="state">State</InputLabel>
+                    <Input id="state" aria-describedby="state" />
+                  </FormControl>
+                  <FormControl
+                    type="text"
+                    defaultValue={zipCode}
+                    onChange={handleChange}
+                  >
+                    <InputLabel htmlFor="zipcode">Zip Code</InputLabel>
+                    <Input id="zipcode" aria-describedby="zipcode" />
+                  </FormControl>
+                </Grid>
+              </FormGroup>
               <Link to="/confirmation">
                 <Button
                   variant="primary"
                   className="mt-auto"
                   style={{
-                    width: '40rem',
-                    position: 'absolute',
+                    width: '100%',
                     bottom: 0,
                   }}
                   onClick={() => checkout(cartTotal, user.id, localState.email)}
@@ -155,42 +187,39 @@ function Checkout(props) {
                   Submit Purchase Order
                 </Button>
               </Link>
-              <Sandbox />
-              {/* RYAN'S STRIPE TEST BELOW
-            <Card>
-              <Button onClick={() => {stripeCheckout()}}>TO STRIPE PAYMENT</Button>
-            </Card> */}
-            </Card>
-            <Card
-              className="flex-fill"
-              style={{
-                width: '40rem',
-                marginLeft: '5rem',
-                color: '#4e4c4b',
-                border: 'none',
-              }}
-            >
-              <Card.Title>Order Total: ${cartTotal}</Card.Title>
-              <Card.Text>Your Order</Card.Text>
-              {cart_details === undefined
-                ? 'Cart Empty'
-                : cart_details.map((item) => (
-                    <Container key={item.id}>
-                      <Image
-                        src={item.product.image_url}
-                        style={{ height: '250px' }}
-                        fluid="true"
-                      />
-                      <li>{item.product.name}</li>
-                      <li>
-                        Qty: {item.product_quantity} @ ${item.product.price}
-                      </li>
-                      <hr></hr>
-                    </Container>
-                  ))}
-            </Card>
-          </Col>
-        </CardGroup>
+            </Grid>
+            <Sandbox />
+          </Card>
+          <Card
+            className="flex-fill"
+            style={{
+              width: '40rem',
+              marginLeft: '5rem',
+              color: '#4e4c4b',
+              border: 'none',
+            }}
+          >
+            <CardHeader title={`Order Total: ${cartTotal}`}></CardHeader>
+            <Typography>Your Order</Typography>
+            {cart_details === undefined
+              ? 'Cart Empty'
+              : cart_details.map((item) => (
+                  <Container key={item.id}>
+                    <CardMedia
+                      component="img"
+                      image={item.product.image_url}
+                      style={{ height: '250px' }}
+                      fluid="true"
+                    />
+                    <li>{item.product.name}</li>
+                    <li>
+                      Qty: {item.product_quantity} @ ${item.product.price}
+                    </li>
+                    <hr></hr>
+                  </Container>
+                ))}
+          </Card>
+        </Grid>
       </Container>
     </Container>
   );
