@@ -2,10 +2,15 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ProductContext } from './AllProducts';
 import ProductOrdering from './ProductOrdering';
-import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Col from 'react-bootstrap/Col';
+
+import {
+  Container,
+  Card,
+  Typography,
+  Grid,
+  CardMedia,
+  CardHeader,
+} from '@mui/material';
 
 export default function AllTheProducts(props) {
   const { products } = useContext(ProductContext);
@@ -18,32 +23,35 @@ export default function AllTheProducts(props) {
         setSortedProducts={setSortedProducts}
         products={products}
       />
-      <CardGroup>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         {finalProds.map((product) => (
-          <Col key={product.id}>
+          <Grid item xs={6} key={product.id}>
             <Card
               className="mb-2"
               style={{
                 width: '30rem',
-                height: '50rem',
+                height: '40rem',
                 color: '#4e4c4b',
-                border: 'none',
               }}
             >
               <Link to={`/products/${product.id}`}>
-                <Card.Img variant="top" src={product.image_url} />
+                <CardMedia
+                  variant="top"
+                  component="img"
+                  image={product.image_url}
+                />
               </Link>
               <Link
                 style={{ textDecoration: 'none', color: '#4e4c4b' }}
                 to={`/products/${product.id}`}
               >
-                <Card.Title>{product.name}</Card.Title>
-                <Card.Text>${product.price}</Card.Text>
+                <CardHeader title={product.name}></CardHeader>
+                <Typography variant="h5">${product.price}</Typography>
               </Link>
             </Card>
-          </Col>
+          </Grid>
         ))}
-      </CardGroup>
+      </Grid>
     </Container>
   );
 }

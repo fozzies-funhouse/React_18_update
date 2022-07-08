@@ -40,21 +40,34 @@ const SingleProduct = (props) => {
       <h3 style={{ color: '#808080' }}>Product Details</h3>
       <Grid>
         <Grid>
+          <Card>
+            <SingleProduct3D />
+          </Card>
           <Card
             className="mb-2"
             style={{
-              width: '30rem',
-              height: '40rem',
+              width: '100%',
+              minHeight: '300px',
               color: '#4e4c4b',
-              border: 'solid',
+              display: 'flex',
+              flexDirection: 'column',
             }}
           >
-            <SingleProduct3D />
             {/* <Card.Img variant="top" src={product.image_url} /> */}
-            <CardContent>
-              <CardHeader>{product.name}</CardHeader>
-              <Typography>${product.price}</Typography>
-              <Typography>Inventory: {product.inventory}</Typography>
+            <CardHeader title={product.name} variant="top">
+              {product.name}
+            </CardHeader>
+            <CardContent
+              style={{
+                display: 'flex',
+                justifyContent: 'flex-start',
+                flexDirection: 'column',
+              }}
+            >
+              <Typography variant="h4">${product.price}</Typography>
+              <Typography variant="h6">
+                Inventory: {product.inventory}
+              </Typography>
               <Button
                 className="mt-auto"
                 variant="secondary"
