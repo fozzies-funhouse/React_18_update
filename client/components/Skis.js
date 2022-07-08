@@ -24,7 +24,7 @@ export default function AllSkis(props) {
           .map((product) => (
             <Col key={product.id}>
               <Card
-                className='mb-2'
+                className="mb-2"
                 style={{
                   width: '30rem',
                   height: '50rem',
@@ -33,7 +33,7 @@ export default function AllSkis(props) {
                 }}
               >
                 <Link to={`/products/${product.id}`}>
-                  <Card.Img variant='top' src={product.image_url} />
+                  <Card.Img variant="top" src={product.image_url} />
                 </Link>
                 <Link
                   style={{ textDecoration: 'none', color: '#4e4c4b' }}

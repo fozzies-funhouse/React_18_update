@@ -1,18 +1,19 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
+// import Button from 'react-bootstrap/Button';
+// import Container from 'react-bootstrap/Container';
 
+import { Container, Button } from '@mui/material';
 export default function Ordering(props) {
   const setSortedProducts = props.setSortedProducts;
   const products = props.products;
 
   return (
-    <div id='ordering-buttons'>
+    <div id="ordering-buttons">
       {'    '}
       &nbsp;&nbsp;&nbsp;
       <Button
-        variant='light'
-        className='mb-3'
+        variant="light"
+        className="mb-3"
         onClick={() =>
           setSortedProducts(
             [...products].sort(function (a, b) {
@@ -36,8 +37,8 @@ export default function Ordering(props) {
       {'    '}
       &nbsp;&nbsp;&nbsp;
       <Button
-        className='mb-3'
-        variant='light'
+        className="mb-3"
+        variant="light"
         onClick={() =>
           setSortedProducts(
             [...products].sort(function (a, b) {
@@ -62,8 +63,8 @@ export default function Ordering(props) {
       {'    '}
       &nbsp;&nbsp;&nbsp;
       <Button
-        variant='light'
-        className='mb-3'
+        variant="light"
+        className="mb-3"
         onClick={() => setSortedProducts(products)}
       >
         {' '}
