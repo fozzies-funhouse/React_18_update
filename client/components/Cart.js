@@ -1,230 +1,85 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCart, removeItem, updateCart } from '../store/cart';
-import {
-  Container,
-  Modal,
-  CloseButton,
-  Button,
-  Form,
-  Image,
-} from 'react-bootstrap';
+import { style, selectOptions, cartTotal } from './CartDrawer/utils';
+import Container from '@mui/material/Container';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
-function Cart(props) {
+const Cart = (props) => {
+  const { getCart, user, updateCart, cart, removeItemFromCart } = props;
   const [productId, setProductId] = useState(0);
   const [isShowing, setIsShowing] = useState(false);
 
-  const [localState, setLocalState] = useState({ productId, isShowing });
-
-  useState(() => {
-    // getCart(user.id);
-  }, []);
-
-  function changeQuantity(evt) {
+  const changeQuantity = (evt) => {
     setProductId(evt.target.id);
     updateCart(evt.target.value, evt.target.id, user.id);
-  }
-
-  function openModal() {
-    setIsShowing(true);
-  }
-
-  function closeModal() {
-    setIsShowing(false);
-  }
-
-  const { getCart, user, updateCart, cart, removeItemFromCart } = props;
-  const { cart_details } = cart;
+  };
+  const openDrawer = () => setIsShowing(true);
+  const closeDrawer = () => setIsShowing(false);
 
   return (
     <div>
       <button
-        variant="primary"
         style={{ backgroundColor: 'transparent', border: 'none' }}
         onMouseDown={async () => {
           await getCart(user.id);
         }}
-        onMouseUp={openModal}
+        onMouseUp={openDrawer}
       >
-        🛒
+       🛒
       </button>
-      <Modal show={isShowing} onHide={closeModal}>
-        <Modal.Header closeButton>
-          <Modal.Title style={{ color: '#4e4c4b' }}>Shopping Cart</Modal.Title>
-        </Modal.Header>
-        {cart_details === undefined
-          ? 'Cart Empty'
-          : cart_details.length === 0
-          ? 'Cart Empty'
-          : cart_details.map((item) => (
-              <Container key={item.id}>
-                <Modal.Body>
-                  <CloseButton
-                    style={{
-                      position: 'absolute',
-                      right: '1.3rem',
-                      top: '1.2rem',
-                    }}
-                    onClick={() => removeItemFromCart(item.product.id, user.id)}
-                  />
-                  <Image
-                    style={{ height: '250px' }}
-                    src={item.product.image_url}
-                    fluid="true"
-                  ></Image>
-                  <p className="mt-2">{item.product.name}</p>
-                  <li>${item.product.price}</li>
-                  <li>Qty: {item.product_quantity}</li>
-                  <Form.Select
-                    className="mt-2"
-                    style={{ width: '150px' }}
-                    name="quanity"
-                    id={item.product.id}
-                    onChange={changeQuantity}
-                  >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                  </Form.Select>
-                  <hr></hr>
-                </Modal.Body>
-              </Container>
-            ))}
-        <Modal.Footer>
-          <Link to="/checkout">
-            <Button
-              variant="secondary"
-              style={{ width: '20rem', marginRight: '5rem' }}
-              onClick={closeModal}
-            >
-              Proceed to Checkout
+      <Drawer open={isShowing} anchor='right' onClose={closeDrawer}>
+        <Typography variant='h6' sx={{ mb: 2, textAlign: 'center' }}>
+          Subtotal ${cartTotal(cart)}
+        </Typography>
+        {cart.cart_details === undefined || cart.cart_details.length === 0 ? (
+          <Typography variant='h6' sx={{ textAlign: 'center' }}>
+            Your cart is empty
+          </Typography>
+        ) : (
+          cart.cart_details.map((item) => (
+            <Container key={item.id}>
+              <button
+                style={style.button.closeButton}
+                onClick={() => removeItemFromCart(item.product.id, user.id)}
+              >
+                &#10060;
+              </button>
+              <img src={item.product.image_url} style={style.image}></img>
+              <p>{item.product.name}</p>
+              <li>${item.product.price}</li>
+              <li>Qty: {item.product_quantity}</li>
+              <select
+                style={style.select}
+                id={String(item.product.id)}
+                onChange={changeQuantity}
+                name='quanity'
+                defaultValue={item.product_quantity}
+              >
+                {selectOptions.map((ele, idx) => (
+                  <option value={idx} key={idx}>
+                    {idx}
+                  </option>
+                ))}
+              </select>
+              <hr></hr>
+            </Container>
+          ))
+        )}
+        <Container>
+          <Link to='/checkout' onClick={closeDrawer}>
+            <Button sx={{ mt: 1, mb: 3 }} variant='contained'>
+              Proceed to checkout
             </Button>
           </Link>
-        </Modal.Footer>
-      </Modal>
+        </Container>
+      </Drawer>
     </div>
   );
-}
-
-// class Cart extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       productId: 0,
-//       isShowing: false,
-//     };
-//     this.changeQuantity = this.changeQuantity.bind(this);
-//     this.openModal = this.openModal.bind(this);
-//     this.closeModal = this.closeModal.bind(this);
-//   }
-
-//   componentDidMount() {
-//     // Ryan added changes below...
-//     // passing in this.props.user.id for determination if guest or logged in user
-//     this.props.getCart(this.props.user.id);
-//   }
-
-// changeQuantity(evt) {
-//   this.setState({ productId: evt.target.id });
-//   this.props.updateCart(evt.target.value, evt.target.id, this.props.user.id);
-// }
-
-// openModal() {
-//   this.setState({ ...this.state, isShowing: true });
-// }
-
-// closeModal() {
-//   this.setState({ ...this.state, isShowing: false });
-// }
-
-//   render() {
-//     const { cart, removeItemFromCart, user } = this.props;
-//     const { cart_details } = cart;
-//     return (
-//       <div>
-//         <button
-//           variant="primary"
-//           style={{ backgroundColor: 'transparent', border: 'none' }}
-//           onMouseDown={async () => {
-//             await this.props.getCart(user.id);
-//           }}
-//           onMouseUp={this.openModal}
-//         >
-//           🛒
-//         </button>
-//         <Modal show={this.state.isShowing} onHide={this.closeModal}>
-//           <Modal.Header closeButton>
-//             <Modal.Title style={{ color: '#4e4c4b' }}>
-//               Shopping Cart
-//             </Modal.Title>
-//           </Modal.Header>
-//           {cart_details === undefined
-//             ? 'Cart Empty'
-//             : cart_details.length === 0
-//             ? 'Cart Empty'
-//             : cart_details.map((item) => (
-//                 <Container key={item.id}>
-//                   <Modal.Body>
-//                     <CloseButton
-//                       style={{
-//                         position: 'absolute',
-//                         right: '1.3rem',
-//                         top: '1.2rem',
-//                       }}
-//                       onClick={() =>
-//                         removeItemFromCart(item.product.id, user.id)
-//                       }
-//                     />
-//                     <Image
-//                       style={{ height: '250px' }}
-//                       src={item.product.image_url}
-//                       fluid="true"
-//                     ></Image>
-//                     <p className="mt-2">{item.product.name}</p>
-//                     <li>${item.product.price}</li>
-//                     <li>Qty: {item.product_quantity}</li>
-//                     <Form.Select
-//                       className="mt-2"
-//                       style={{ width: '150px' }}
-//                       name="quanity"
-//                       id={item.product.id}
-//                       onChange={this.changeQuantity}
-//                     >
-//                       <option value="1">1</option>
-//                       <option value="2">2</option>
-//                       <option value="3">3</option>
-//                       <option value="4">4</option>
-//                       <option value="5">5</option>
-//                       <option value="6">6</option>
-//                       <option value="7">7</option>
-//                       <option value="8">8</option>
-//                     </Form.Select>
-//                     <hr></hr>
-//                   </Modal.Body>
-//                 </Container>
-//               ))}
-//           <Modal.Footer>
-//             <Link to="/checkout">
-//               <Button
-//                 variant="secondary"
-//                 style={{ width: '20rem', marginRight: '5rem' }}
-//                 onClick={this.closeModal}
-//               >
-//                 Proceed to Checkout
-//               </Button>
-//             </Link>
-//           </Modal.Footer>
-//         </Modal>
-//       </div>
-//     );
-//   }
-// }
+};
 
 const mapStateToProps = (state) => ({
   // expanded to better see states being tracked...
