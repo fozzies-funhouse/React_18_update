@@ -1,120 +1,104 @@
-// import React from 'react';
-
-// const Navbar = () => {
-//   return <div>Hello</div>;
-// };
-
-// export default Navbar;
-
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logout, authenticate } from '../store';
-import { Navbar, Nav, Container, Form, Button } from 'react-bootstrap';
+import { logout } from '../store';
 import Cart from './Cart';
-import { fetchCart } from '../store/cart';
+import { style } from './Utils/navUtils';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Avatar, Tooltip,MenuItem, Container } from '@mui/material';
 
-const Navigation = ({ handleLogout, isLoggedIn, createGuestCart, user }) => (
-  <Navbar bg='light' variant='light' sticky='top'>
-    <Container>
-      <Navbar.Brand as={Link} to='/'>
-        Trekkies Snowboard & Skis
-      </Navbar.Brand>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Nav>
-            <Nav.Link as={Link} to='/home'>
-              Home
-            </Nav.Link>
-            <Nav.Link as={Link} to='/' href='#' onClick={handleLogout}>
-              logout
-            </Nav.Link>
-            <Nav.Link as={Link} to='/products'>
-              Products
-            </Nav.Link>
-            <Nav.Item
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Cart />
-              <Form
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginLeft: '5rem',
-                }}
+const Navigation = ({ handleLogout, isLoggedIn }) => {
+  const [userMenu, setUserMenu] = useState(false);
+  const openUserMenu = (event) => setUserMenu(event.currentTarget);
+  const closeUserMenu = () => setUserMenu(null);
+
+  const loggedInView = () => {
+    const pages = ['Products'];
+    return (
+      <AppBar position='static'>
+        <Container maxWidth='xl'>
+          <Toolbar disableGutters>
+            <Link to='/' {...style.navLink}>
+              <Typography {...style.logo}>LOGO Placeholder</Typography>
+            </Link>
+            <Box {...style.pageBox}>
+              {pages.map((page) => (
+                <Link
+                  to={page.toLowerCase()}
+                  key={page}
+                  onClick={closeUserMenu}
+                  {...style.navLink}
+                >
+                  <Typography>{page}</Typography>
+                </Link>
+              ))}
+            </Box>
+            <Box sx={{ display: 'flex' }}>
+              <Tooltip title='Settings'>
+                <IconButton onClick={openUserMenu} sx={{ p: 0 }}>
+                  <Avatar />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                {...style.menu}
+                onClose={closeUserMenu}
+                open={Boolean(userMenu)}
+                anchorEl={userMenu}
               >
-                <Form.Control type='text'></Form.Control>
-                <Button variant='secondaray'>Search</Button>
-              </Form>
-            </Nav.Item>
-          </Nav>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Nav>
-            <Nav.Link as={Link} to='/'>
-              Home
-            </Nav.Link>
-            <Nav.Link as={Link} to='/login'>
-              Login
-            </Nav.Link>
-            <Nav.Link as={Link} to='/signup'>
-              Sign Up
-            </Nav.Link>
-            <Nav.Link
-              as={Link}
-              to='/products'
-              onClick={() => createGuestCart()}
-            >
-              Products
-            </Nav.Link>
-            <Nav.Item
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
+                <MenuItem onClick={closeUserMenu}>
+                  <Link to='/home' {...style.link}>
+                    <Typography textAlign='center'>Profile</Typography>
+                  </Link>
+                </MenuItem>
+                <MenuItem onClick={closeUserMenu}>
+                  <Link to='/' {...style.link} onClick={handleLogout}>
+                    <Typography textAlign='center'>Logout</Typography>
+                  </Link>
+                </MenuItem>
+              </Menu>
               <Cart />
-            </Nav.Item>
-            <Form
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginLeft: '5rem',
-              }}
-            >
-              <Form.Control type='text'></Form.Control>
-              <Button variant='secondaray'>Search</Button>
-            </Form>
-          </Nav>
-        </div>
-      )}
-    </Container>
-  </Navbar>
-);
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    );
+  };
 
-/**
- * CONTAINER
- */
+  const guestView = () => {
+    const pages = ['Products', 'Login', 'Signup'];
+    return (
+      <AppBar position='static'>
+        <Container maxWidth='xl'>
+          <Toolbar disableGutters>
+            <Link to='/' {...style.navLink}>
+              <Typography {...style.logo}>LOGO Placeholder</Typography>
+            </Link>
+            <Box {...style.pageBox}>
+              {pages.map((page) => (
+                <Link
+                  to={page.toLowerCase()}
+                  key={page}
+                  onClick={closeUserMenu}
+                  {...style.navLink}
+                >
+                  <Typography>{page}</Typography>
+                </Link>
+              ))}
+            </Box>
+            <Cart />
+          </Toolbar>
+        </Container>
+      </AppBar>
+    );
+  };
+
+  return isLoggedIn ? loggedInView() : guestView();
+};
+
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
   };
 };
-
-// const mapState = (state) => ({
-//   isLoggedIn: !!state.auth.id,
-//   user: state.auth,
-// });
 
 const mapDispatch = (dispatch) => {
   return {
@@ -129,7 +113,6 @@ const mapDispatch = (dispatch) => {
         );
       }
     },
-    // createGuestCart: (userId) => dispatch(fetchCart(userId)),
   };
 };
 
