@@ -14,6 +14,7 @@ import {
   Grid,
   Button,
 } from '@mui/material';
+import './SingleProduct.css';
 
 const SingleProduct = (props) => {
   const [count, setCount] = useState(0);
@@ -28,8 +29,28 @@ const SingleProduct = (props) => {
 
   return (
     <>
-      <SingleProduct3D id={id} />
+      <Container>
+        <Grid
+          container
+          spacing={1}
+          direction='row'
+          justifyContent='center'
+          alignItems='center'
+        >
+          <Grid item xs={12} md={8} lg={8} style={{ height: 600, width: 600 }}>
+            <SingleProduct3D id={id} />
+          </Grid>
+          <Grid item xs={10} md={4} lg={4}>
+            <Card elevation={5}>
+              <CardHeader title={product.name} variant='top'>
+                {product.name}
+              </CardHeader>
+            </Card>
+          </Grid>
+        </Grid>
+      </Container>
 
+      {/* <h1 className='single-product__card'>Hello</h1> */}
       {/* <Container>
         <h1
         style={{

@@ -1,15 +1,14 @@
-import React, { Suspense, useRef } from 'react';
+import React, { Suspense } from 'react';
 import {
   Environment,
   PresentationControls,
   MeshReflectorMaterial,
 } from '@react-three/drei';
 import {
-  Canvas, // Canvaas element
-  useFrame, // Animation by frame
+  Canvas, // Canvas element
 } from '@react-three/fiber';
 
-// import './SingleProduct3D.css';
+import './SingleProduct3D.css';
 import Shoe from './Shoe';
 
 // React Functional Component
@@ -19,6 +18,7 @@ function SingleProduct3D(props) {
 
   return (
     <>
+      {/* This the single product 3D Scene created with React Three Fiber */}
       <Canvas
         dpr={[1, 1.5]}
         shadows
@@ -44,10 +44,12 @@ function SingleProduct3D(props) {
           />
         </directionalLight>
         <Suspense fallback={null}>
+          {/* Shoe model */}
           <PresentationControls global polar={[0, 0.3]}>
             <Shoe id={id} />
           </PresentationControls>
 
+          {/* Reflective plane as floor */}
           <mesh position={[0, -3.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
             <planeGeometry args={[80, 80]} />
             <MeshReflectorMaterial
@@ -62,6 +64,7 @@ function SingleProduct3D(props) {
               roughness={0.6}
             />
           </mesh>
+
           <Environment preset='dawn' />
         </Suspense>
       </Canvas>

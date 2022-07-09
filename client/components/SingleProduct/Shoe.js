@@ -6,8 +6,9 @@ import { useGLTF } from '@react-three/drei';
 
 const ShoeModel = [
   {
-    // Array of Objects with path and scale properties
-    // ShoeModel[0] is empty it only contains this helpful note.
+    // Array of Objects with path and scale properties and since
+    // we dont have a product of id '0' ShoeModel[0] is empty
+    // it only contains this helpful note.
   },
   // ShoeModel[1]
   {
@@ -104,10 +105,11 @@ const Shoe = (props) => {
   const gltf = useGLTF(path);
   // console.log(gltf.scene);
   gltf.scene.scale.set(scale.x, scale.y, scale.z);
+
   gltf.scene.position.set(0, -2, 0);
   gltf.scene.rotation.y = Math.PI;
 
-  // Animation hook
+  // Animation hook to animate on each frame
   useFrame(() => {
     shoeRef.current.rotation.y += 0.003;
   });
