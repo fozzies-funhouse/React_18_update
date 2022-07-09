@@ -17,8 +17,8 @@ const Cart = (props) => {
     setProductId(evt.target.id);
     updateCart(evt.target.value, evt.target.id, user.id);
   };
-  const openModal = () => setIsShowing(true);
-  const closeModal = () => setIsShowing(false);
+  const openDrawer = () => setIsShowing(true);
+  const closeDrawer = () => setIsShowing(false);
 
   return (
     <div>
@@ -27,11 +27,11 @@ const Cart = (props) => {
         onMouseDown={async () => {
           await getCart(user.id);
         }}
-        onMouseUp={openModal}
+        onMouseUp={openDrawer}
       >
        🛒
       </button>
-      <Drawer open={isShowing} anchor='right' onClose={closeModal}>
+      <Drawer open={isShowing} anchor='right' onClose={closeDrawer}>
         <Typography variant='h6' sx={{ mb: 2, textAlign: 'center' }}>
           Subtotal ${cartTotal(cart)}
         </Typography>
@@ -70,7 +70,7 @@ const Cart = (props) => {
           ))
         )}
         <Container>
-          <Link to='/checkout' onClick={closeModal}>
+          <Link to='/checkout' onClick={closeDrawer}>
             <Button sx={{ mt: 1, mb: 3 }} variant='contained'>
               Proceed to checkout
             </Button>
