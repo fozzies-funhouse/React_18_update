@@ -96,9 +96,6 @@ const ShoeModel = [
 const Shoe = (props) => {
   const { id } = props;
 
-  if (id >= ShoeModel.length) {
-    return <div>No 3D Model</div>;
-  }
   const { path, scale } = ShoeModel[id];
 
   const shoeRef = useRef(); // useRef hook to connect animation per each frame
