@@ -4,7 +4,7 @@ import { useGLTF } from '@react-three/drei';
 
 // Shoe Component
 
-const ShoeModel = [
+export const ShoeModel = [
   {
     // Array of Objects with path and scale properties and since
     // we dont have a product of id '0' ShoeModel[0] is empty
