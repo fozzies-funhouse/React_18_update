@@ -1,8 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useState ,useMemo } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import axios from "axios";
 import useResponsiveFontSize from './useResponsiveFontSize';
 import { exportTotal as importTotal } from '../Checkout';
+import CircularProgress from '@mui/material/CircularProgress';
+import ButtonBase from "@mui/material/ButtonBase";
 
 const useOptions = () => {
   const fontSize = useResponsiveFontSize();
@@ -29,13 +31,25 @@ const useOptions = () => {
   return options;
 };
 
+
 const StripeCard = () => {
   const stripe = useStripe();
   const elements = useElements();
   const options = useOptions();
 
+  const [paymentLoading, setPaymentLoading] = useState(false)
+  const spinnerVisible = (paymentLoading ? "block" : "none")
+
+  const styles = {
+    spinner: {
+      display: spinnerVisible,
+      alignSelf: "center"
+    }
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setPaymentLoading(true);
 
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
@@ -66,8 +80,10 @@ const StripeCard = () => {
       if (response.data.success) {
         console.log("payment successful!");
       }
+      setPaymentLoading(false);
     } catch (error) {
       console.log("payment error", error);
+      setPaymentLoading(false);
     }
 
   };
@@ -97,15 +113,15 @@ const StripeCard = () => {
           }}
         />
       </label>
-      <button
-        type="submit"
-        disabled={!stripe}
-        style={{
-          width: '100%',
-        }}
-      >
+      <ButtonBase
+      type="submit"
+      disabled={!stripe}
+      style={{
+        width: '100%',
+      }}>
         Pay
-      </button>
+        <CircularProgress style={styles.spinner} />
+      </ButtonBase>
     </form>
   );
 };
