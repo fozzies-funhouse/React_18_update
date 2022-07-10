@@ -21,11 +21,26 @@ const Product = db.define('product', {
     allowNull: false,
     validate: { min: 0 },
   },
-  image_url: {
+  description: {
     type: Sequelize.TEXT,
   },
+  image_url: {
+    type: Sequelize.STRING,
+  },
   model_url: {
-    type: Sequelize.TEXT,
+    type: Sequelize.STRING,
+  },
+  ratingsArray: {
+    type: Sequelize.ARRAY(Sequelize.INTEGER),
+  },
+  rating: {
+    type: Sequelize.VIRTUAL,
+    get(){
+      return (this.ratingsArray.reduce((a, b)=> (a+b)) / this.ratingsArray.length).toPrecision(2);
+    },
+    set(value){
+      throw new Error("Do not set this value.  Instead manipulate ratingsArray.")
+    }
   }
 });
 
