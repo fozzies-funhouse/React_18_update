@@ -1,11 +1,93 @@
 [
   {
-    "name": "star fighter",
+    "name": "Calliope",
     "type": "shoe",
     "price": 200,
-    "inventory": 1,
-    "image_url": "path to pic",
-    "model_url": "path to model"
+    "inventory": 23,
+    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "image_url": "/public/Shoes/Shoe1.png",
+    "model_url": "/public/Shoes/Shoe1.glb",
+    "ratingsArray": [5, 5, 4]
+  },
+  {
+    "name": "Clio",
+    "type": "shoe",
+    "price": 832,
+    "inventory": 39,
+    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "image_url": "/public/Shoes/Shoe2.png",
+    "model_url": "/public/Shoes/Shoe2.glb",
+    "ratingsArray": [5, 3, 4]
+  },
+  {
+    "name": "Euterpe",
+    "type": "shoe",
+    "price": 934,
+    "inventory": 23,
+    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "image_url": "/public/Shoes/Shoe3.png",
+    "model_url": "/public/Shoes/Shoe3.glb",
+    "ratingsArray": [5, 5, 5]
+  },
+  {
+    "name": "Thalia",
+    "type": "shoe",
+    "price": 477,
+    "inventory": 19,
+    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "image_url": "/public/Shoes/Shoe4.png",
+    "model_url": "/public/Shoes/Shoe4.glb",
+    "ratingsArray": [5, 4, 5]
+  },
+  {
+    "name": "Melpomena",
+    "type": "shoe",
+    "price": 754,
+    "inventory": 84,
+    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "image_url": "/public/Shoes/Shoe5.png",
+    "model_url": "/public/Shoes/Shoe5.glb",
+    "ratingsArray": [5, 5, 3]
+  },
+  {
+    "name": "Terpsichore",
+    "type": "shoe",
+    "price": 553,
+    "inventory": 9,
+    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "image_url": "/public/Shoes/Shoe6.png",
+    "model_url": "/public/Shoes/Shoe6.glb",
+    "ratingsArray": [5, 5, 5]
+  },
+  {
+    "name": "Erato",
+    "type": "shoe",
+    "price": 394,
+    "inventory": 29,
+    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "image_url": "/public/Shoes/Shoe7.png",
+    "model_url": "/public/Shoes/Shoe7.glb",
+    "ratingsArray": [5, 4, 3]
+  },
+  {
+    "name": "Polyhmnia",
+    "type": "shoe",
+    "price": 750,
+    "inventory": 65,
+    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "image_url": "/public/Shoes/Shoe8.png",
+    "model_url": "/public/Shoes/Shoe8.glb",
+    "ratingsArray": [4, 3, 3]
+  },
+  {
+    "name": "Urania",
+    "type": "shoe",
+    "price": 590,
+    "inventory": 45,
+    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "image_url": "/public/Shoes/Shoe9.png",
+    "model_url": "/public/Shoes/Shoe9.glb",
+    "ratingsArray": [4, 4, 3]
   }
 ]
 
