@@ -27,7 +27,7 @@ export default function AllTheProducts(props) {
         {finalProds.map((product) => (
           <Grid item xs={6} key={product.id}>
             <Card
-              className="mb-2"
+              className='mb-2'
               style={{
                 width: '30rem',
                 height: '40rem',
@@ -36,8 +36,8 @@ export default function AllTheProducts(props) {
             >
               <Link to={`/products/${product.id}`}>
                 <CardMedia
-                  variant="top"
-                  component="img"
+                  variant='top'
+                  component='img'
                   image={product.image_url}
                 />
               </Link>
@@ -46,7 +46,7 @@ export default function AllTheProducts(props) {
                 to={`/products/${product.id}`}
               >
                 <CardHeader title={product.name}></CardHeader>
-                <Typography variant="h5">${product.price}</Typography>
+                <Typography variant='h5'>${product.price}</Typography>
               </Link>
             </Card>
           </Grid>

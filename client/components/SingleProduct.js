@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProduct, addToCart } from '../store/singleProduct';
 import { fetchCart } from '../store/cart';
 import SingleProduct3D from './SingleProduct/SingleProduct3D';
+import { ShoeModel } from './SingleProduct/Shoe';
 
 import {
   Container,
@@ -35,6 +36,16 @@ const SingleProduct = (props) => {
     dispatch(fetchCart()); //if user is not logged in this thunk creates a local storage cart
   }, []);
 
+  // Generating number of stars
+  const productStars = () => {
+    let str = '';
+    for (let i = 0; i < Math.floor(product.rating); i++) {
+      let star = '🌟';
+      str += star;
+    }
+    return str;
+  };
+
   const selectOptions = [...Array(10)];
 
   return (
@@ -58,7 +69,7 @@ const SingleProduct = (props) => {
             >
               {/* This is the 3D Scene  it only renders if is items 1-9 the 
                   rest renders the product pic */}
-              {id < 9 ? (
+              {id < ShoeModel.length ? (
                 <SingleProduct3D id={id} />
               ) : (
                 <img
@@ -91,7 +102,7 @@ const SingleProduct = (props) => {
 
                     <Grid item>
                       <Typography variant='body1' style={{ marginLeft: 20 }}>
-                        Ratings: 🌟🌟🌟🌟 4.6%
+                        Ratings: {productStars()} {product.rating}%
                       </Typography>
                     </Grid>
                     {/* Checking inventory if inventory = 0 It will display 
