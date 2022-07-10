@@ -26,6 +26,8 @@ import { stripeCheckout } from '../store/stripeCheckout';
 
 import StripeContainer from './Stripe/StripeContainer';
 
+export let exportTotal = 0;
+
 function Checkout(props) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -72,6 +74,8 @@ function Checkout(props) {
           acc += total;
           return acc;
         }, 0);
+
+  exportTotal = cartTotal;
 
   return (
     <Container>
@@ -188,7 +192,7 @@ function Checkout(props) {
                 </Button>
               </Link>
             </Grid>
-            <StripeContainer amount={cartTotal}/>
+            <StripeContainer />
           </Card>
           <Card
             className="flex-fill"

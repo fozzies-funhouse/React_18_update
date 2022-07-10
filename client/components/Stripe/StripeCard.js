@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import axios from "axios";
-
 import useResponsiveFontSize from './useResponsiveFontSize';
+import { exportTotal as importTotal } from '../Checkout';
 
 const useOptions = () => {
   const fontSize = useResponsiveFontSize();
@@ -29,7 +29,7 @@ const useOptions = () => {
   return options;
 };
 
-const StripeCard = ({ amount }) => {
+const StripeCard = () => {
   const stripe = useStripe();
   const elements = useElements();
   const options = useOptions();
@@ -43,21 +43,22 @@ const StripeCard = ({ amount }) => {
       return;
     }
 
+    console.log("imported total", importTotal)
+
     const { paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: elements.getElement(CardElement),
     });
 
     console.log('[PaymentMethod]', paymentMethod);
-    console.log("amount", amount)
 
     try {
       const { id } = paymentMethod;
       const response = await axios.post(
-        "http://localhost:5001/samori-stripe-microservice/us-central1/stripeCharge",
+        "https://samori-stripe-microservice.web.app/api/charge",
         {
-          amount: 4000,
-          id: id,
+          amount: importTotal,
+          id: id
         }
       );
 

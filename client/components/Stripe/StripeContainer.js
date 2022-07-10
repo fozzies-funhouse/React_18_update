@@ -11,12 +11,12 @@ const PUBLIC_KEY = "pk_test_51LIHOVLcfdacnvzyenB7TQ2IsTKewgB4fCfpWokK5brUbLG1yw1
 
 const stripeTestPromise = loadStripe(PUBLIC_KEY);
 
-export default function StripeContainer({ amount }) {
+export default function StripeContainer() {
 
   return (
     <div>
       <BrowserRouter>
-        <Elements stripe={stripeTestPromise} amount={amount}>
+        <Elements stripe={stripeTestPromise} >
           <StripeCard />
         </Elements>
       </BrowserRouter>
