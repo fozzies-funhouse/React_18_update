@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+import axios from "axios";
 
 import useResponsiveFontSize from './useResponsiveFontSize';
 
@@ -28,7 +29,7 @@ const useOptions = () => {
   return options;
 };
 
-const StripeCard = () => {
+const StripeCard = ({ amount }) => {
   const stripe = useStripe();
   const elements = useElements();
   const options = useOptions();
@@ -42,12 +43,32 @@ const StripeCard = () => {
       return;
     }
 
-    const payload = await stripe.createPaymentMethod({
+    const { paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: elements.getElement(CardElement),
     });
 
-    console.log('[PaymentMethod]', payload);
+    console.log('[PaymentMethod]', paymentMethod);
+    console.log("amount", amount)
+
+    try {
+      const { id } = paymentMethod;
+      const response = await axios.post(
+        "http://localhost:5001/samori-stripe-microservice/us-central1/stripeCharge",
+        {
+          amount: 4000,
+          id: id,
+        }
+      );
+
+      console.log("response data", response.data.success);
+      if (response.data.success) {
+        console.log("payment successful!");
+      }
+    } catch (error) {
+      console.log("payment error", error);
+    }
+
   };
 
   return (

@@ -188,7 +188,7 @@ function Checkout(props) {
                 </Button>
               </Link>
             </Grid>
-            <StripeContainer />
+            <StripeContainer amount={cartTotal}/>
           </Card>
           <Card
             className="flex-fill"
