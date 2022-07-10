@@ -32,6 +32,7 @@ const SingleProduct = (props) => {
 
   useEffect(() => {
     dispatch(fetchProduct(id));
+    dispatch(fetchCart()); //if user is not logged in this thunk creates a local storage cart
   }, []);
 
   const selectOptions = [...Array(10)];
