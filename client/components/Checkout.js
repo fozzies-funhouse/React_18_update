@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchCart, checkoutCart } from '../store/cart';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchCart, checkoutCart } from "../store/cart";
 
 import {
   Container,
@@ -17,23 +17,23 @@ import {
   InputLabel,
   FormHelperText,
   Input,
-} from '@mui/material';
+} from "@mui/material";
 
-import { stripeCheckout } from '../store/stripeCheckout';
+import { stripeCheckout } from "../store/stripeCheckout";
 
-import StripeContainer from './Stripe/StripeContainer';
+import StripeContainer from "./Stripe/StripeContainer";
 
 export let exportTotal = 0;
 
 function Checkout(props) {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [zipCode, setZipCode] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const { getCart, cart, checkout, user } = props;
   const { cart_details } = cart;
@@ -42,17 +42,17 @@ function Checkout(props) {
     getCart(user.id);
   }, []);
 
-  console.log('cart', cart);
+  console.log("cart", cart);
 
   const [localState, setLocalState] = useState({
-    firstName: user.firstName || '',
-    lastName: user.lastName || '',
-    email: user.email || '',
-    address: user.address || '',
-    zipCode: user.zipCode || '',
-    city: user.city || '',
-    state: user.state || '',
-    phoneNumber: user.phoneNumber || '',
+    firstName: user.firstName || "",
+    lastName: user.lastName || "",
+    email: user.email || "",
+    address: user.address || "",
+    zipCode: user.zipCode || "",
+    city: user.city || "",
+    state: user.state || "",
+    phoneNumber: user.phoneNumber || "",
   });
 
   function handleChange(event) {
@@ -78,12 +78,12 @@ function Checkout(props) {
     <Container>
       <h1
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          color: '#808080',
-          marginBottom: '2rem',
-          marginTop: '2rem',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "#808080",
+          marginBottom: "2rem",
+          marginTop: "2rem",
         }}
       >
         Secure Checkout
@@ -95,10 +95,10 @@ function Checkout(props) {
           <Card
             className="flex-fill"
             style={{
-              width: '40rem',
-              height: '50rem',
-              color: '#4e4c4b',
-              border: 'none',
+              width: "40rem",
+              height: "50rem",
+              color: "#4e4c4b",
+              border: "none",
             }}
           >
             <CardHeader className="text-center">Contact Information</CardHeader>
@@ -179,7 +179,7 @@ function Checkout(props) {
                   variant="primary"
                   className="mt-auto"
                   style={{
-                    width: '100%',
+                    width: "100%",
                     bottom: 0,
                   }}
                   onClick={() => checkout(cartTotal, user.id, localState.email)}
@@ -193,22 +193,22 @@ function Checkout(props) {
           <Card
             className="flex-fill"
             style={{
-              width: '40rem',
-              marginLeft: '5rem',
-              color: '#4e4c4b',
-              border: 'none',
+              width: "40rem",
+              marginLeft: "5rem",
+              color: "#4e4c4b",
+              border: "none",
             }}
           >
             <CardHeader title={`Order Total: ${cartTotal}`}></CardHeader>
             <Typography>Your Order</Typography>
             {cart_details === undefined
-              ? 'Cart Empty'
+              ? "Cart Empty"
               : cart_details.map((item) => (
                   <Container key={item.id}>
                     <CardMedia
                       component="img"
                       image={item.product.image_url}
-                      style={{ height: '250px' }}
+                      style={{ height: "250px" }}
                       fluid="true"
                     />
                     <li>{item.product.name}</li>
