@@ -8,7 +8,6 @@ import {
   Canvas, // Canvas element
 } from '@react-three/fiber';
 
-import './SingleProduct3D.css';
 import Shoe from './Shoe';
 
 // React Functional Component
