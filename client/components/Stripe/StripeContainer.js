@@ -1,27 +1,21 @@
-import React, { useState } from 'react';
+import React from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import "./AppStyle.css";
 
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
-import './AppStyle.css';
+import { BrowserRouter } from "react-router-dom";
+import StripeCard from "./StripeCard";
 
-import { BrowserRouter } from 'react-router-dom';
+const PUBLIC_KEY =
+  "pk_test_51LIHOVLcfdacnvzyenB7TQ2IsTKewgB4fCfpWokK5brUbLG1yw1ucRn1KyIuTWo8Mv6xjLtSXOfrqQ7aU9cu9Pdg009BJjult9";
 
-import StripeCard from './StripeCard';
+const stripeTestPromise = loadStripe(PUBLIC_KEY);
 
-const stripePromise = loadStripe(
-  'pk_test_51LDBGaHtk0V3Nu7lBzBtudF4WV08WWlvokTHwPDPJ6r2mXjVX5BuOKh1Ht33ma0NwDlKuoNIIy8VN2Y9YteDU0BC00XOrE3ztp'
-);
-
-export default function StripeContainer(props) {
-  const options = {
-    // passing the client secret obtained from the server
-    clientSecret: '{{CLIENT_SECRET}}',
-  };
-
+export default function StripeContainer() {
   return (
     <div>
       <BrowserRouter>
-        <Elements stripe={stripePromise}>
+        <Elements stripe={stripeTestPromise}>
           <StripeCard />
         </Elements>
       </BrowserRouter>
