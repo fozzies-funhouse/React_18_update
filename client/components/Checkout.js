@@ -207,7 +207,7 @@ function Checkout(props) {
                   <Container key={item.id}>
                     <CardMedia
                       component="img"
-                      image={item.product.image_url}
+                      image={item.product.image_url.slice(7)}
                       style={{ height: "250px" }}
                       fluid="true"
                     />
