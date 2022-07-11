@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { fetchCart, checkoutCart } from "../store/cart";
 
 import {
@@ -22,8 +21,6 @@ import {
 import { stripeCheckout } from "../store/stripeCheckout";
 
 import StripeContainer from "./Stripe/StripeContainer";
-
-export let exportTotal = 0;
 
 function Checkout(props) {
   const [firstName, setFirstName] = useState("");
@@ -72,7 +69,15 @@ function Checkout(props) {
           return acc;
         }, 0);
 
-  exportTotal = cartTotal;
+
+  const stripeProps = {
+
+    checkout: checkout,
+    cartTotal: cartTotal,
+    userID: user.id,
+    email: localState.email,
+
+  }
 
   return (
     <Container>
@@ -174,21 +179,8 @@ function Checkout(props) {
                   </FormControl>
                 </Grid>
               </FormGroup>
-              <Link to="/confirmation">
-                <Button
-                  variant="primary"
-                  className="mt-auto"
-                  style={{
-                    width: "100%",
-                    bottom: 0,
-                  }}
-                  onClick={() => checkout(cartTotal, user.id, localState.email)}
-                >
-                  Submit Purchase Order
-                </Button>
-              </Link>
             </Grid>
-            <StripeContainer />
+            <StripeContainer stripeProps={stripeProps}/>
           </Card>
           <Card
             className="flex-fill"

@@ -11,12 +11,13 @@ const PUBLIC_KEY =
 
 const stripeTestPromise = loadStripe(PUBLIC_KEY);
 
-export default function StripeContainer() {
+export default function StripeContainer(props) {
+  const { stripeProps } = props;
   return (
     <div>
       <BrowserRouter>
         <Elements stripe={stripeTestPromise}>
-          <StripeCard />
+          <StripeCard stripeProps={stripeProps}/>
         </Elements>
       </BrowserRouter>
     </div>
