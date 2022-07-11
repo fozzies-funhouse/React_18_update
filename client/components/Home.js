@@ -134,7 +134,7 @@ function Home(props) {
                   return (
                     <Container key={order.product.id}>
                       <Image
-                        src={order.product.image_url}
+                        src={order.product.image_url.slice(7)}
                         style={{ height: '250px' }}
                         fluid="true"
                       ></Image>

@@ -42,7 +42,7 @@ const Landing = (props) => {
                     <Card elevation={5}>
                       <CardMedia
                         component='img'
-                        image={product.image_url}
+                        image={product.image_url.slice(7)}  // removes "/public" to hit our static route
                         height={300}
                         width={300}
                       />
@@ -66,7 +66,7 @@ const Landing = (props) => {
                     <Card elevation={5}>
                       <CardMedia
                         component='img'
-                        image={product.image_url}
+                        image={product.image_url.slice(7)}  // removes "/public" to hit our static route
                         height={300}
                         width={300}
                       />

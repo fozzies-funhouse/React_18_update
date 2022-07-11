@@ -48,7 +48,7 @@ const Cart = (props) => {
               >
                 &#10060;
               </button>
-              <img src={item.product.image_url} style={style.image}></img>
+              <img src={item.product.image_url.slice(7)} style={style.image}></img>
               <p>{item.product.name}</p>
               <li>${item.product.price}</li>
               <li>Qty: {item.product_quantity}</li>
