@@ -67,13 +67,13 @@ const SingleProduct = (props) => {
               lg={8}
               style={{ height: 600, width: 600 }}
             >
-              {/* This is the 3D Scene  it only renders if is items 1-9 the 
+              {/* This is the 3D Scene  it only renders if is items 1-9 the
                   rest renders the product pic */}
               {id < ShoeModel.length ? (
                 <SingleProduct3D id={id} />
               ) : (
                 <img
-                  src={product.image_url}
+                  src={product.image_url.slice(7)}
                   style={{ height: 600, width: 600 }}
                 />
               )}
@@ -105,7 +105,7 @@ const SingleProduct = (props) => {
                         Ratings: {productStars()} {product.rating}%
                       </Typography>
                     </Grid>
-                    {/* Checking inventory if inventory = 0 It will display 
+                    {/* Checking inventory if inventory = 0 It will display
                       'Out of stock' */}
                     {product.inventory > 0 ? (
                       <Grid item>
@@ -162,7 +162,7 @@ const SingleProduct = (props) => {
                           // Check for inventory
                           if (qty > product.inventory) {
                             alert(
-                              `🤕  Sorry we have ${product.inventory} in stock 
+                              `🤕  Sorry we have ${product.inventory} in stock
                                             ¯l_(ツ)_/¯`
                             );
                           } else {

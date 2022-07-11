@@ -38,7 +38,7 @@ export default function AllTheProducts(props) {
                 <CardMedia
                   variant='top'
                   component='img'
-                  image={product.image_url}
+                  image={product.image_url.slice(7)}
                 />
               </Link>
               <Link
