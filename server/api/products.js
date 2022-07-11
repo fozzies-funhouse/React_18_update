@@ -1,13 +1,15 @@
 const { requireToken } = require('./GateKeepingMiddleWare');
 const router = require('express').Router();
 const {
-  models: { Product, Cart, Order, CartDetail },
+  models: { Product, Cart, Order, CartDetail, Tag },
 } = require('../db');
 
 // GET /api/products
 router.get('/', async (req, res, next) => {
   try {
-    const products = await Product.findAll();
+    const products = await Product.findAll({
+      include: { model: Tag },
+    });
     res.json(products);
   } catch (err) {
     next(err);
