@@ -1,75 +1,75 @@
-import React, { Component, createContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import products, { fetchProducts } from '../store/products';
-import AllTheProducts from './AllTheProducts';
-import AllSkis from './Skis';
-import AllSnowboards from './Snowboards';
+import { fetchProducts } from '../store/products';
 
-import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
+import FilteredProducts from './FilteredProducts';
+
+import {
+  Select,
+  Container,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from '@mui/material';
 
 export const ProductContext = createContext();
 
-class AllProducts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedFilter: '',
-    };
-    this.changeFilter = this.changeFilter.bind(this);
-  }
-  componentDidMount() {
-    this.props.getProducts();
-  }
+function AllProducts(props) {
+  const [selectedFilter, setSelectedFilter] = useState('');
 
-  changeFilter(evt) {
-    this.setState({
-      selectedFilter: evt.target.value,
-    });
-  }
+  const { getProducts, products, user } = props;
 
-  render() {
-    const { products } = this.props;
-    return (
-      <ProductContext.Provider value={{ products }}>
-        <div id="all-products">
-          <h1
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              color: '#808080',
-              marginBottom: '2rem',
-            }}
-          >
-            Welcome {this.props.user.first_name || 'Guest'}
-          </h1>
-          <Container>
-            <Form.Select
-              size="lg"
-              className="mb-3"
-              onChange={this.changeFilter}
-            >
-              <option value="All">All Products</option>
-              <option value="Skis">Skis</option>
-              <option value="Snowboards">Snowboards</option>
-            </Form.Select>
-          </Container>
-          <Container>
-            {this.state.selectedFilter === 'All' ? (
-              <AllTheProducts />
-            ) : this.state.selectedFilter === 'Skis' ? (
-              <AllSkis />
-            ) : this.state.selectedFilter === 'Snowboards' ? (
-              <AllSnowboards />
-            ) : (
-              <AllTheProducts />
-            )}
-          </Container>
-        </div>
-      </ProductContext.Provider>
-    );
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  let tagsArr = [];
+
+  function tagsArray() {
+    for (let i = 0; i < products.length; ++i) {
+      let curVal = products[i].tags[0].category;
+      if (!tagsArr.includes(curVal)) tagsArr.push(curVal);
+    }
   }
+  tagsArray();
+
+  function changeFilter(evt) {
+    setSelectedFilter(evt.target.value);
+  }
+  return (
+    <ProductContext.Provider value={{ products }}>
+      <div id="all-products">
+        <h1
+          id="all-products-title"
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: '#808080',
+            marginBottom: '2rem',
+          }}
+        >
+          Welcome {user.first_name || 'Guest'}
+        </h1>
+        <Container>
+          <FormControl fullWidth>
+            <InputLabel id="filter-select-tag">Filter By Brand</InputLabel>
+            <Select size="lg" className="mb-3" onChange={changeFilter}>
+              <MenuItem value={''}>All Brands</MenuItem>
+              {tagsArr.map((tag, idx) => (
+                <MenuItem key={idx} value={tag}>
+                  {tag}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Container>
+        <Container>
+          <FilteredProducts filter={selectedFilter} />
+        </Container>
+      </div>
+    </ProductContext.Provider>
+  );
 }
 
 const mapStateToProps = (state) => ({
