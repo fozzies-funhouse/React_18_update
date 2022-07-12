@@ -117,7 +117,7 @@ const StripeCard = (props) => {
       </label>
       <ButtonBase
         type="submit"
-        disabled={!stripe}
+        disabled={!stripe || cartTotal === 0}
         style={{
           width: "100%",
         }}
