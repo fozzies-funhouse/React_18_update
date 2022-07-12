@@ -119,7 +119,7 @@ const StripeCard = (props) => {
             console.log("CardElement [focus]");
           }}
         />
-        <ButtonBase style={styles.payButton} type="submit" disabled={!stripe}>
+        <ButtonBase style={styles.payButton} type="submit" disabled={!stripe || cartTotal === 0}>
           Pay
           <CircularProgress style={styles.spinner} />
         </ButtonBase>
