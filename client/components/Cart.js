@@ -7,6 +7,7 @@ import Container from '@mui/material/Container';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const Cart = (props) => {
   const { getCart, user, updateCart, cart, removeItemFromCart } = props;
@@ -19,6 +20,7 @@ const Cart = (props) => {
   };
   const openDrawer = () => setIsShowing(true);
   const closeDrawer = () => setIsShowing(false);
+  const disabledLink = cartTotal(cart) === 0 ? "disabled-link" : "";
 
   return (
     <div>
@@ -29,7 +31,7 @@ const Cart = (props) => {
         }}
         onMouseUp={openDrawer}
       >
-       🛒
+       <ShoppingCartIcon />
       </button>
       <Drawer open={isShowing} anchor='right' onClose={closeDrawer}>
         <Typography variant='h6' sx={{ mb: 2, textAlign: 'center' }}>
@@ -69,10 +71,10 @@ const Cart = (props) => {
             </Container>
           ))
         )}
-        <Container>
-          <Link to='/checkout' onClick={closeDrawer}>
+        <Container onClick={closeDrawer}>
+          <Link className={disabledLink} to='/checkout' >
             <Button sx={{ mt: 1, mb: 3 }} variant='contained'>
-              Proceed to checkout
+              {cartTotal(cart) === 0 ? "Keep Shopping" : "Proceed to Checkout"}
             </Button>
           </Link>
         </Container>

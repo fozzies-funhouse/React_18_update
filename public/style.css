@@ -9,3 +9,7 @@ a {
 /* label {
   display: block;
 } */
+
+.disabled-link{
+  pointer-events: none
+}
