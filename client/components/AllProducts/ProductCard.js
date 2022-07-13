@@ -59,7 +59,7 @@ const ProductCard = ({ product }) => {
 
               <Grid item>
                 <Typography variant='body1' style={{ marginLeft: 20 }}>
-                  Ratings: {productStars()} {product.rating}/ 5.0
+                  Ratings: {productStars()} {product.rating}
                 </Typography>
               </Grid>
             </Grid>
