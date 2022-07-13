@@ -4,7 +4,18 @@ import { Link } from 'react-router-dom';
 import { logout } from '../store';
 import Cart from './Cart';
 import { style } from './Utils/navUtils';
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Avatar, Tooltip,MenuItem, Container } from '@mui/material';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Avatar,
+  Tooltip,
+  MenuItem,
+  Container,
+} from '@mui/material';
 
 const Navigation = ({ handleLogout, isLoggedIn }) => {
   const [userMenu, setUserMenu] = useState(false);
