@@ -15,7 +15,7 @@ async function seed() {
   await Promise.all(userData.map((user) => User.create(user)));
 
   // seed tags
-  let sneakerBrands = ["Nike", "Converse", "Addidas", "Vans", "Jordans"];
+  let sneakerBrands = ["Nike", "Converse", "Adidas", "Vans", "Jordans"];
   for (let i = 0; i < sneakerBrands.length; i++) {
     let tag = {
       category: sneakerBrands[i],
