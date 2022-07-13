@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logout } from '../store';
-import Cart from './Cart';
-import { style } from './Utils/navUtils';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../store";
+import Cart from "./Cart";
+import { style } from "./Utils/navUtils";
 import {
   AppBar,
   Box,
@@ -15,8 +15,8 @@ import {
   Tooltip,
   MenuItem,
   Container,
-} from '@mui/material';
-import { Login } from './AuthForm';
+} from "@mui/material";
+import { Login } from "./AuthForm";
 
 const Navigation = ({ handleLogout, isLoggedIn }) => {
   const [userMenu, setUserMenu] = useState(false);
@@ -24,12 +24,12 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
   const closeUserMenu = () => setUserMenu(null);
 
   const loggedInView = () => {
-    const pages = ['Products'];
+    const pages = ["Products"];
     return (
-      <AppBar position='static'>
-        <Container maxWidth='xl'>
+      <AppBar position="static">
+        <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <Link to='/' {...style.navLink}>
+            <Link to="/" {...style.navLink}>
               <Typography {...style.logo}>LOGO Placeholder</Typography>
             </Link>
             <Box {...style.pageBox}>
@@ -44,8 +44,8 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
                 </Link>
               ))}
             </Box>
-            <Box sx={{ display: 'flex' }}>
-              <Tooltip title='Settings'>
+            <Box sx={{ display: "flex" }}>
+              <Tooltip title="Settings">
                 <IconButton onClick={openUserMenu} sx={{ p: 0 }}>
                   <Avatar />
                 </IconButton>
@@ -57,17 +57,18 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
                 anchorEl={userMenu}
               >
                 <MenuItem onClick={closeUserMenu}>
-                  <Link to='/home' {...style.link}>
-                    <Typography textAlign='center'>Profile</Typography>
+                  <Link to="/home" {...style.link}>
+                    <Typography textAlign="center">Profile</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={closeUserMenu}>
-                  <Link to='/' {...style.link} onClick={handleLogout}>
-                    <Typography textAlign='center'>Logout</Typography>
+                  <Link to="/" {...style.link} onClick={handleLogout}>
+                    <Typography textAlign="center">Logout</Typography>
                   </Link>
                 </MenuItem>
               </Menu>
             </Box>
+            <Cart />
           </Toolbar>
         </Container>
       </AppBar>
@@ -77,14 +78,14 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
   const guestView = () => {
     // const pages = ['Products', 'Login', 'Signup'];
     return (
-      <AppBar position='static'>
-        <Container maxWidth='xl'>
+      <AppBar position="static">
+        <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <Link to='/' {...style.navLink}>
+            <Link to="/" {...style.navLink}>
               <Typography {...style.logo}>LOGO Placeholder</Typography>
             </Link>
             <Box {...style.pageBox}>
-              <Link to='products' onClick={closeUserMenu} {...style.navLink}>
+              <Link to="products" onClick={closeUserMenu} {...style.navLink}>
                 <Typography>Products</Typography>
               </Link>
               <Login />
@@ -113,7 +114,7 @@ const mapDispatch = (dispatch) => {
     createGuestCart() {
       if (!window.localStorage.cart) {
         window.localStorage.setItem(
-          'cart',
+          "cart",
           JSON.stringify({ cart_details: [] })
         );
       }
