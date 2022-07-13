@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 
 import Landing3D from './LandingScene/Landing3D';
+import ProductCard from './AllProducts/ProductCard';
 
 const Landing = (props) => {
   const dispatch = useDispatch();
@@ -25,85 +26,42 @@ const Landing = (props) => {
   return (
     <Container>
       <Landing3D />
-      {/* <Typography
-        variant='h2'
-        component='div'
-        sx={{ textAlign: 'center', m: 5, border: 5 }}
-      >
-        3D Interactive Canvas
-      </Typography> */}
       <Grid item xs={12} container>
-        <Grid item xs={6} spacing={3} container>
+        <Grid item xs={10} spacing={4} container>
           {products.length === 0 || product1 === undefined
             ? 'Loading'
             : products.map((product, idx) =>
                 idx > 1 ? (
                   <Grid item key={product.id} xs={8} sx={{ ml: 7, mb: 5 }}>
-                    <Card elevation={5}>
-                      <CardMedia
-                        component='img'
-                        image={product.image_url.slice(7)}  // removes "/public" to hit our static route
-                        height={300}
-                        width={300}
-                      />
-                      <CardContent>
-                        <Typography
-                          gutterBottom
-                          sx={{ fontSize: 16 }}
-                          width={150}
-                          color='text.secondary'
-                        >
-                          {product.name}
-                        </Typography>
-                        <Typography variant='body2' color='text.secondary'>
-                          ${product.price}
-                        </Typography>
-                      </CardContent>
-                    </Card>
+                    < ProductCard key={product.id} product={product} />
                   </Grid>
                 ) : (
                   <Grid item key={product.id} xs={5}>
-                    <Card elevation={5}>
-                      <CardMedia
-                        component='img'
-                        image={product.image_url.slice(7)}  // removes "/public" to hit our static route
-                        height={300}
-                        width={300}
-                      />
-                      <CardContent>
-                        <Typography
-                          gutterBottom
-                          sx={{ fontSize: 16 }}
-                          width={150}
-                          color='text.secondary'
-                        >
-                          {product.name}
-                        </Typography>
-                        <Typography variant='body2' color='text.secondary'>
-                          ${product.price}
-                        </Typography>
-                      </CardContent>
-                    </Card>
+                    < ProductCard key={product.id} product={product} />
                   </Grid>
                 )
               )}
         </Grid>
-        <Grid item xs={6} sx={{ alignSelf: 'center' }}>
+        <Grid item xs={12} sx={{ alignSelf: 'center' }}>
           <Card sx={{ textAlign: 'center' }} elevation={5}>
             <CardContent>
-              <CardHeader title='About the product' />
+              <CardHeader title='About the Team' />
               <Typography
                 sx={{ fontSize: 12 }}
                 color='text.secondary'
                 paragraph
               >
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Commodi
+                Commodi officiis ipsa, culpa non quos nulla, nisi sequi distinctio
+                minima vitae in quod adipisci, rem dolore?
                 <br />
-                officiis ipsa, culpa non quos nulla, nisi sequi distinctio
-                minima
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Commodi officiis ipsa, culpa non quos nulla, nisi sequi distinctio
+                minima vitae in quod adipisci, rem dolore?
                 <br />
-                vitae in quod adipisci, rem dolore?
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Commodi officiis ipsa, culpa non quos nulla, nisi sequi distinctio
+                minima vitae in quod adipisci, rem dolore?
               </Typography>
             </CardContent>
           </Card>
