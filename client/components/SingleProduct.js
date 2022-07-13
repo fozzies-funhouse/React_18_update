@@ -65,7 +65,7 @@ const SingleProduct = (props) => {
               xs={12}
               md={8}
               lg={8}
-              style={{ height: 600, width: 600, touchAction: 'none' }}
+              style={{ height: 600, width: 600 }}
             >
               {/* This is the 3D Scene  it only renders if is items 1-9 the
                   rest renders the product pic */}
