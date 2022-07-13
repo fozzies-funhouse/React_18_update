@@ -4,18 +4,18 @@ import { Link } from "react-router-dom";
 import { logout } from "../store";
 import Cart from "./Cart";
 import { style } from "./Utils/navUtils";
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-  Typography,
-  Menu,
-  Avatar,
-  Tooltip,
-  MenuItem,
-  Container,
-} from "@mui/material";
+
+import AppBar from "@mui/material/AppBar";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Toolbar from "@mui/material/Toolbar";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+
 import { Login } from "./AuthForm";
 
 const Navigation = ({ handleLogout, isLoggedIn }) => {
@@ -76,7 +76,6 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
   };
 
   const guestView = () => {
-    // const pages = ['Products', 'Login', 'Signup'];
     return (
       <AppBar position="static">
         <Container maxWidth="xl">
