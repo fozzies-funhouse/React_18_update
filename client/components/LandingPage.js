@@ -27,7 +27,7 @@ const Landing = (props) => {
     <Container>
       <Landing3D />
       <Grid item xs={12} container>
-        <Grid item xs={10} spacing={4} container>
+        <Grid item xs={9} spacing={4} container>
           {products.length === 0 || product1 === undefined
             ? 'Loading'
             : products.map((product, idx) =>
@@ -42,10 +42,10 @@ const Landing = (props) => {
                 )
               )}
         </Grid>
-        <Grid item xs={12} sx={{ alignSelf: 'center' }}>
+        <Grid item xs={3} sx={{ alignSelf: 'center' }}>
           <Card sx={{ textAlign: 'center' }} elevation={5}>
             <CardContent>
-              <CardHeader title='About the Team' />
+              <CardHeader title='About the Product' />
               <Typography
                 sx={{ fontSize: 12 }}
                 color='text.secondary'
