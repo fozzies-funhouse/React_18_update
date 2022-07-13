@@ -1,79 +1,79 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from '../store';
-import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Button,
+  Container,
+  FormControl,
+  FormGroup,
+  TextField,
+} from '@mui/material';
+import { Signup } from './SignUpForm';
 
 /**
  * COMPONENT
  */
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
-    <Container>
-      <h1
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          color: '#808080',
-          marginBottom: '2rem',
-          marginTop: '2rem',
-        }}
+    <div>
+      <button
+        style={{ backgroundColor: 'transparent', border: 'none' }}
+        onClick={handleOpen}
       >
         Login
-      </h1>
-      <Container>
-        <CardGroup>
-          <Col className='d-flex'>
-            <Card
-            className='flex-fill'
-            style={{
-              width: '40rem',
-              height: '30rem',
-              color: '#4e4c4b',
-              border: 'none',
-              textAlign: 'center'
-            }}>
-              <Form onSubmit={handleSubmit} name={name}>
-                <Form.Group>
-                  <Col style={{ width: '16rem' }}>
-                    <Form.Label htmlFor='email'>Email</Form.Label>
-                    <Form.Control name='email' type='text'></Form.Control>
-                  </Col>
-                  <Col style={{ width: '16rem' }}>
-                    <Form.Label htmlFor='password'>Password</Form.Label>
-                    <Form.Control name='password' type='password'></Form.Control>
-                  </Col>
-                  <Row>
-                    <Button
-                      variant='secondary'
-                      className='mt-auto'
-                      style={{
-                        width: '38rem',
-                        position: 'absolute',
-                      }}
-                      type='submit'
-                    >
-                      {displayName}
-                    </Button>
-                    {error && error.response && (
-                      <div> {error.response.data} </div>
-                    )}
-                  </Row>
-                </Form.Group>
-              </Form>
-            </Card>
-          </Col>
-        </CardGroup>
-      </Container>
-    </Container>
+      </button>
+      <Dialog open={open} onClose={handleClose}>
+        <Container>
+          <DialogTitle variant='body2'>Sign in to Hot Kicks</DialogTitle>
+          <DialogContent>
+            <form onSubmit={handleSubmit} name={name}>
+              <FormGroup row>
+                <FormControl>
+                  <TextField
+                    variant='outlined'
+                    label='Email'
+                    sx={{ mr: 2 }}
+                    required={true}
+                    type='email'
+                    name='email'
+                  ></TextField>
+                </FormControl>
+                <FormControl>
+                  <TextField
+                    variant='outlined'
+                    label='Password'
+                    type='password'
+                    required={true}
+                    name='password'
+                  ></TextField>
+                </FormControl>
+              </FormGroup>
+              <Button
+                type='submit'
+                sx={{ mt: 2, width: '100%' }}
+                size='large'
+                variant='contained'
+                onClick={handleClose}
+              >
+                {displayName}
+              </Button>
+              {error && error.response && <div> {error.response.data} </div>}
+            </form>
+          </DialogContent>
+          <div style={{ display: 'flex' }}>
+            Don't have an account? <Signup />
+          </div>
+        </Container>
+      </Dialog>
+    </div>
   );
 };
 

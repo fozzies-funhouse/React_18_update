@@ -1,89 +1,96 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from '../store';
-// import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Image from 'react-bootstrap/Image';
-import Container from '@mui/material/Container';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Button,
+  Container,
+  FormControl,
+  FormGroup,
+  TextField,
+} from '@mui/material';
 
 const SignUpForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
-    <Container maxWidth="sm">
-      <h1
+    <div>
+      <button
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          color: '#808080',
-          marginBottom: '2rem',
-          marginTop: '2rem',
+          backgroundColor: 'transparent',
+          border: 'none',
+          color: '#e2725b',
+          padding: 0,
         }}
+        onClick={handleOpen}
       >
-        Sign Up
-      </h1>
-      <hr></hr>
-      <Container>
-        <CardGroup>
-          <Col className="d-flex">
-            <Card
-              className="flex-fill"
-              style={{
-                width: '40rem',
-                height: '30rem',
-                color: '#4e4c4b',
-                border: 'none',
-                textAlign: 'center',
-              }}
-            >
-              <Card.Title>Contact Information</Card.Title>
-              <Form onSubmit={handleSubmit} name={name}>
-                <Form.Group>
-                  <Col style={{ width: '16rem' }}>
-                    <Form.Label htmlFor="firstname">First Name</Form.Label>
-                    <Form.Control name="firstname" type="text"></Form.Control>
-                  </Col>
-                  <Col style={{ width: '16rem' }}>
-                    <Form.Label htmlFor="lastName">Last Name</Form.Label>
-                    <Form.Control name="lastname" type="text"></Form.Control>
-                  </Col>
-                  <Row>
-                    <Form.Label htmlFor="email">Email</Form.Label>
-                    <Form.Control name="email" type="text"></Form.Control>
-                    <Form.Label htmlFor="password">Password</Form.Label>
-                    <Form.Control
-                      name="password"
-                      type="password"
-                    ></Form.Control>
-                    <Button
-                      variant="secondary"
-                      className="mt-auto"
-                      style={{
-                        width: '40rem',
-                        position: 'absolute',
-                        bottom: 0,
-                      }}
-                      type="submit"
-                    >
-                      {displayName}
-                    </Button>
-                  </Row>
-                  {error && error.response && (
-                    <div> {error.response.data} </div>
-                  )}
-                </Form.Group>
-              </Form>
-            </Card>
-          </Col>
-        </CardGroup>
-      </Container>
-    </Container>
+        Signup
+      </button>
+      <Dialog open={open} onClose={handleClose}>
+        <Container>
+          <DialogTitle variant='body2'>Create Hot Kicks account</DialogTitle>
+          <DialogContent>
+            <form onSubmit={handleSubmit} name={name}>
+              <FormGroup row>
+                <FormControl>
+                  <TextField
+                    variant='outlined'
+                    label='First Name'
+                    sx={{ mr: 2 }}
+                    type='text'
+                    name='firstname'
+                  ></TextField>
+                </FormControl>
+                <FormControl>
+                  <TextField
+                    variant='outlined'
+                    label='Last Name'
+                    type='text'
+                    name='lastname'
+                  ></TextField>
+                </FormControl>
+              </FormGroup>
+              <FormGroup>
+                <FormControl>
+                  <TextField
+                    sx={{ mt: 2, mb: 2 }}
+                    variant='outlined'
+                    label='Email'
+                    required={true}
+                    type='email'
+                    name='email'
+                  ></TextField>
+                </FormControl>
+                <FormControl>
+                  <TextField
+                    variant='outlined'
+                    label='Password'
+                    type='password'
+                    required={true}
+                    name='password'
+                  ></TextField>
+                </FormControl>
+              </FormGroup>
+              <Button
+                type='submit'
+                sx={{ mt: 2, width: '100%' }}
+                size='large'
+                variant='contained'
+                onClick={handleClose}
+              >
+                {displayName}
+              </Button>
+              {error && error.response && <div> {error.response.data} </div>}
+            </form>
+          </DialogContent>
+        </Container>
+      </Dialog>
+    </div>
   );
 };
 

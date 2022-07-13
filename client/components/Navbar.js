@@ -16,6 +16,7 @@ import {
   MenuItem,
   Container,
 } from '@mui/material';
+import { Login } from './AuthForm';
 
 const Navigation = ({ handleLogout, isLoggedIn }) => {
   const [userMenu, setUserMenu] = useState(false);
@@ -66,7 +67,6 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
                   </Link>
                 </MenuItem>
               </Menu>
-              <Cart />
             </Box>
           </Toolbar>
         </Container>
@@ -75,7 +75,7 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
   };
 
   const guestView = () => {
-    const pages = ['Products', 'Login', 'Signup'];
+    // const pages = ['Products', 'Login', 'Signup'];
     return (
       <AppBar position='static'>
         <Container maxWidth='xl'>
@@ -84,16 +84,10 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
               <Typography {...style.logo}>LOGO Placeholder</Typography>
             </Link>
             <Box {...style.pageBox}>
-              {pages.map((page) => (
-                <Link
-                  to={page.toLowerCase()}
-                  key={page}
-                  onClick={closeUserMenu}
-                  {...style.navLink}
-                >
-                  <Typography>{page}</Typography>
-                </Link>
-              ))}
+              <Link to='products' onClick={closeUserMenu} {...style.navLink}>
+                <Typography>Products</Typography>
+              </Link>
+              <Login />
             </Box>
             <Cart />
           </Toolbar>
