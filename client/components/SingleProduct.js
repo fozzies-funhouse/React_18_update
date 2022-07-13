@@ -65,7 +65,7 @@ const SingleProduct = (props) => {
               xs={12}
               md={8}
               lg={8}
-              style={{ height: 600, width: 600 }}
+              style={{ height: 600, width: 600, touchAction: 'none' }}
             >
               {/* This is the 3D Scene  it only renders if is items 1-9 the
                   rest renders the product pic */}
@@ -187,11 +187,11 @@ const SingleProduct = (props) => {
               </Card>
             </Grid>
           </Grid>
-          <Grid item xs={12} md={8} lg={8}>
+          <Grid item xs={6} md={8} lg={8}>
             <Card
               sx={{ textAlign: 'center' }}
               elevation={5}
-              style={{ height: 200, width: 600, marginBottom: 80 }}
+              style={{ marginBottom: 80 }}
             >
               <CardContent>
                 <Typography
