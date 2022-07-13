@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { logout } from "../store";
 import Cart from "./Cart";
 import { style } from "./Utils/navUtils";
-
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -24,7 +23,6 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
   const closeUserMenu = () => setUserMenu(null);
 
   const loggedInView = () => {
-    const pages = ["Products"];
     return (
       <AppBar position="static">
         <Container maxWidth="xl">
@@ -33,16 +31,13 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
               <Typography {...style.logo}>LOGO Placeholder</Typography>
             </Link>
             <Box {...style.pageBox}>
-              {pages.map((page) => (
                 <Link
-                  to={page.toLowerCase()}
-                  key={page}
+                  to={'/products'}
                   onClick={closeUserMenu}
                   {...style.navLink}
                 >
-                  <Typography>{page}</Typography>
+                  <Typography>Products</Typography>
                 </Link>
-              ))}
             </Box>
             <Box sx={{ display: "flex" }}>
               <Tooltip title="Settings">
@@ -84,7 +79,7 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
               <Typography {...style.logo}>LOGO Placeholder</Typography>
             </Link>
             <Box {...style.pageBox}>
-              <Link to="products" onClick={closeUserMenu} {...style.navLink}>
+              <Link to="/products" onClick={closeUserMenu} {...style.navLink}>
                 <Typography>Products</Typography>
               </Link>
               <Login />
