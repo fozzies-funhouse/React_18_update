@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from "react";
-import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import axios from "axios";
-import useResponsiveFontSize from "./useResponsiveFontSize";
-import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
-import CircularProgress from "@mui/material/CircularProgress";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
+import React, { useState, useMemo } from 'react';
+import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+import axios from 'axios';
+import useResponsiveFontSize from './useResponsiveFontSize';
+import Box from '@mui/material/Box';
+import ButtonBase from '@mui/material/ButtonBase';
+import CircularProgress from '@mui/material/CircularProgress';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
 
 const StripeCard = (props) => {
   const { stripeProps } = props;
@@ -18,48 +18,61 @@ const StripeCard = (props) => {
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [confirmationNumber, setConfirmationNumber] = useState('');
+
   function toggleModal() {
     let newValue = !modalVisible;
     setModalVisible(newValue);
   }
 
-  const spinnerDisplay = paymentLoading ? "block" : "none";
+  function redirectToHome() {
+    const logo = document.querySelector(
+      '#app > div > header > div > div > a > p'
+    );
+    logo.click();
+  }
+
+  const spinnerDisplay = paymentLoading ? 'block' : 'none';
 
   // styles object defined within the fucntion
   // because it needs access to "spinnerDisplay" variable
   const styles = {
     box: {
-      backgroundColor: "white",
-      alignItems: "center",
+      backgroundColor: 'white',
+      alignItems: 'center',
+      display: 'flex',
+      alignContent: 'center',
+      justifyContent: 'center',
+      flexDirection: 'column',
     },
     modal: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-      alignSelf: "center",
-      position: "absolute",
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignContent: 'center',
+      alignSelf: 'center',
+      position: 'absolute',
       height: 400,
       width: 400,
-      top: "33%",
-      left: "33%",
+      top: '33%',
+      left: '33%',
     },
     modalHeader: {
-      color: "#808080",
-      marginBottom: "2rem",
-      marginTop: "2rem",
-      textAlign: "center",
+      color: '#808080',
+      marginBottom: '2rem',
+      marginTop: '2rem',
+      textAlign: 'center',
     },
     payButton: {
-      width: "100%",
+      width: '100%',
     },
     spinner: {
       display: spinnerDisplay,
-      alignSelf: "center",
+      alignSelf: 'center',
     },
     stripeForm: {
-      marginBottom: "2rem",
-      marginTop: "2rem",
+      marginBottom: '2rem',
+      marginTop: '2rem',
     },
   };
 
@@ -74,30 +87,35 @@ const StripeCard = (props) => {
     }
 
     const { paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
+      type: 'card',
       card: elements.getElement(CardElement),
     });
 
     try {
       const { id } = paymentMethod;
       const response = await axios.post(
-        "https://samori-stripe-microservice.web.app/api/charge",
+        'https://samori-stripe-microservice.web.app/api/charge',
         {
-          amount: cartTotal,
+          amount: cartTotal * 100,
           id: id,
         }
       );
 
       if (response.data.success) {
         console.log(response.data.message);
+        console.log('DATA', response.data);
+
+        setConfirmationNumber(response.data.confirmationNumber || 'WE FAILED');
+
         checkout(cartTotal, userID, email);
         toggleModal();
+        // redirectToHome();
       }
       setPaymentLoading(false);
     } catch (error) {
-      console.log("payment error", error);
+      console.log('payment error', error);
       setPaymentLoading(false);
-      alert("An error occured processing your payment.");
+      alert('An error occured processing your payment.');
     }
   };
 
@@ -107,19 +125,23 @@ const StripeCard = (props) => {
         <CardElement
           options={options}
           onReady={() => {
-            console.log("CardElement [ready]");
+            console.log('CardElement [ready]');
           }}
           onChange={(event) => {
-            console.log("CardElement [change]", event);
+            console.log('CardElement [change]', event);
           }}
           onBlur={() => {
-            console.log("CardElement [blur]");
+            console.log('CardElement [blur]');
           }}
           onFocus={() => {
-            console.log("CardElement [focus]");
+            console.log('CardElement [focus]');
           }}
         />
-        <ButtonBase style={styles.payButton} type="submit" disabled={!stripe || cartTotal === 0}>
+        <ButtonBase
+          style={styles.payButton}
+          type="submit"
+          disabled={!stripe || cartTotal === 0}
+        >
           Pay
           <CircularProgress style={styles.spinner} />
         </ButtonBase>
@@ -128,18 +150,24 @@ const StripeCard = (props) => {
         style={styles.modal}
         open={modalVisible}
         onClose={(_, reason) => {
-          if (reason === "backdropClick") {
+          if (reason === 'backdropClick') {
             toggleModal();
+            redirectToHome();
           }
         }}
       >
         <Box style={styles.box}>
-          <Typography variant="h3" style={styles.modalHeader}>
-          Order In {"\u2705"}
+          <Typography variant="h5" style={styles.modalHeader}>
+            Order In {'\u2705'}
           </Typography>
-          <Typography variant="h3" style={styles.modalHeader}>
-            Thanks for dropping by!
+          <Typography variant="div" style={styles.modalHeader}>
+            Confirmation Number:
+            <br></br>
+            {confirmationNumber}
           </Typography>
+          <ButtonBase onClick={redirectToHome} style={styles.payButton}>
+            KEEP SHOPPING
+          </ButtonBase>
         </Box>
       </Modal>
     </>
@@ -155,15 +183,15 @@ const useOptions = () => {
       style: {
         base: {
           fontSize,
-          color: "#424770",
-          letterSpacing: "0.025em",
-          fontFamily: "Source Code Pro, monospace",
-          "::placeholder": {
-            color: "#aab7c4",
+          color: '#424770',
+          letterSpacing: '0.025em',
+          fontFamily: 'Source Code Pro, monospace',
+          '::placeholder': {
+            color: '#aab7c4',
           },
         },
         invalid: {
-          color: "#9e2146",
+          color: '#9e2146',
         },
       },
     }),
