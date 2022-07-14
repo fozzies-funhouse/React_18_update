@@ -31,7 +31,7 @@ const AllProducts = (props) => {
     }
 
     console.log(productsArr);
-  }, [filter]);
+  }, [filter, products]);
 
   let tagsArr = ['All']; // Array of tags including 'All'
   function tagsArray() {
@@ -48,9 +48,9 @@ const AllProducts = (props) => {
         {/* Filters */}
         <Grid
           container
-          direction='row'
-          justifyContent='space-evenly'
-          alignItems='center'
+          direction="row"
+          justifyContent="space-evenly"
+          alignItems="center"
           style={{ padding: 20 }}
         >
           {tagsArr.map((tag, idx) => (
@@ -71,9 +71,9 @@ const AllProducts = (props) => {
         {/* Product Card */}
         <Grid
           container
-          direction='row'
-          justifyContent='center'
-          alignItems='center'
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
           style={{ marginBottom: 60 }} //Footer is overlapping this fixes it.
         >
           {productsArr.length > 0 ? (
