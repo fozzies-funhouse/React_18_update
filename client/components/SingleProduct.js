@@ -187,11 +187,11 @@ const SingleProduct = (props) => {
               </Card>
             </Grid>
           </Grid>
-          <Grid item xs={12} md={8} lg={8}>
+          <Grid item xs={6} md={8} lg={8}>
             <Card
               sx={{ textAlign: 'center' }}
               elevation={5}
-              style={{ height: 200, width: 600, marginBottom: 80 }}
+              style={{ marginBottom: 80 }}
             >
               <CardContent>
                 <Typography

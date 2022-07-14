@@ -10,6 +10,6 @@ a {
   display: block;
 } */
 
-.disabled-link{
-  pointer-events: none
+.disabled-link {
+  pointer-events: none;
 }
