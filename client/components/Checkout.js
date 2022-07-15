@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { fetchCart, checkoutCart } from "../store/cart";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { fetchCart, checkoutCart } from '../store/cart';
 
 import {
   Container,
@@ -16,21 +16,21 @@ import {
   InputLabel,
   FormHelperText,
   Input,
-} from "@mui/material";
+} from '@mui/material';
 
-import { stripeCheckout } from "../store/stripeCheckout";
+import { stripeCheckout } from '../store/stripeCheckout';
 
-import StripeContainer from "./Stripe/StripeContainer";
+import StripeContainer from './Stripe/StripeContainer';
 
 function Checkout(props) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [zipCode, setZipCode] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const { getCart, cart, checkout, user } = props;
   const { cart_details } = cart;
@@ -39,17 +39,17 @@ function Checkout(props) {
     getCart(user.id);
   }, []);
 
-  console.log("cart", cart);
+  console.log('cart', cart);
 
   const [localState, setLocalState] = useState({
-    firstName: user.firstName || "",
-    lastName: user.lastName || "",
-    email: user.email || "",
-    address: user.address || "",
-    zipCode: user.zipCode || "",
-    city: user.city || "",
-    state: user.state || "",
-    phoneNumber: user.phoneNumber || "",
+    firstName: user.firstName || '',
+    lastName: user.lastName || '',
+    email: user.email || '',
+    address: user.address || '',
+    zipCode: user.zipCode || '',
+    city: user.city || '',
+    state: user.state || '',
+    phoneNumber: user.phoneNumber || '',
   });
 
   function handleChange(event) {
@@ -69,138 +69,137 @@ function Checkout(props) {
           return acc;
         }, 0);
 
-
   const stripeProps = {
-
     checkout: checkout,
     cartTotal: cartTotal,
     userID: user.id,
     email: localState.email,
-
-  }
+  };
 
   return (
     <Container>
       <h1
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          color: "#808080",
-          marginBottom: "2rem",
-          marginTop: "2rem",
+          display: 'flex',
+          justifyContent: 'center',
+          // color: '#808080',
         }}
       >
         Secure Checkout
       </h1>
       <hr></hr>
-
-      <Container>
-        <Grid className="d-flex">
-          <Card
-            className="flex-fill"
+      <Grid container xs={12}>
+        <Grid
+          container
+          xs={10}
+          md={6}
+          lg={6}
+          style={{ border: 'solid', maxHeight: '450px', height: '450px' }}
+        >
+          <Container
             style={{
-              width: "40rem",
-              height: "50rem",
-              color: "#4e4c4b",
-              border: "none",
+              maxHeight: '100px',
+              height: 'auto',
             }}
           >
-            <CardHeader className="text-center">Contact Information</CardHeader>
-            <Grid>
-              <FormGroup>
-                <Grid>
-                  <FormControl
-                    type="text"
-                    defaultValue={firstName}
-                    onChange={handleChange}
-                  >
-                    <InputLabel htmlFor="first-name">First Name</InputLabel>
-                    <Input id="first-name" aria-describedby="first-name" />
-                  </FormControl>
-                  <FormControl
-                    type="text"
-                    defaultValue={lastName}
-                    onChange={handleChange}
-                  >
-                    <InputLabel htmlFor="last-name">Last Name</InputLabel>
-                    <Input id="last-name" aria-describedby="last-name" />
-                  </FormControl>
+            <Container>
+              <FormControl
+                fullWidth="true"
+                type="text"
+                defaultValue={firstName}
+                onChange={handleChange}
+              >
+                <InputLabel htmlFor="first-name">First Name</InputLabel>
+                <Input id="first-name" aria-describedby="first-name" />
+              </FormControl>
+              <FormControl
+                fullWidth="true"
+                type="text"
+                defaultValue={lastName}
+                onChange={handleChange}
+              >
+                <InputLabel htmlFor="last-name">Last Name</InputLabel>
+                <Input id="last-name" aria-describedby="last-name" />
+              </FormControl>
 
-                  <FormControl
-                    name="email"
-                    type="text"
-                    defaultValue={email}
-                    onChange={handleChange}
-                  >
-                    <InputLabel htmlFor="email">Email</InputLabel>
-                    <Input id="email" aria-describedby="email" />
-                  </FormControl>
-                  <FormControl
-                    type="text"
-                    defaultValue={phoneNumber}
-                    onChange={handleChange}
-                  >
-                    <InputLabel htmlFor="phoneNumber">Phone Number</InputLabel>
-                    <Input id="phoneNumber" aria-describedby="Phone Number" />
-                  </FormControl>
-                  <FormControl
-                    type="text"
-                    defaultValue={address}
-                    onChange={handleChange}
-                  >
-                    <InputLabel htmlFor="address">Address</InputLabel>
-                    <Input id="address" aria-describedby="address" />
-                  </FormControl>
-                  <FormControl
-                    type="text"
-                    defaultValue={city}
-                    onChange={handleChange}
-                  >
-                    <InputLabel htmlFor="city">City</InputLabel>
-                    <Input id="city" aria-describedby="city" />
-                  </FormControl>
+              <FormControl
+                name="email"
+                type="text"
+                defaultValue={email}
+                onChange={handleChange}
+              >
+                <InputLabel htmlFor="email">Email</InputLabel>
+                <Input id="email" aria-describedby="email" />
+              </FormControl>
+              <FormControl
+                type="text"
+                defaultValue={phoneNumber}
+                onChange={handleChange}
+              >
+                <InputLabel htmlFor="phoneNumber">Phone Number</InputLabel>
+                <Input id="phoneNumber" aria-describedby="Phone Number" />
+              </FormControl>
+              <FormControl
+                type="text"
+                defaultValue={address}
+                onChange={handleChange}
+              >
+                <InputLabel htmlFor="address">Address</InputLabel>
+                <Input id="address" aria-describedby="address" />
+              </FormControl>
+              <FormControl
+                type="text"
+                defaultValue={city}
+                onChange={handleChange}
+              >
+                <InputLabel htmlFor="city">City</InputLabel>
+                <Input id="city" aria-describedby="city" />
+              </FormControl>
 
-                  <FormControl
-                    type="text"
-                    defaultValue={state}
-                    onChange={handleChange}
-                  >
-                    <InputLabel htmlFor="state">State</InputLabel>
-                    <Input id="state" aria-describedby="state" />
-                  </FormControl>
-                  <FormControl
-                    type="text"
-                    defaultValue={zipCode}
-                    onChange={handleChange}
-                  >
-                    <InputLabel htmlFor="zipcode">Zip Code</InputLabel>
-                    <Input id="zipcode" aria-describedby="zipcode" />
-                  </FormControl>
-                </Grid>
-              </FormGroup>
-            </Grid>
-            <StripeContainer stripeProps={stripeProps}/>
-          </Card>
+              <FormControl
+                fullWidth="true"
+                type="text"
+                defaultValue={state}
+                onChange={handleChange}
+              >
+                <InputLabel htmlFor="state">State</InputLabel>
+                <Input id="state" aria-describedby="state" />
+              </FormControl>
+              <FormControl
+                type="text"
+                defaultValue={zipCode}
+                onChange={handleChange}
+              >
+                <InputLabel htmlFor="zipcode">Zip Code</InputLabel>
+                <Input id="zipcode" aria-describedby="zipcode" />
+              </FormControl>
+            </Container>
+            <Container>
+              <StripeContainer stripeProps={stripeProps} />
+            </Container>
+          </Container>
+        </Grid>
+
+        <Grid container xs={6}>
           <Card
             className="flex-fill"
             style={{
-              width: "40rem",
-              marginLeft: "5rem",
-              color: "#4e4c4b",
-              border: "none",
+              // width: '40rem',
+              // marginLeft: '5rem',
+              color: '#4e4c4b',
+              border: 'none',
             }}
           >
             <CardHeader title={`Order Total: ${cartTotal}`}></CardHeader>
             <Typography>Your Order</Typography>
             {cart_details === undefined
-              ? "Cart Empty"
+              ? 'Cart Empty'
               : cart_details.map((item) => (
                   <Container key={item.id}>
                     <CardMedia
                       component="img"
                       image={item.product.image_url.slice(7)}
-                      style={{ height: "250px" }}
+                      style={{ height: '250px' }}
                       fluid="true"
                     />
                     <li>{item.product.name}</li>
@@ -212,7 +211,7 @@ function Checkout(props) {
                 ))}
           </Card>
         </Grid>
-      </Container>
+      </Grid>
     </Container>
   );
 }
