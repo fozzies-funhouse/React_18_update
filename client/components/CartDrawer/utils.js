@@ -1,5 +1,5 @@
 export const style = {
-  image: { height: '250px' },
+  image: { objectFit: 'contained', height: '150px', width: '250px' },
   select: {
     width: '150px',
     height: '30px',
