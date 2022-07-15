@@ -9,12 +9,13 @@ export const style = {
   button: {
     closeButton: {
       position: 'absolute',
-      right: '20px',
+      right: '30px',
       padding: 0,
       border: 'none',
       background: 'none',
       backgroundColor: 'transparent',
       zIndex: 2,
+      boxShadow: 'none'
     },
   },
 };
