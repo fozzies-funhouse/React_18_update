@@ -25,7 +25,7 @@ const AuthForm = (props) => {
   return (
     <div>
       <button
-        style={{ backgroundColor: 'transparent', border: 'none' }}
+        style={{ backgroundColor: 'transparent', border: 'none', boxShadow: 'none',  fontWeight: 20, height: '45px'}}
         onClick={handleOpen}
       >
         Login

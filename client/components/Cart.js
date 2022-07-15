@@ -25,7 +25,7 @@ const Cart = (props) => {
   return (
     <div>
       <button
-        style={{ backgroundColor: 'transparent', border: 'none' }}
+        style={{ backgroundColor: 'transparent', border: 'none', boxShadow: 'none' }}
         onMouseDown={async () => {
           await getCart(user.id);
         }}
