@@ -30,7 +30,6 @@ const AllProducts = (props) => {
       setProductsArr(filteredArr);
     }
 
-    console.log(productsArr);
   }, [filter, products]);
 
   let tagsArr = ['All']; // Array of tags including 'All'
