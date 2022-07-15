@@ -7,7 +7,6 @@ import {
   Card,
   CardHeader,
   CardContent,
-  CardMedia,
   Typography,
   Grid,
 } from '@mui/material';
@@ -25,87 +24,130 @@ const Landing = (props) => {
   const products = [product1, product2, product3];
   return (
     <Container>
-      <Landing3D />
-      <Grid item xs={12} container>
-        <Grid item xs={9} spacing={4} container>
-          {products.length === 0 || product1 === undefined
-            ? 'Loading'
-            : products.map((product, idx) =>
-                idx > 1 ? (
-                  <Grid item key={product.id} xs={8} sx={{ ml: 7, mb: 5 }}>
-                    < ProductCard key={product.id} product={product} />
+      <Grid xs={12} md={12} lg={12}>
+        <Landing3D />
+      </Grid>
+
+      <Grid container>
+        <Grid item container spacing={3}>
+          <Grid
+            item
+            container
+            xs={12}
+            md={7}
+            direction='row'
+            justifyContent='center'
+            alignItems='center'
+          >
+            {products.length === 0 || product1 === undefined
+              ? 'Loading'
+              : products.map((product, idx) => (
+                  <Grid item key={product.id} xs={12} md={5.5}>
+                    <ProductCard product={product} />
                   </Grid>
-                ) : (
-                  <Grid item key={product.id} xs={5}>
-                    < ProductCard key={product.id} product={product} />
-                  </Grid>
-                )
-              )}
-        </Grid>
-        <Grid item xs={3} sx={{ alignSelf: 'center' }}>
-          <Card sx={{ textAlign: 'center' }} elevation={5}>
-            <CardContent>
-              <CardHeader title='About the Product' />
-              <Typography
-                sx={{ fontSize: 12 }}
-                color='text.secondary'
-                paragraph
-              >
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Commodi officiis ipsa, culpa non quos nulla, nisi sequi distinctio
-                minima vitae in quod adipisci, rem dolore?
-                <br />
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Commodi officiis ipsa, culpa non quos nulla, nisi sequi distinctio
-                minima vitae in quod adipisci, rem dolore?
-                <br />
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Commodi officiis ipsa, culpa non quos nulla, nisi sequi distinctio
-                minima vitae in quod adipisci, rem dolore?
-              </Typography>
-            </CardContent>
-          </Card>
+                ))}
+          </Grid>
+          <Grid item xs={12} md={5} sx={{ alignSelf: 'center' }}>
+            <Card sx={{ textAlign: 'center' }} elevation={5}>
+              <CardContent>
+                <CardHeader title='About the Product' />
+                <Typography
+                  sx={{ fontSize: 12 }}
+                  color='text.secondary'
+                  paragraph
+                >
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Commodi officiis ipsa, culpa non quos nulla, nisi sequi
+                  distinctio minima vitae in quod adipisci, rem dolore?
+                  <br />
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Commodi officiis ipsa, culpa non quos nulla, nisi sequi
+                  distinctio minima vitae in quod adipisci, rem dolore?
+                  <br />
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Commodi officiis ipsa, culpa non quos nulla, nisi sequi
+                  distinctio minima vitae in quod adipisci, rem dolore?
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12} container>
-        <Grid item xs={3}>
+      <Grid
+        item
+        xs={12}
+        container
+        direction='row'
+        justifyContent='space-evenly'
+        alignItems='center'
+        sx={{ mb: 10 }}
+      >
+        <Grid
+          container
+          item
+          xs={5.8}
+          md={3}
+          direction='column'
+          alignItems='center'
+        >
           <Avatar
             alt='Allah Jackson'
             src='/allah.png'
-            sx={{ height: 100, width: 100, mt: 5, ml: 3 }}
+            sx={{ height: 100, width: 100, mt: 5 }}
           />
           <Typography variant='bio' color='text.secondary' paragraph>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius ullam
             earum esse numquam?
           </Typography>
         </Grid>
-        <Grid item xs={3} sx={{ mb: 10 }}>
+        <Grid
+          container
+          item
+          xs={5.8}
+          md={3}
+          direction='column'
+          alignItems='center'
+        >
           <Avatar
             alt='Allah Jackson'
             src='/allah.png'
-            sx={{ height: 100, width: 100, mt: 5, ml: 3 }}
+            sx={{ height: 100, width: 100, mt: 5 }}
           />
           <Typography variant='bio' color='text.secondary' paragraph>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius ullam
             earum esse numquam?
           </Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid
+          container
+          item
+          xs={5.8}
+          md={3}
+          direction='column'
+          alignItems='center'
+        >
           <Avatar
             alt='Allah Jackson'
             src='/allah.png'
-            sx={{ height: 100, width: 100, mt: 5, ml: 3 }}
+            sx={{ height: 100, width: 100, mt: 5 }}
           />
           <Typography variant='bio' color='text.secondary' paragraph>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius ullam
             earum esse numquam?
           </Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid
+          container
+          item
+          xs={5.8}
+          md={3}
+          direction='column'
+          alignItems='center'
+        >
           <Avatar
             alt='Allah Jackson'
             src='/allah.png'
-            sx={{ height: 100, width: 100, mt: 5, ml: 3 }}
+            sx={{ height: 100, width: 100, mt: 5 }}
           />
           <Typography variant='bio' color='text.secondary' paragraph>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius ullam
