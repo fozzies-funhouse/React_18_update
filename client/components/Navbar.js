@@ -76,7 +76,7 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Link to="/" {...style.navLink}>
-              <Typography {...style.logo}>LOGO Placeholder</Typography>
+              <Typography {...style.logo}>HOT KICKS</Typography>
             </Link>
             <Box {...style.pageBox}>
               <Link to="/products" onClick={closeUserMenu} {...style.navLink}>
