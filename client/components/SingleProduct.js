@@ -17,7 +17,7 @@ import {
   MenuItem,
 } from '@mui/material';
 const SingleProduct = (props) => {
-  const [qty, setQty] = useState(1);
+  // const [qty, setQty] = useState(1);
   // Pulling state from redux
   const user = useSelector((state) => state.auth);
   const product = useSelector((state) => state.product);
@@ -27,9 +27,9 @@ const SingleProduct = (props) => {
 
   const id = props.match.params.id; // product ID variable
 
-  const handleChange = (event) => {
-    setQty(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setQty(event.target.value);
+  // };
 
   useEffect(() => {
     dispatch(fetchProduct(id));
@@ -102,7 +102,7 @@ const SingleProduct = (props) => {
 
                     <Grid item>
                       <Typography variant='body1' style={{ marginLeft: 20 }}>
-                        Ratings: {productStars()} {product.rating}%
+                        Ratings: {productStars()} {product.rating}
                       </Typography>
                     </Grid>
                     {/* Checking inventory if inventory = 0 It will display
@@ -126,7 +126,7 @@ const SingleProduct = (props) => {
                         </Typography>
                       </Grid>
                     )}
-                    <Grid item style={{ marginLeft: 20 }}>
+                    {/* <Grid item style={{ marginLeft: 20 }}>
                       Qty:
                       <Select
                         label='Qty'
@@ -147,7 +147,7 @@ const SingleProduct = (props) => {
                           </MenuItem>
                         ))}
                       </Select>
-                    </Grid>
+                    </Grid> */}
 
                     <Grid item alignSelf={'center'}>
                       <Button
@@ -160,7 +160,7 @@ const SingleProduct = (props) => {
                         }}
                         onClick={() => {
                           // Check for inventory
-                          if (qty > product.inventory) {
+                          if (product.inventory < 1) {
                             alert(
                               `🤕  Sorry we have ${product.inventory} in stock
                                             ¯l_(ツ)_/¯`
@@ -168,13 +168,13 @@ const SingleProduct = (props) => {
                           } else {
                             // Check for user id
                             if (user.id) {
-                              for (let i = 0; i < qty; i++) {
+                              // for (let i = 0; i < qty; i++) {
                                 dispatch(addToCart(id, user.id));
-                              }
+                              // }
                             } else {
-                              for (let i = 0; i < qty; i++) {
+                              // for (let i = 0; i < qty; i++) {
                                 dispatch(addToCart(id));
-                              }
+                              // }
                             }
                           }
                         }}
@@ -191,7 +191,7 @@ const SingleProduct = (props) => {
             <Card
               sx={{ textAlign: 'center' }}
               elevation={5}
-              style={{ marginBottom: 80 }}
+              style={{ marginBottom: 80, maxWidth: 600 }}
             >
               <CardContent>
                 <Typography
@@ -204,13 +204,7 @@ const SingleProduct = (props) => {
                   Product Description
                 </Typography>
                 <Typography variant='body1'>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Commodi
-                  <br />
-                  officiis ipsa, culpa non quos nulla, nisi sequi distinctio
-                  minima
-                  <br />
-                  vitae in quod adipisci, rem dolore?
+                 {product.description}
                 </Typography>
               </CardContent>
             </Card>
