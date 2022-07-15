@@ -2,92 +2,92 @@
   {
     "name": "Calliope",
     "type": "shoe",
-    "price": 200,
+    "price": 195,
     "inventory": 23,
-    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "description": "Doodles! by Eduardo Kuhn, licensed under CC-Attribution. \n\n https://sketchfab.com/eduardokuhn",
     "image_url": "/public/Shoes/Shoe1.png",
     "model_url": "/public/Shoes/Shoe1.glb",
-    "ratingsArray": [5, 5, 4]
+    "ratingsArray": [5, 5, 4, 5]
   },
   {
     "name": "Clio",
     "type": "shoe",
-    "price": 832,
+    "price": 289,
     "inventory": 39,
-    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "description": "BOWSER by Navirobot, licensed under CC-Attribution. \n\n https://sketchfab.com/Navirobot",
     "image_url": "/public/Shoes/Shoe2.png",
     "model_url": "/public/Shoes/Shoe2.glb",
-    "ratingsArray": [5, 3, 4]
+    "ratingsArray": [5, 3, 4, 5]
   },
   {
     "name": "Euterpe",
     "type": "shoe",
-    "price": 934,
+    "price": 249,
     "inventory": 23,
-    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "description": "IGNIS by Davidicus, licensed under CC-Attribution. \n\n https://sketchfab.com/davidicus",
     "image_url": "/public/Shoes/Shoe3.png",
     "model_url": "/public/Shoes/Shoe3.glb",
-    "ratingsArray": [5, 5, 5]
+    "ratingsArray": [5, 5, 5, 4]
   },
   {
     "name": "Thalia",
     "type": "shoe",
-    "price": 477,
+    "price": 225,
     "inventory": 19,
-    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "description": "RIOT by Davidicus, licensed under CC-Attribution. \n\n https://sketchfab.com/davidicus",
     "image_url": "/public/Shoes/Shoe4.png",
     "model_url": "/public/Shoes/Shoe4.glb",
-    "ratingsArray": [5, 4, 5]
+    "ratingsArray": [5, 4, 5, 5]
   },
   {
     "name": "Melpomena",
     "type": "shoe",
-    "price": 754,
+    "price": 220,
     "inventory": 84,
-    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "description": "ANDROMEDA by Davidicus, licensed under CC-Attribution. \n\n https://sketchfab.com/davidicus",
     "image_url": "/public/Shoes/Shoe5.png",
     "model_url": "/public/Shoes/Shoe5.glb",
-    "ratingsArray": [5, 5, 3]
+    "ratingsArray": [5, 5, 3, 4]
   },
   {
     "name": "Terpsichore",
     "type": "shoe",
-    "price": 553,
+    "price": 299,
     "inventory": 9,
-    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "description": "Hyper Sneaker by Mareon, licensed under CC-Attribution. \n\n https://sketchfab.com/mareoncz",
     "image_url": "/public/Shoes/Shoe6.png",
     "model_url": "/public/Shoes/Shoe6.glb",
-    "ratingsArray": [5, 5, 5]
+    "ratingsArray": [5, 5, 5, 4]
   },
   {
     "name": "Erato",
     "type": "shoe",
-    "price": 394,
+    "price": 269,
     "inventory": 29,
-    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "description": "#RTFKTChallenge by Abhay Singh, licensed under CC-Attribution.  \n\n https://sketchfab.com/AbhayS",
     "image_url": "/public/Shoes/Shoe7.png",
     "model_url": "/public/Shoes/Shoe7.glb",
-    "ratingsArray": [5, 4, 3]
+    "ratingsArray": [5, 4, 3, 5]
   },
   {
     "name": "Polyhmnia",
     "type": "shoe",
-    "price": 750,
+    "price": 249,
     "inventory": 65,
-    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "description": "Batik by Navirobot, licensed under CC-Attribution. \n\n https://sketchfab.com/Navirobot",
     "image_url": "/public/Shoes/Shoe8.png",
     "model_url": "/public/Shoes/Shoe8.glb",
-    "ratingsArray": [4, 3, 3]
+    "ratingsArray": [4, 3, 3, 5]
   },
   {
     "name": "Urania",
     "type": "shoe",
-    "price": 590,
+    "price": 130,
     "inventory": 45,
-    "description": "memorare possum, quibus in locis maxumas hostium copias populus Romanus parva manu fuderit, quas urbis natura munitas pugnando ceperit",
+    "description": "Kentia by juanmadg, licensed under CC-Attribution. \n\n https://sketchfab.com/juanmadg",
     "image_url": "/public/Shoes/Shoe9.png",
     "model_url": "/public/Shoes/Shoe9.glb",
-    "ratingsArray": [4, 4, 3]
+    "ratingsArray": [4, 4, 3, 5]
   }
 ]
 
