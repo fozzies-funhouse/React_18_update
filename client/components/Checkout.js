@@ -21,6 +21,7 @@ import {
 import { stripeCheckout } from '../store/stripeCheckout';
 
 import StripeContainer from './Stripe/StripeContainer';
+import { padding } from '@mui/system';
 
 function Checkout(props) {
   const [firstName, setFirstName] = useState('');
@@ -85,61 +86,91 @@ function Checkout(props) {
           // color: '#808080',
         }}
       >
-        Secure Checkout
+        Order Total: ${cartTotal}
       </h1>
       <hr></hr>
-      <Grid container xs={12}>
+      <Grid container xs={12} style={{ border: 'solid' }}>
         <Grid
           container
-          xs={10}
-          md={6}
-          lg={6}
-          style={{ border: 'solid', maxHeight: '450px', height: '450px' }}
+          xs={12}
+          md={12}
+          lg={12}
+          style={{ maxHeight: '33%', border: 'solid' }}
         >
-          <Container
-            style={{
-              maxHeight: '100px',
-              height: 'auto',
-            }}
-          >
+          <Container>
             <Container>
+              <Container
+                sx={{
+                  md: {
+                    maxWidth: '10%',
+                    width: '20%',
+                  },
+                }}
+              >
+                <FormControl
+                  sx={{
+                    width: { xs: '100%', md: '40%' },
+                    paddingRight: { md: '3rem' },
+                  }}
+                  // fullWidth="true"
+                  type="text"
+                  defaultValue={firstName}
+                  onChange={handleChange}
+                >
+                  <InputLabel htmlFor="first-name">First Name</InputLabel>
+                  <Input
+                    id="first-name"
+                    aria-describedby="first-name"
+                    variant="outlined"
+                  />
+                </FormControl>
+                <FormControl
+                  type="text"
+                  // fullWidth="true"
+                  sx={{ width: { xs: '100%', md: '45%' } }}
+                  defaultValue={lastName}
+                  onChange={handleChange}
+                >
+                  <InputLabel htmlFor="last-name">Last Name</InputLabel>
+                  <Input id="last-name" aria-describedby="last-name" />
+                </FormControl>
+              </Container>
+              <Container
+                sx={{
+                  md: {
+                    display: 'flex',
+                    flexDirection: 'row',
+                  },
+                }}
+              >
+                <FormControl
+                  name="email"
+                  // fullWidth="true"
+                  sx={{
+                    width: { xs: '100%', md: '45%' },
+                    paddingRight: { md: '3rem' },
+                    // padding: '3rem',
+                  }}
+                  type="text"
+                  defaultValue={email}
+                  onChange={handleChange}
+                >
+                  <InputLabel htmlFor="email">Email</InputLabel>
+                  <Input id="email" aria-describedby="email" />
+                </FormControl>
+                <FormControl
+                  fullWidth="true"
+                  type="text"
+                  sx={{ width: { xs: '100%', md: '45%' } }}
+                  defaultValue={phoneNumber}
+                  onChange={handleChange}
+                >
+                  <InputLabel htmlFor="phoneNumber">Phone Number</InputLabel>
+                  <Input id="phoneNumber" aria-describedby="Phone Number" />
+                </FormControl>
+              </Container>
               <FormControl
                 fullWidth="true"
-                type="text"
-                defaultValue={firstName}
-                onChange={handleChange}
-              >
-                <InputLabel htmlFor="first-name">First Name</InputLabel>
-                <Input id="first-name" aria-describedby="first-name" />
-              </FormControl>
-              <FormControl
-                fullWidth="true"
-                type="text"
-                defaultValue={lastName}
-                onChange={handleChange}
-              >
-                <InputLabel htmlFor="last-name">Last Name</InputLabel>
-                <Input id="last-name" aria-describedby="last-name" />
-              </FormControl>
-
-              <FormControl
-                name="email"
-                type="text"
-                defaultValue={email}
-                onChange={handleChange}
-              >
-                <InputLabel htmlFor="email">Email</InputLabel>
-                <Input id="email" aria-describedby="email" />
-              </FormControl>
-              <FormControl
-                type="text"
-                defaultValue={phoneNumber}
-                onChange={handleChange}
-              >
-                <InputLabel htmlFor="phoneNumber">Phone Number</InputLabel>
-                <Input id="phoneNumber" aria-describedby="Phone Number" />
-              </FormControl>
-              <FormControl
                 type="text"
                 defaultValue={address}
                 onChange={handleChange}
@@ -148,6 +179,8 @@ function Checkout(props) {
                 <Input id="address" aria-describedby="address" />
               </FormControl>
               <FormControl
+                // fullWidth="true"
+                spacing={2}
                 type="text"
                 defaultValue={city}
                 onChange={handleChange}
@@ -157,7 +190,7 @@ function Checkout(props) {
               </FormControl>
 
               <FormControl
-                fullWidth="true"
+                // fullWidth="true"
                 type="text"
                 defaultValue={state}
                 onChange={handleChange}
@@ -166,6 +199,7 @@ function Checkout(props) {
                 <Input id="state" aria-describedby="state" />
               </FormControl>
               <FormControl
+                // fullWidth="true"
                 type="text"
                 defaultValue={zipCode}
                 onChange={handleChange}
@@ -173,14 +207,13 @@ function Checkout(props) {
                 <InputLabel htmlFor="zipcode">Zip Code</InputLabel>
                 <Input id="zipcode" aria-describedby="zipcode" />
               </FormControl>
-            </Container>
-            <Container>
+
               <StripeContainer stripeProps={stripeProps} />
             </Container>
           </Container>
         </Grid>
 
-        <Grid container xs={6}>
+        <Grid container xs={12} md={6}>
           <Card
             className="flex-fill"
             style={{
@@ -190,7 +223,6 @@ function Checkout(props) {
               border: 'none',
             }}
           >
-            <CardHeader title={`Order Total: ${cartTotal}`}></CardHeader>
             <Typography>Your Order</Typography>
             {cart_details === undefined
               ? 'Cart Empty'
