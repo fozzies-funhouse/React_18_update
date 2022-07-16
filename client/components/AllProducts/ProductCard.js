@@ -1,8 +1,25 @@
 import React from 'react';
-import { Card, CardContent, Typography, Grid, CardMedia } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Grid,
+  CardMedia,
+  CardActions,
+  Button,
+} from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
+
+import { addToCart } from '../../store/singleProduct';
+import './AllProducts.css';
 
 const ProductCard = ({ product }) => {
+  const user = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+
   // Generating number of stars
   const productStars = () => {
     let str = '';
@@ -22,6 +39,10 @@ const ProductCard = ({ product }) => {
           marginTop: 15,
           maxWidth: 480,
         }}
+        className='card'
+        component={motion.div}
+        whileInView={{ scale: [0.5, 1] }}
+        transition={{ duration: 0.7 }}
       >
         <Link
           to={`/products/${product.id}`}
@@ -37,8 +58,8 @@ const ProductCard = ({ product }) => {
               padding: 10,
             }}
           />
-          <CardContent>
-            <Grid container direction={'column'} spacing={1.5}>
+          <Grid container direction={'column'} spacing={1.5}>
+            <CardContent>
               <Grid item>
                 <Typography
                   variant='h5'
@@ -62,9 +83,48 @@ const ProductCard = ({ product }) => {
                   Ratings: {productStars()} {product.rating}
                 </Typography>
               </Grid>
-            </Grid>
-          </CardContent>
+            </CardContent>
+          </Grid>
         </Link>
+
+        <CardActions>
+          <Grid
+            container
+            direction='row'
+            justifyContent='center'
+            alignItems='center'
+          >
+            <Button
+              size='small'
+              style={{
+                backgroundColor: '#f0cb11',
+                color: 'black',
+                marginBottom: 10,
+                padding: 10,
+              }}
+              onClick={() => {
+                // Check for inventory
+                if (product.inventory < 1) {
+                  alert(
+                    `🤕  Sorry we have ${product.inventory} in stock
+                                            ¯l_(ツ)_/¯`
+                  );
+                } else {
+                  // Check for user id
+                  if (user.id) {
+                    dispatch(addToCart(product.id, user.id));
+                  } else {
+                    dispatch(addToCart(product.id));
+                  }
+                }
+              }}
+            >
+              Add to Cart
+            </Button>
+          </Grid>
+        </CardActions>
+
+        {/* </Grid> */}
       </Card>
     </>
   );

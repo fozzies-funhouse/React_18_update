@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Grid } from '@mui/material';
-import { motion } from 'framer-motion';
 
 import { fetchProducts } from '../../store/products';
 import Filter from './Filter';
@@ -11,8 +10,6 @@ import './AllProducts.css';
 const AllProducts = (props) => {
   const [filter, setFilter] = useState('All');
   const [productsArr, setProductsArr] = useState([]);
-  //Framer motion piece of state
-  // const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
 
   const products = useSelector((state) => state.products);
   const dispatch = useDispatch();
@@ -31,9 +28,6 @@ const AllProducts = (props) => {
       );
       setProductsArr(filteredArr);
     }
-
-    // // Bring cards up again
-    // setAnimateCard([{ y: 0, opacity: 1 }]);
   }, [filter, products]);
 
   let tagsArr = ['All']; // Array of tags including 'All'
@@ -54,7 +48,7 @@ const AllProducts = (props) => {
           direction='row'
           justifyContent='space-evenly'
           alignItems='center'
-          style={{ padding: 20 }}
+          style={{ padding: 20, marginBottom: 20, marginTop: 15 }}
         >
           {tagsArr.map((tag, idx) => (
             <Grid
@@ -64,13 +58,7 @@ const AllProducts = (props) => {
               key={idx}
               className='card-item'
               onClick={() => {
-                // // Drop cards down
-                // setAnimateCard([{ y: 100, opacity: 0 }]);
-
-                // // We need a second for the animation to take place
-                // setTimeout(() => {
                 setFilter(tag);
-                // }, 1000);
               }}
             >
               <Filter tag={tag} value={tag} />
@@ -85,6 +73,7 @@ const AllProducts = (props) => {
           justifyContent='center'
           alignItems='center'
           style={{ marginBottom: 60 }} //Footer is overlapping this fixes it.
+          spacing={5}
         >
           {productsArr.length > 0 ? (
             productsArr.map((product) => (
@@ -94,14 +83,9 @@ const AllProducts = (props) => {
                 md={6}
                 lg={4}
                 key={product.id}
-                // className='card-item'
-                // component={motion.div} // Framer motion component
-                // transition={{
-                //   duration: 0.5,
-                //   ease: 'easeInOut',
-                //   delayChildren: 0.2,
-                // }}
-                // animate={animateCard}
+                style={{
+                  marginTop: 30,
+                }}
               >
                 <ProductCard product={product} />
               </Grid>
