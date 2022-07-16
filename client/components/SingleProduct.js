@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { connect } from 'react-redux';
 import { fetchProduct, addToCart } from '../store/singleProduct';
 import { fetchCart } from '../store/cart';
 import SingleProduct3D from './SingleProduct/SingleProduct3D';
@@ -13,11 +12,9 @@ import {
   Typography,
   Grid,
   Button,
-  Select,
-  MenuItem,
+  Tooltip,
 } from '@mui/material';
 const SingleProduct = (props) => {
-  // const [qty, setQty] = useState(1);
   // Pulling state from redux
   const user = useSelector((state) => state.auth);
   const product = useSelector((state) => state.product);
@@ -26,10 +23,6 @@ const SingleProduct = (props) => {
   const dispatch = useDispatch();
 
   const id = props.match.params.id; // product ID variable
-
-  // const handleChange = (event) => {
-  //   setQty(event.target.value);
-  // };
 
   useEffect(() => {
     dispatch(fetchProduct(id));
@@ -60,24 +53,31 @@ const SingleProduct = (props) => {
             justifyContent='center'
             alignItems='center'
           >
-            <Grid
-              item
-              xs={12}
-              md={8}
-              lg={8}
-              style={{ height: 600, width: 600 }}
+            <Tooltip
+              title='Drag to interact'
+              placement='right-end'
+              arrow='true'
             >
-              {/* This is the 3D Scene  it only renders if is items 1-9 the
+              <Grid
+                item
+                xs={12}
+                md={8}
+                lg={8}
+                style={{ height: 600, width: 600 }}
+              >
+                {/* This is the 3D Scene  it only renders if is items 1-9 the
                   rest renders the product pic */}
-              {id < ShoeModel.length ? (
-                <SingleProduct3D id={id} />
-              ) : (
-                <img
-                  src={product.image_url.slice(7)}
-                  style={{ height: 600, width: 600 }}
-                />
-              )}
-            </Grid>
+                {id < ShoeModel.length ? (
+                  <SingleProduct3D id={id} />
+                ) : (
+                  <img
+                    src={product.image_url.slice(7)}
+                    style={{ height: 600, width: 600 }}
+                  />
+                )}
+              </Grid>
+            </Tooltip>
+
             <Grid item xs={10} md={4} lg={4}>
               <Card elevation={5}>
                 <CardContent>
@@ -126,28 +126,6 @@ const SingleProduct = (props) => {
                         </Typography>
                       </Grid>
                     )}
-                    {/* <Grid item style={{ marginLeft: 20 }}>
-                      Qty:
-                      <Select
-                        label='Qty'
-                        type='number'
-                        placeholder='Qty'
-                        onChange={handleChange}
-                        name='Qty'
-                        value={qty}
-                        style={{
-                          marginLeft: 10,
-                          width: 60,
-                          height: 40,
-                        }}
-                      >
-                        {selectOptions.map((item, idx) => (
-                          <MenuItem value={idx} key={idx}>
-                            {idx}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </Grid> */}
 
                     <Grid item alignSelf={'center'}>
                       <Button
@@ -168,13 +146,9 @@ const SingleProduct = (props) => {
                           } else {
                             // Check for user id
                             if (user.id) {
-                              // for (let i = 0; i < qty; i++) {
-                                dispatch(addToCart(id, user.id));
-                              // }
+                              dispatch(addToCart(id, user.id));
                             } else {
-                              // for (let i = 0; i < qty; i++) {
-                                dispatch(addToCart(id));
-                              // }
+                              dispatch(addToCart(id));
                             }
                           }
                         }}
@@ -203,9 +177,7 @@ const SingleProduct = (props) => {
                 >
                   Product Description
                 </Typography>
-                <Typography variant='body1'>
-                 {product.description}
-                </Typography>
+                <Typography variant='body1'>{product.description}</Typography>
               </CardContent>
             </Card>
           </Grid>
