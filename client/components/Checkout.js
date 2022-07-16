@@ -114,14 +114,13 @@ function Checkout(props) {
                 defaultValue={firstName}
                 onChange={handleChange}
               >
-                <InputLabel htmlFor="first-name">First Name</InputLabel>
+                <InputLabel htmlFor="first-name" margin="dense">
+                  First Name
+                </InputLabel>
                 <Input
                   id="first-name"
                   aria-describedby="first-name"
                   variant="outlined"
-                  sx={{
-                    maxWidth: '600px',
-                  }}
                 />
               </FormControl>
               <FormControl
@@ -246,18 +245,25 @@ function Checkout(props) {
             }}
             onClick={() => setExpanded(!expanded)}
           >
-            Click me
+            {!expanded ? 'View Your Order' : 'Close Order Review'}
           </h1>
           <Collapse in={expanded}>
-            <Typography>Your Order</Typography>
             {cart_details === undefined
               ? 'Cart Empty'
               : cart_details.map((item) => (
-                  <Container key={item.id}>
+                  <Container
+                    key={item.id}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
                     <CardMedia
                       component="img"
                       image={item.product.image_url.slice(7)}
-                      style={{ height: 'auto' }}
+                      style={{ height: 'auto', maxWidth: '60%' }}
                       fluid="true"
                     />
                     <li>{item.product.name}</li>
