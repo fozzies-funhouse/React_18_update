@@ -211,12 +211,12 @@ function Checkout(props) {
             >
               {!payExpanded ? 'Pay For Your Order' : 'Hide Credit Card Details'}
             </h1>
-            <Collapse in={payExpanded} style={{ width: '100%' }}>
-              <Container>
-                <StripeContainer stripeProps={stripeProps} />
-              </Container>
-            </Collapse>
           </Grid>
+          <Collapse in={payExpanded} style={{ width: '100%' }}>
+            <Container>
+              <StripeContainer stripeProps={stripeProps} />
+            </Container>
+          </Collapse>
         </Grid>
 
         <Grid
