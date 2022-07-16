@@ -1,0 +1,19 @@
+.filter-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: #b8b8b8;
+}
+
+.filter-item:hover {
+  background-color: #464646;
+}
+
+.filter-image {
+  max-height: 60%;
+  max-width: 60%;
+}
