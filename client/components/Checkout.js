@@ -16,6 +16,7 @@ import {
   InputLabel,
   FormHelperText,
   Input,
+  Collapse,
 } from '@mui/material';
 
 import { stripeCheckout } from '../store/stripeCheckout';
@@ -35,6 +36,8 @@ function Checkout(props) {
 
   const { getCart, cart, checkout, user } = props;
   const { cart_details } = cart;
+
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     getCart(user.id);
@@ -89,140 +92,163 @@ function Checkout(props) {
         Order Total: ${cartTotal}
       </h1>
       <hr></hr>
-      <Grid container xs={12} style={{ border: 'solid' }}>
-        <Grid
-          container
-          xs={12}
-          md={12}
-          lg={12}
-          style={{ maxHeight: '33%', border: 'solid' }}
-        >
+      <Grid container>
+        <Grid item xs={12} style={{ maxHeight: 'auto', border: 'solid' }}>
           <Container>
-            <Container>
-              <Container
+            <Container
+              sx={{
+                md: {
+                  maxWidth: '10%',
+                  width: '20%',
+                },
+              }}
+            >
+              <FormControl
                 sx={{
-                  md: {
-                    maxWidth: '10%',
-                    width: '20%',
-                  },
+                  width: { xs: '100%', md: '40%' },
+                  paddingRight: { md: '3rem' },
+                  paddingBottom: '3rem',
                 }}
+                // fullWidth="true"
+                type="text"
+                defaultValue={firstName}
+                onChange={handleChange}
               >
-                <FormControl
+                <InputLabel htmlFor="first-name">First Name</InputLabel>
+                <Input
+                  id="first-name"
+                  aria-describedby="first-name"
+                  variant="outlined"
                   sx={{
-                    width: { xs: '100%', md: '40%' },
-                    paddingRight: { md: '3rem' },
+                    maxWidth: '600px',
                   }}
-                  // fullWidth="true"
-                  type="text"
-                  defaultValue={firstName}
-                  onChange={handleChange}
-                >
-                  <InputLabel htmlFor="first-name">First Name</InputLabel>
-                  <Input
-                    id="first-name"
-                    aria-describedby="first-name"
-                    variant="outlined"
-                  />
-                </FormControl>
-                <FormControl
-                  type="text"
-                  // fullWidth="true"
-                  sx={{ width: { xs: '100%', md: '45%' } }}
-                  defaultValue={lastName}
-                  onChange={handleChange}
-                >
-                  <InputLabel htmlFor="last-name">Last Name</InputLabel>
-                  <Input id="last-name" aria-describedby="last-name" />
-                </FormControl>
-              </Container>
-              <Container
-                sx={{
-                  md: {
-                    display: 'flex',
-                    flexDirection: 'row',
-                  },
-                }}
-              >
-                <FormControl
-                  name="email"
-                  // fullWidth="true"
-                  sx={{
-                    width: { xs: '100%', md: '45%' },
-                    paddingRight: { md: '3rem' },
-                    // padding: '3rem',
-                  }}
-                  type="text"
-                  defaultValue={email}
-                  onChange={handleChange}
-                >
-                  <InputLabel htmlFor="email">Email</InputLabel>
-                  <Input id="email" aria-describedby="email" />
-                </FormControl>
-                <FormControl
-                  fullWidth="true"
-                  type="text"
-                  sx={{ width: { xs: '100%', md: '45%' } }}
-                  defaultValue={phoneNumber}
-                  onChange={handleChange}
-                >
-                  <InputLabel htmlFor="phoneNumber">Phone Number</InputLabel>
-                  <Input id="phoneNumber" aria-describedby="Phone Number" />
-                </FormControl>
-              </Container>
-              <FormControl
-                fullWidth="true"
-                type="text"
-                defaultValue={address}
-                onChange={handleChange}
-              >
-                <InputLabel htmlFor="address">Address</InputLabel>
-                <Input id="address" aria-describedby="address" />
+                />
               </FormControl>
               <FormControl
+                type="text"
                 // fullWidth="true"
-                spacing={2}
-                type="text"
-                defaultValue={city}
+                sx={{ width: { xs: '100%', md: '45%' } }}
+                margin="dense"
+                defaultValue={lastName}
                 onChange={handleChange}
               >
-                <InputLabel htmlFor="city">City</InputLabel>
-                <Input id="city" aria-describedby="city" />
+                <InputLabel htmlFor="last-name">Last Name</InputLabel>
+                <Input id="last-name" aria-describedby="last-name" />
               </FormControl>
-
-              <FormControl
-                // fullWidth="true"
-                type="text"
-                defaultValue={state}
-                onChange={handleChange}
-              >
-                <InputLabel htmlFor="state">State</InputLabel>
-                <Input id="state" aria-describedby="state" />
-              </FormControl>
-              <FormControl
-                // fullWidth="true"
-                type="text"
-                defaultValue={zipCode}
-                onChange={handleChange}
-              >
-                <InputLabel htmlFor="zipcode">Zip Code</InputLabel>
-                <Input id="zipcode" aria-describedby="zipcode" />
-              </FormControl>
-
-              <StripeContainer stripeProps={stripeProps} />
             </Container>
+            <Container
+              sx={{
+                md: {
+                  display: 'flex',
+                  flexDirection: 'row',
+                },
+              }}
+            >
+              <FormControl
+                name="email"
+                // fullWidth="true"
+                sx={{
+                  width: { xs: '100%', md: '45%' },
+                  paddingRight: { md: '3rem' },
+                  // padding: '3rem',
+                }}
+                type="text"
+                defaultValue={email}
+                onChange={handleChange}
+              >
+                <InputLabel htmlFor="email">Email</InputLabel>
+                <Input
+                  id="email"
+                  aria-describedby="email"
+                  sx={{
+                    maxWidth: '85%',
+                  }}
+                />
+              </FormControl>
+              <FormControl
+                // fullWidth="true"
+                type="text"
+                sx={{ width: { xs: '100%', md: '45%' } }}
+                defaultValue={phoneNumber}
+                onChange={handleChange}
+              >
+                <InputLabel htmlFor="phoneNumber">Phone Number</InputLabel>
+                <Input id="phoneNumber" aria-describedby="Phone Number" />
+              </FormControl>
+            </Container>
+            <FormControl
+              sx={{
+                width: { xs: '100%' },
+                paddingRight: { md: '3rem' },
+                paddingBottom: '3rem',
+              }}
+              type="text"
+              defaultValue={address}
+              onChange={handleChange}
+            >
+              <InputLabel htmlFor="address">Address</InputLabel>
+              <Input id="address" aria-describedby="address" />
+            </FormControl>
+            <FormControl
+              // fullWidth="true"
+              sx={{
+                width: { xs: '100%', md: '40%' },
+                paddingRight: { md: '3rem' },
+              }}
+              type="text"
+              defaultValue={city}
+              onChange={handleChange}
+            >
+              <InputLabel htmlFor="city">City</InputLabel>
+              <Input id="city" aria-describedby="city" />
+            </FormControl>
+
+            <FormControl
+              // fullWidth="true"
+              type="text"
+              defaultValue={state}
+              onChange={handleChange}
+            >
+              <InputLabel htmlFor="state">State</InputLabel>
+              <Input id="state" aria-describedby="state" />
+            </FormControl>
+            <FormControl
+              // fullWidth="true"
+              type="text"
+              defaultValue={zipCode}
+              onChange={handleChange}
+            >
+              <InputLabel htmlFor="zipcode">Zip Code</InputLabel>
+              <Input id="zipcode" aria-describedby="zipcode" />
+            </FormControl>
+
+            <StripeContainer stripeProps={stripeProps} />
           </Container>
         </Grid>
 
-        <Grid container xs={12} md={6}>
-          <Card
-            className="flex-fill"
+        <Grid
+          item
+          xs={12}
+          sx={{
+            display: 'flex',
+            alignContent: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            border: 'solid',
+            width: '100%',
+          }}
+        >
+          <h1
             style={{
-              // width: '40rem',
-              // marginLeft: '5rem',
-              color: '#4e4c4b',
-              border: 'none',
+              backgroundColor: '#a8a8a8',
+
+              alignSelf: 'center',
             }}
+            onClick={() => setExpanded(!expanded)}
           >
+            Click me
+          </h1>
+          <Collapse in={expanded}>
             <Typography>Your Order</Typography>
             {cart_details === undefined
               ? 'Cart Empty'
@@ -231,7 +257,7 @@ function Checkout(props) {
                     <CardMedia
                       component="img"
                       image={item.product.image_url.slice(7)}
-                      style={{ height: '250px' }}
+                      style={{ height: 'auto' }}
                       fluid="true"
                     />
                     <li>{item.product.name}</li>
@@ -241,7 +267,7 @@ function Checkout(props) {
                     <hr></hr>
                   </Container>
                 ))}
-          </Card>
+          </Collapse>
         </Grid>
       </Grid>
     </Container>
