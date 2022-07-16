@@ -25,7 +25,7 @@ const Landing = (props) => {
   const products = [product1, product2, product3];
   return (
     <Container>
-      <Tooltip title='Drag to interact' placement='bottom' arrow='true'>
+      <Tooltip title='Drag to interact' placement='bottom' arrow={true}>
         <Grid item xs={12} md={12} lg={12}>
           <Landing3D />
         </Grid>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProduct, addToCart } from '../store/singleProduct';
-import { fetchCart } from '../store/cart';
-import SingleProduct3D from './SingleProduct/SingleProduct3D';
-import { ShoeModel } from './SingleProduct/Shoe';
+import { fetchProduct, addToCart } from '../../store/singleProduct';
+import { fetchCart } from '../../store/cart';
+import SingleProduct3D from './SingleProduct3D';
+import { ShoeModel } from './Shoe';
 
 import {
   Container,
@@ -56,7 +56,7 @@ const SingleProduct = (props) => {
             <Tooltip
               title='Drag to interact'
               placement='right-end'
-              arrow='true'
+              arrow={true}
             >
               <Grid
                 item
