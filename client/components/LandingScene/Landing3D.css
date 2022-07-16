@@ -2,9 +2,21 @@ canvas {
   height: 100vh;
   width: auto;
   position: relative;
+  /* z-index: -10; */
 }
 
 .landing-scene2 {
-  background: #151515;
+  background: rgba(0, 0, 0, 0.8);
   color: #fff;
+}
+
+.section-html {
+  position: absolute;
+  z-index: 10;
+}
+.section-html1 {
+  position: absolute;
+  z-index: 10;
+  color: #fff;
+  margin-left: 10;
 }

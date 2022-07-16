@@ -19,8 +19,6 @@ export const style = {
     style: {
       textDecoration: 'none',
       color: 'white',
-      alignself: 'center',
-      margin: 10
     },
   },
   link: {
@@ -34,7 +32,17 @@ export const style = {
     style: {
       marginRight: 2,
       fontFamily: 'monospace',
-      fontWeight: 700
+      fontWeight: 700,
+      textDecoration: 'none',
+      color: 'white'
+    }
+  },
+  navButton: {
+    style: {
+      backgroundColor: 'transparent',
+      border: 'none',
+      boxShadow: 'none',
+      fontWeight: 20
     }
   }
 };

@@ -21,9 +21,9 @@ function Landing3D(props) {
   let shoePosition = [];
 
   if (offset) {
-    shoePosition = [8, -2, -3];
+    shoePosition = [4, -2, -3];
   } else {
-    shoePosition = [-8, -2, -3];
+    shoePosition = [-2, -2, -3];
   }
 
   return (
@@ -33,7 +33,7 @@ function Landing3D(props) {
         shadows
         camera={{ position: [0, 8, 15], fov: 75 }}
         gl={{ alpha: true }}
-        className={offset ? 'landing-scene2' : 'landingscene1'}
+        className={offset ? '' : 'landingscene1'}
       >
         <ambientLight intensity={0.25} />
         <directionalLight
@@ -52,24 +52,9 @@ function Landing3D(props) {
         </directionalLight>
         <Suspense fallback={null}>
           <group position={shoePosition}>
-            <PresentationControls global rotation={[0, 0, 0]} polar={[0, 0.3]}>
+            <PresentationControls global rotation={[0, 0, 0]} polar={[-1, 1]}>
               <Shoe id={id} />
             </PresentationControls>
-
-            <mesh position={[0, -3.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-              <planeGeometry args={[20, 20]} />
-              <MeshReflectorMaterial
-                blur={[400, 100]}
-                resolution={1024}
-                mixBlur={1}
-                mixStrength={5}
-                depthScale={1}
-                minDepthThreshold={0.85}
-                color={offset ? '#151515' : '#c0c0c0'}
-                metalness={0.5}
-                roughness={0.8}
-              />
-            </mesh>
           </group>
           <Environment preset='dawn' />
         </Suspense>

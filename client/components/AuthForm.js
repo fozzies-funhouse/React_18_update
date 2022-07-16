@@ -10,6 +10,7 @@ import {
   FormControl,
   FormGroup,
   TextField,
+  DialogActions,
 } from '@mui/material';
 import { Signup } from './SignUpForm';
 
@@ -25,7 +26,13 @@ const AuthForm = (props) => {
   return (
     <div>
       <button
-        style={{ backgroundColor: 'transparent', border: 'none', boxShadow: 'none',  fontWeight: 20, height: '45px'}}
+        style={{
+          backgroundColor: 'transparent',
+          border: 'none',
+          boxShadow: 'none',
+          fontWeight: 20,
+          height: '45px',
+        }}
         onClick={handleOpen}
       >
         Login
@@ -68,9 +75,11 @@ const AuthForm = (props) => {
               {error && error.response && <div> {error.response.data} </div>}
             </form>
           </DialogContent>
-          <div style={{ display: 'flex' }}>
+          <DialogActions>
+            {/* <div style={{ display: 'flex' }}> */}
             Don't have an account? <Signup />
-          </div>
+            {/* </div> */}
+          </DialogActions>
         </Container>
       </Dialog>
     </div>

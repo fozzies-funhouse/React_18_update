@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { logout } from "../store";
-import Cart from "./Cart";
-import { style } from "./Utils/navUtils";
-import AppBar from "@mui/material/AppBar";
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Toolbar from "@mui/material/Toolbar";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { logout } from '../store';
+import Cart from './Cart';
+import { style } from './Utils/navUtils';
+import AppBar from '@mui/material/AppBar';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import { Login } from "./AuthForm";
+import { Login } from './AuthForm';
 
 const Navigation = ({ handleLogout, isLoggedIn }) => {
   const [userMenu, setUserMenu] = useState(false);
@@ -24,23 +24,21 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
 
   const loggedInView = () => {
     return (
-      <AppBar position="static">
-        <Container maxWidth="xl">
+      <AppBar position='static' sx={{ background: 'rgba(0,0,0,0.8)' }}>
+        <Container maxWidth='xl'>
           <Toolbar disableGutters>
-            <Link to="/" {...style.navLink}>
-              <Typography {...style.logo}>LOGO Placeholder</Typography>
-            </Link>
+            <button {...style.navButton}>
+              <Link to='/' {...style.navLink}>
+                HOT KICKS
+              </Link>
+            </button>
             <Box {...style.pageBox}>
-                <Link
-                  to={'/products'}
-                  onClick={closeUserMenu}
-                  {...style.navLink}
-                >
-                  <Typography>Products</Typography>
-                </Link>
+              <Link to={'/products'} onClick={closeUserMenu} {...style.navLink}>
+                <Typography>Products</Typography>
+              </Link>
             </Box>
-            <Box sx={{ display: "flex" }}>
-              <Tooltip title="Settings">
+            <Box sx={{ display: 'flex' }}>
+              <Tooltip title='Settings'>
                 <IconButton onClick={openUserMenu} sx={{ p: 0 }}>
                   <Avatar />
                 </IconButton>
@@ -52,13 +50,13 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
                 anchorEl={userMenu}
               >
                 <MenuItem onClick={closeUserMenu}>
-                  <Link to="/home" {...style.link}>
-                    <Typography textAlign="center">Profile</Typography>
+                  <Link to='/home' {...style.link}>
+                    <Typography textAlign='center'>Profile</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={closeUserMenu}>
-                  <Link to="/" {...style.link} onClick={handleLogout}>
-                    <Typography textAlign="center">Logout</Typography>
+                  <Link to='/' {...style.link} onClick={handleLogout}>
+                    <Typography textAlign='center'>Logout</Typography>
                   </Link>
                 </MenuItem>
               </Menu>
@@ -72,18 +70,21 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
 
   const guestView = () => {
     return (
-      <AppBar position="static">
-        <Container maxWidth="xl">
+      <AppBar position='static' sx={{ background: 'rgba(0,0,0,0.8)' }}>
+        <Container maxWidth='xl'>
           <Toolbar disableGutters>
-            <Link to="/" {...style.navLink}>
-              <Typography {...style.logo}>HOT KICKS</Typography>
-            </Link>
-            <Box {...style.pageBox}>
-              <Link to="/products" onClick={closeUserMenu} {...style.navLink}>
-                <Typography>Products</Typography>
+            <button {...style.navButton}>
+              <Link to='/' {...style.logo}>
+                HOT KICKS
               </Link>
-              <Login />
-            </Box>
+            </button>
+            <Box {...style.pageBox}></Box>
+            <button {...style.navButton}>
+              <Link to='/products' onClick={closeUserMenu} {...style.navLink}>
+                Products
+              </Link>
+            </button>
+            <Login />
             <Cart />
           </Toolbar>
         </Container>
@@ -108,7 +109,7 @@ const mapDispatch = (dispatch) => {
     createGuestCart() {
       if (!window.localStorage.cart) {
         window.localStorage.setItem(
-          "cart",
+          'cart',
           JSON.stringify({ cart_details: [] })
         );
       }
