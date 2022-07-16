@@ -32,7 +32,8 @@ const AllProducts = (props) => {
       );
       setProductsArr(filteredArr);
     }
-    // }, 500);
+    // }, 800);
+
     // Bring cards up again
     setAnimateCard([{ y: 0, opacity: 1 }]);
   }, [filter, products]);
@@ -96,13 +97,13 @@ const AllProducts = (props) => {
                 lg={4}
                 key={product.id}
                 className='card-item'
-                component={motion.div}
-                animate={animateCard}
+                component={motion.div} // Framer motion component
                 transition={{
-                  duration: 0.6,
+                  duration: 0.5,
                   ease: 'easeInOut',
                   delayChildren: 0.2,
                 }}
+                animate={animateCard}
               >
                 <ProductCard product={product} />
               </Grid>
