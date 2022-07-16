@@ -9,6 +9,7 @@ import {
   CardContent,
   Typography,
   Grid,
+  Tooltip,
 } from '@mui/material';
 
 import Landing3D from './LandingScene/Landing3D';
@@ -24,9 +25,11 @@ const Landing = (props) => {
   const products = [product1, product2, product3];
   return (
     <Container>
-      <Grid xs={12} md={12} lg={12}>
-        <Landing3D />
-      </Grid>
+      <Tooltip title='Drag to interact' placement='bottom' arrow={true}>
+        <Grid item xs={12} md={12} lg={12}>
+          <Landing3D />
+        </Grid>
+      </Tooltip>
 
       <Grid container>
         <Grid item container spacing={3}>

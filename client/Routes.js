@@ -6,7 +6,7 @@ import { Signup } from './components/SignUpForm';
 import Home from './components/Home';
 import { me } from './store';
 import AllProducts from './components/AllProducts/AllProducts';
-import SingleProduct from './components/SingleProduct';
+import SingleProduct from './components/SingleProduct/SingleProduct';
 import Landing from './components/LandingPage';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
