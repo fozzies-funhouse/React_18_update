@@ -24,12 +24,18 @@ const Landing = (props) => {
   const [product1, product2, product3] = productList;
   const products = [product1, product2, product3];
   return (
-    <Container>
-      <Tooltip title='Drag to interact' placement='bottom' arrow={true}>
-        <Grid item xs={12} md={12} lg={12}>
-          <Landing3D />
-        </Grid>
-      </Tooltip>
+    <>
+      {/* <Tooltip title='Drag to interact' placement='bottom' arrow={true}> */}
+      <Grid item xs={12} md={12} lg={12}>
+        <Landing3D id={1} />
+      </Grid>
+      <Grid item xs={12} md={12} lg={12}>
+        <Landing3D id={2} offset={true} />
+      </Grid>
+      <Grid item xs={12} md={12} lg={12}>
+        <Landing3D id={7} />
+      </Grid>
+      {/* </Tooltip> */}
 
       <Grid container>
         <Grid item container spacing={3}>
@@ -158,7 +164,7 @@ const Landing = (props) => {
           </Typography>
         </Grid>
       </Grid>
-    </Container>
+    </>
   );
 };
 
