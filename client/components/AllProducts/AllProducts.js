@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { Container, Grid } from '@mui/material';
+import { motion } from 'framer-motion';
 
 import { fetchProducts } from '../../store/products';
 import Filter from './Filter';
 import ProductCard from './ProductCard';
-import { Container, Grid } from '@mui/material';
-
-// let productsArr = [];
+import './AllProducts.css';
 
 const AllProducts = (props) => {
   const [filter, setFilter] = useState('All');
   const [productsArr, setProductsArr] = useState([]);
+  //Framer motion piece of state
+  const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
+
   const products = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
@@ -21,6 +23,7 @@ const AllProducts = (props) => {
   }, []);
 
   useEffect(() => {
+    // setTimeout(() => {
     if (filter === 'All') {
       setProductsArr(products);
     } else {
@@ -29,7 +32,9 @@ const AllProducts = (props) => {
       );
       setProductsArr(filteredArr);
     }
-
+    // }, 500);
+    // Bring cards up again
+    setAnimateCard([{ y: 0, opacity: 1 }]);
   }, [filter, products]);
 
   let tagsArr = ['All']; // Array of tags including 'All'
@@ -47,9 +52,9 @@ const AllProducts = (props) => {
         {/* Filters */}
         <Grid
           container
-          direction="row"
-          justifyContent="space-evenly"
-          alignItems="center"
+          direction='row'
+          justifyContent='space-evenly'
+          alignItems='center'
           style={{ padding: 20 }}
         >
           {tagsArr.map((tag, idx) => (
@@ -58,8 +63,15 @@ const AllProducts = (props) => {
               xs={4}
               md={1.8}
               key={idx}
+              className='card-item'
               onClick={() => {
-                setFilter(tag);
+                // Drop cards down
+                setAnimateCard([{ y: 100, opacity: 0 }]);
+
+                // We need a second for the animation to take place
+                setTimeout(() => {
+                  setFilter(tag);
+                }, 1000);
               }}
             >
               <Filter tag={tag} value={tag} />
@@ -70,14 +82,28 @@ const AllProducts = (props) => {
         {/* Product Card */}
         <Grid
           container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
+          direction='row'
+          justifyContent='center'
+          alignItems='center'
           style={{ marginBottom: 60 }} //Footer is overlapping this fixes it.
         >
           {productsArr.length > 0 ? (
             productsArr.map((product) => (
-              <Grid item xs={12} md={6} lg={4} key={product.id}>
+              <Grid
+                item
+                xs={12}
+                md={6}
+                lg={4}
+                key={product.id}
+                className='card-item'
+                component={motion.div}
+                animate={animateCard}
+                transition={{
+                  duration: 0.6,
+                  ease: 'easeInOut',
+                  delayChildren: 0.2,
+                }}
+              >
                 <ProductCard product={product} />
               </Grid>
             ))

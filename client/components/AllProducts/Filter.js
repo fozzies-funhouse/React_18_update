@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+
 import './AllProducts.css';
 
 const Filter = ({ tag }) => {
@@ -13,6 +14,7 @@ const Filter = ({ tag }) => {
       >
         <img className='filter-image' src={`./Tags/${tag}.png`} alt={tag} />
       </motion.div>
+      <div className='filter-tag'>{tag}</div>
     </>
   );
 };

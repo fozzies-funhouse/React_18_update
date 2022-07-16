@@ -11,9 +11,18 @@
 
 .filter-item:hover {
   background-color: #464646;
+  cursor: pointer;
 }
 
 .filter-image {
   max-height: 60%;
   max-width: 60%;
+}
+
+.filter-tag {
+  margin-left: 16px;
+}
+
+.card-item {
+  transition: all 0.5s ease-in-out;
 }
