@@ -23,7 +23,6 @@ const AllProducts = (props) => {
   }, []);
 
   useEffect(() => {
-    // setTimeout(() => {
     if (filter === 'All') {
       setProductsArr(products);
     } else {
@@ -32,7 +31,6 @@ const AllProducts = (props) => {
       );
       setProductsArr(filteredArr);
     }
-    // }, 800);
 
     // Bring cards up again
     setAnimateCard([{ y: 0, opacity: 1 }]);

@@ -24,7 +24,7 @@ const Landing = (props) => {
   const products = [product1, product2, product3];
   return (
     <Container>
-      <Grid xs={12} md={12} lg={12}>
+      <Grid item xs={12} md={12} lg={12}>
         <Landing3D />
       </Grid>
 

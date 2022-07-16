@@ -20,5 +20,3 @@ const Filter = ({ tag }) => {
 };
 
 export default Filter;
-
-// Nike converse Adidas vans jordans
