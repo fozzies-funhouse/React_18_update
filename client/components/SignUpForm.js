@@ -19,13 +19,15 @@ const SignUpForm = (props) => {
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
+    <div style={{ margin: 4}}>
       <button
         style={{
           backgroundColor: 'transparent',
           border: 'none',
+          boxShadow: 'none',
           color: '#e2725b',
           padding: 0,
+          margin: 0,
         }}
         onClick={handleOpen}
       >

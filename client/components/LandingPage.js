@@ -53,109 +53,30 @@ const Landing = (props) => {
           <Grid item xs={12} md={5} sx={{ alignSelf: 'center' }}>
             <Card sx={{ textAlign: 'center' }} elevation={5}>
               <CardContent>
-                <CardHeader title='About the Product' />
+                <CardHeader title='About Us' />
                 <Typography
                   sx={{ fontSize: 12 }}
                   color='text.secondary'
                   paragraph
                 >
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Commodi officiis ipsa, culpa non quos nulla, nisi sequi
-                  distinctio minima vitae in quod adipisci, rem dolore?
-                  <br />
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Commodi officiis ipsa, culpa non quos nulla, nisi sequi
-                  distinctio minima vitae in quod adipisci, rem dolore?
-                  <br />
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Commodi officiis ipsa, culpa non quos nulla, nisi sequi
-                  distinctio minima vitae in quod adipisci, rem dolore?
+                  "In an age where online shopping is rapidly growing users
+                  should have the ability to interact with the product they are
+                  looking to buy. To tackle this problem we used React three
+                  fiber to transform the traditional model of an e-commerce site
+                  into an Immersive 3D Experience where users can see their
+                  product in 360 degrees. This will allow our users to have a
+                  retail experience in our online shopping environment!"
+                </Typography>
+                <Typography
+                  sx={{ fontSize: 12, textAlign: 'right', mr: 5 }}
+                  color='text.secondary'
+                  paragraph
+                >
+                  - Team Hot Kicks
                 </Typography>
               </CardContent>
             </Card>
           </Grid>
-        </Grid>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        container
-        direction='row'
-        justifyContent='space-evenly'
-        alignItems='center'
-        sx={{ mb: 10 }}
-      >
-        <Grid
-          container
-          item
-          xs={5.8}
-          md={3}
-          direction='column'
-          alignItems='center'
-        >
-          <Avatar
-            alt='Allah Jackson'
-            src='/allah.png'
-            sx={{ height: 100, width: 100, mt: 5 }}
-          />
-          <Typography variant='bio' color='text.secondary' paragraph>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius ullam
-            earum esse numquam?
-          </Typography>
-        </Grid>
-        <Grid
-          container
-          item
-          xs={5.8}
-          md={3}
-          direction='column'
-          alignItems='center'
-        >
-          <Avatar
-            alt='Allah Jackson'
-            src='/allah.png'
-            sx={{ height: 100, width: 100, mt: 5 }}
-          />
-          <Typography variant='bio' color='text.secondary' paragraph>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius ullam
-            earum esse numquam?
-          </Typography>
-        </Grid>
-        <Grid
-          container
-          item
-          xs={5.8}
-          md={3}
-          direction='column'
-          alignItems='center'
-        >
-          <Avatar
-            alt='Allah Jackson'
-            src='/allah.png'
-            sx={{ height: 100, width: 100, mt: 5 }}
-          />
-          <Typography variant='bio' color='text.secondary' paragraph>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius ullam
-            earum esse numquam?
-          </Typography>
-        </Grid>
-        <Grid
-          container
-          item
-          xs={5.8}
-          md={3}
-          direction='column'
-          alignItems='center'
-        >
-          <Avatar
-            alt='Allah Jackson'
-            src='/allah.png'
-            sx={{ height: 100, width: 100, mt: 5 }}
-          />
-          <Typography variant='bio' color='text.secondary' paragraph>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius ullam
-            earum esse numquam?
-          </Typography>
         </Grid>
       </Grid>
     </Container>
