@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Pagination, PaginationItem } from '@mui/material';
 
 import { fetchProducts } from '../../store/products';
 import Filter from './Filter';
 import ProductCard from './ProductCard';
 import './AllProducts.css';
+
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import usePagination from './UsePagination';
 
 const AllProducts = (props) => {
   const [filter, setFilter] = useState('All');
@@ -39,15 +43,26 @@ const AllProducts = (props) => {
   }
   tagsArray();
 
+  const [page, setPage] = useState(1);
+  const PER_PAGE = 3;
+
+  const count = Math.ceil(productsArr.length / PER_PAGE);
+  const _DATA = usePagination(productsArr, PER_PAGE);
+
+  const handleChange = (e, p) => {
+    setPage(p);
+    _DATA.jump(p);
+  };
+
   return (
     <>
       <Container>
         {/* Filters */}
         <Grid
           container
-          direction='row'
-          justifyContent='space-evenly'
-          alignItems='center'
+          direction="row"
+          justifyContent="space-evenly"
+          alignItems="center"
           style={{ padding: 20, marginBottom: 20, marginTop: 15 }}
         >
           {tagsArr.map((tag, idx) => (
@@ -56,7 +71,7 @@ const AllProducts = (props) => {
               xs={4}
               md={1.8}
               key={idx}
-              className='card-item'
+              className="card-item"
               onClick={() => {
                 setFilter(tag);
               }}
@@ -69,14 +84,28 @@ const AllProducts = (props) => {
         {/* Product Card */}
         <Grid
           container
-          direction='row'
-          justifyContent='center'
-          alignItems='center'
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
           style={{ marginBottom: 60 }} //Footer is overlapping this fixes it.
           spacing={5}
         >
-          {productsArr.length > 0 ? (
-            productsArr.map((product) => (
+          <Pagination
+            count={count}
+            size="large"
+            page={page}
+            variant="outlined"
+            // shape="rounded"
+            onChange={handleChange}
+            renderItem={(item) => (
+              <PaginationItem
+                components={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                {...item}
+              />
+            )}
+          />
+          {_DATA.currentData().length > 0 ? (
+            _DATA.currentData().map((product) => (
               <Grid
                 item
                 xs={12}
