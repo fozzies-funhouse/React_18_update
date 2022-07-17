@@ -34,7 +34,7 @@ function Checkout(props) {
   const [state, setState] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
-  const { getCart, cart, checkout, user } = props;
+  const { getCart, cart, checkout, user, history } = props;
   const { cart_details } = cart;
 
   const [expanded, setExpanded] = useState(false);
@@ -78,6 +78,7 @@ function Checkout(props) {
     cartTotal: cartTotal,
     userID: user.id,
     email: localState.email,
+    history: history,
   };
 
   return (
