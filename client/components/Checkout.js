@@ -43,8 +43,6 @@ function Checkout(props) {
     getCart(user.id);
   }, []);
 
-  console.log('cart', cart);
-
   const [localState, setLocalState] = useState({
     firstName: user.firstName || '',
     lastName: user.lastName || '',
