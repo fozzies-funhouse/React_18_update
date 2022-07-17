@@ -2,21 +2,31 @@ canvas {
   height: 100vh;
   width: auto;
   position: relative;
+  touch-action: none;
   /* z-index: -10; */
 }
 
 .landing-scene2 {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   color: #fff;
 }
 
 .section-html {
-  position: absolute;
-  z-index: 10;
+  text-align: center;
+}
+
+.section-button {
+  align-self: center;
+  padding-top: 5px;
+  text-align: center;
+  border-radius: 980px;
+  background: #0071e3;
+  color: #fff;
+  max-width: 140px;
+  min-height: 40px;
+  margin-bottom: 80px;
+  margin-top: 20px;
 }
 .section-html1 {
-  position: absolute;
-  z-index: 10;
-  color: #fff;
-  margin-left: 10;
+  text-align: right;
 }

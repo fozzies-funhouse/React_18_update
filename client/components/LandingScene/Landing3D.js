@@ -1,13 +1,7 @@
-import React, { Suspense, useRef } from 'react';
-import {
-  Environment,
-  PresentationControls,
-  MeshReflectorMaterial,
-  useGLTF,
-} from '@react-three/drei';
+import React, { Suspense } from 'react';
+import { Environment, PresentationControls } from '@react-three/drei';
 import {
   Canvas, // Canvaas element
-  useFrame, // useFrame  hook for getting the animation loop each frame
 } from '@react-three/fiber';
 
 import Shoe from '../SingleProduct/Shoe';
@@ -21,9 +15,9 @@ function Landing3D(props) {
   let shoePosition = [];
 
   if (offset) {
-    shoePosition = [4, -2, -3];
+    shoePosition = [-1, -2, -1];
   } else {
-    shoePosition = [-2, -2, -3];
+    shoePosition = [1, -2, -1];
   }
 
   return (

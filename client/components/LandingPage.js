@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../store/products';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Avatar,
@@ -10,10 +11,12 @@ import {
   Typography,
   Grid,
   Tooltip,
+  Button,
 } from '@mui/material';
 
 import Landing3D from './LandingScene/Landing3D';
 import ProductCard from './AllProducts/ProductCard';
+import './LandingScene/Landing3D.css';
 
 const Landing = (props) => {
   const dispatch = useDispatch();
@@ -30,12 +33,34 @@ const Landing = (props) => {
         direction='row'
         justifyContent='center'
         alignItems='center'
+        // className='landing-scene1'
       >
-        <Grid item xs={12} md={8} lg={8}>
+        <Grid item xs={11} md={7} lg={7}>
           <Landing3D id={2} />
         </Grid>
-        <Grid item xs={12} md={4} lg={4}>
-          <h1 className='section-html'>Hello!</h1>
+        <Grid item xs={11} md={4} lg={4}>
+          <Typography
+            variant='h3'
+            className='section-html'
+            sx={{ marginBottom: '20px' }}
+          >
+            CLIO
+          </Typography>
+
+          <Typography
+            variant='h5'
+            className='section-html'
+            sx={{ marginBottom: '20px' }}
+          >
+            Creativity meets Design
+          </Typography>
+
+          <Link to={`/products`} style={{ textDecoration: 'none' }}>
+            <div className='section-button' style={{ marginLeft: '120px' }}>
+              {' '}
+              Get Started{' '}
+            </div>
+          </Link>
         </Grid>
       </Grid>
 
@@ -46,10 +71,30 @@ const Landing = (props) => {
         alignItems='center'
         className='landing-scene2'
       >
-        <Grid item xs={12} md={4} lg={4}>
-          <h1 className='section-html1'>Hello!</h1>
+        <Grid item xs={11} md={4} lg={4}>
+          <Typography
+            variant='h3'
+            className='section-html'
+            sx={{ marginBottom: '20px' }}
+          >
+            ERATO
+          </Typography>
+          <Typography
+            variant='h5'
+            className='section-html'
+            sx={{ marginBottom: '20px' }}
+          >
+            Slick and Confortable
+          </Typography>
+
+          <Link to={`/products`} style={{ textDecoration: 'none' }}>
+            <div className='section-button' style={{ marginLeft: '125px' }}>
+              {' '}
+              Get Started{' '}
+            </div>
+          </Link>
         </Grid>
-        <Grid item xs={12} md={8} lg={8}>
+        <Grid item xs={11} md={7} lg={7}>
           <Landing3D id={7} offset={true} />
         </Grid>
       </Grid>
