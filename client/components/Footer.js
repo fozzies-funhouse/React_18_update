@@ -1,26 +1,37 @@
 import React from 'react';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Container';
+import { Login } from './AuthForm';
+import { Signup } from './SignUpForm';
 
 const Footer = (props) => {
+  const helpOptions = ['Contact', 'Support', 'Privacy'];
+  const accountOptions = ['Login', 'Signup'];
   return (
-    <BottomNavigation
-      showLabels
-      sx={{
-        width: '100%',
-        position: 'fixed',
-        bottom: 0,
-      }}
+    <footer
+      style={{ background: 'rgba(0,0,0,0.8)', color: 'white', marginTop: 50  }}
     >
-      <BottomNavigationAction label='Facebook' icon={<FacebookIcon />} />
-      <BottomNavigationAction label='Instagram' icon={<InstagramIcon />} />
-      <BottomNavigationAction label='Twitter' icon={<TwitterIcon />} />
-      <BottomNavigationAction label='LinkedIn' icon={<LinkedInIcon />} />
-    </BottomNavigation>
+      <Box>
+        <Container sx={{ display: 'flex' }}>
+          <Box sx={{ flexDirection: 'row' }}>
+            <Box sx={{ borderBottom: '1px solid white' }}>Help</Box>
+            {helpOptions.map((option) => (
+              <Box>{option}</Box>
+            ))}
+          </Box>
+          <Box sx={{ flexDirection: 'row' }}>
+            <Box sx={{ borderBottom: '1px solid white' }}>Account</Box>
+            {accountOptions.map((option) => (
+              <Box>{option}</Box>
+            ))}
+          </Box>
+        </Container>
+        <Box sx={{ textAlign: 'center', mt: 2 }}>
+          Copyright &reg; {new Date().getFullYear()} Hot Kicks Inc. All rights
+          reserved.
+        </Box>
+      </Box>
+    </footer>
   );
 };
 

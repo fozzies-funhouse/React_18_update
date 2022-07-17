@@ -2,9 +2,12 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   components: {
-    BottomNavigationAction: {
+    MuiButton: {
       styleOverrides: {
-        color: 'white'
+        root: {
+          background: 'rgba(0,0,0,0.8)',
+          ":hover": {backgroundColor: 'rgba(0,0,0,0.8)'}
+        }
       }
     }
   },
