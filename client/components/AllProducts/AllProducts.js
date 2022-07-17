@@ -44,7 +44,7 @@ const AllProducts = (props) => {
   tagsArray();
 
   const [page, setPage] = useState(1);
-  const PER_PAGE = 3;
+  const PER_PAGE = 6;
 
   const count = Math.ceil(productsArr.length / PER_PAGE);
   const _DATA = usePagination(productsArr, PER_PAGE);
@@ -55,76 +55,83 @@ const AllProducts = (props) => {
   };
 
   return (
-    <>
-      <Container>
-        {/* Filters */}
-        <Grid
-          container
-          direction="row"
-          justifyContent="space-evenly"
-          alignItems="center"
-          style={{ padding: 20, marginBottom: 20, marginTop: 15 }}
-        >
-          {tagsArr.map((tag, idx) => (
+    <Container
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      {/* Filters */}
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-evenly"
+        alignItems="center"
+        style={{ padding: 20, marginBottom: 20, marginTop: 15 }}
+      >
+        {tagsArr.map((tag, idx) => (
+          <Grid
+            item
+            xs={4}
+            md={1.8}
+            key={idx}
+            className="card-item"
+            onClick={() => {
+              setFilter(tag);
+            }}
+          >
+            <Filter tag={tag} value={tag} />
+          </Grid>
+        ))}
+      </Grid>
+
+      {/* Product Card */}
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        style={{ marginBottom: 60 }} //Footer is overlapping this fixes it.
+        spacing={5}
+      >
+        {_DATA.currentData().length > 0 ? (
+          _DATA.currentData().map((product) => (
             <Grid
               item
-              xs={4}
-              md={1.8}
-              key={idx}
-              className="card-item"
-              onClick={() => {
-                setFilter(tag);
+              xs={12}
+              md={6}
+              lg={4}
+              key={product.id}
+              style={{
+                marginTop: 30,
               }}
             >
-              <Filter tag={tag} value={tag} />
+              <ProductCard product={product} />
             </Grid>
-          ))}
-        </Grid>
-
-        {/* Product Card */}
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          style={{ marginBottom: 60 }} //Footer is overlapping this fixes it.
-          spacing={5}
-        >
-          <Pagination
-            count={count}
+          ))
+        ) : (
+          <h3>Uh Oh, No Shoes!</h3>
+        )}
+      </Grid>
+      <Pagination
+        count={count}
+        size="large"
+        page={page}
+        variant="outlined"
+        style={{ alignSelf: 'center' }}
+        // shape="rounded"
+        onChange={handleChange}
+        renderItem={(item) => (
+          <PaginationItem
             size="large"
-            page={page}
-            variant="outlined"
-            // shape="rounded"
-            onChange={handleChange}
-            renderItem={(item) => (
-              <PaginationItem
-                components={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-                {...item}
-              />
-            )}
+            components={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+            {...item}
           />
-          {_DATA.currentData().length > 0 ? (
-            _DATA.currentData().map((product) => (
-              <Grid
-                item
-                xs={12}
-                md={6}
-                lg={4}
-                key={product.id}
-                style={{
-                  marginTop: 30,
-                }}
-              >
-                <ProductCard product={product} />
-              </Grid>
-            ))
-          ) : (
-            <h3>Uh Oh, No Shoes!</h3>
-          )}
-        </Grid>
-      </Container>
-    </>
+        )}
+      />
+    </Container>
   );
 };
 
