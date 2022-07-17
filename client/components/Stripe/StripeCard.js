@@ -26,8 +26,10 @@ const StripeCard = (props) => {
   }
 
   function redirectToHome() {
+    toggleModal();
+
     const logo = document.querySelector(
-      '#app > div > header > div > div > a > p'
+      '#app > div > header > div > div > button:nth-child(1) > a'
     );
     logo.click();
   }
@@ -109,7 +111,6 @@ const StripeCard = (props) => {
 
         checkout(cartTotal, userID, email);
         toggleModal();
-        // redirectToHome();
       }
       setPaymentLoading(false);
     } catch (error) {
@@ -151,7 +152,6 @@ const StripeCard = (props) => {
         open={modalVisible}
         onClose={(_, reason) => {
           if (reason === 'backdropClick') {
-            toggleModal();
             redirectToHome();
           }
         }}
