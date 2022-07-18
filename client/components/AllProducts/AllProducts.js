@@ -31,6 +31,10 @@ const AllProducts = (props) => {
         (product) => product.tags[0].category === filter
       );
       setProductsArr(filteredArr);
+      const paginationButton = document.querySelector(
+        '#app > div > div > div > nav > ul > li:nth-child(2) > button'
+      );
+      paginationButton.click();
     }
   }, [filter, products]);
 
@@ -122,6 +126,7 @@ const AllProducts = (props) => {
         variant="outlined"
         style={{ alignSelf: 'center' }}
         // shape="rounded"
+        defaultPage={1}
         onChange={handleChange}
         renderItem={(item) => (
           <PaginationItem
