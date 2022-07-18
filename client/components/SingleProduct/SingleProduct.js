@@ -44,7 +44,7 @@ const SingleProduct = (props) => {
   return (
     <>
       <Container>
-        <Grid container spacing={4} direction='column' alignItems='center'>
+        <Grid container spacing={4} direction='column' alignItems='center' style={{ minHeight: '90vh' }}>
           <Grid
             container
             item

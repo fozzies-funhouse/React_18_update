@@ -93,7 +93,7 @@ const AllProducts = (props) => {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        style={{ marginBottom: 60, height: '70vh' }} //Footer is overlapping this fixes it.
+        style={{ marginBottom: 60 }} //Footer is overlapping this fixes it.
         spacing={5}
       >
         {_DATA.currentData().length > 0 ? (
@@ -106,6 +106,7 @@ const AllProducts = (props) => {
               key={product.id}
               style={{
                 marginTop: 30,
+                height: '70vh'
               }}
             >
               <ProductCard product={product} />
