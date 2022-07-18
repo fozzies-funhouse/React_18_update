@@ -4,17 +4,10 @@ import { fetchCart, checkoutCart } from '../store/cart';
 
 import {
   Container,
-  Card,
-  CardHeader,
   CardMedia,
-  Typography,
   Grid,
-  Button,
   FormControl,
-  FormLabel,
-  FormGroup,
   InputLabel,
-  FormHelperText,
   Input,
   Collapse,
 } from '@mui/material';
@@ -22,7 +15,6 @@ import {
 import { stripeCheckout } from '../store/stripeCheckout';
 
 import StripeContainer from './Stripe/StripeContainer';
-import { padding } from '@mui/system';
 
 function Checkout(props) {
   const [firstName, setFirstName] = useState('');
@@ -34,7 +26,7 @@ function Checkout(props) {
   const [state, setState] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
-  const { getCart, cart, checkout, user } = props;
+  const { getCart, cart, checkout, user, history } = props;
   const { cart_details } = cart;
 
   const [expanded, setExpanded] = useState(false);
@@ -42,8 +34,6 @@ function Checkout(props) {
   useEffect(() => {
     getCart(user.id);
   }, []);
-
-  console.log('cart', cart);
 
   const [localState, setLocalState] = useState({
     firstName: user.firstName || '',
@@ -78,6 +68,7 @@ function Checkout(props) {
     cartTotal: cartTotal,
     userID: user.id,
     email: localState.email,
+    history: history,
   };
 
   return (
@@ -226,7 +217,7 @@ function Checkout(props) {
             alignContent: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
-            border: 'solid',
+            border: 'none',
             width: '100%',
             margin: '2rem',
           }}
@@ -260,7 +251,7 @@ function Checkout(props) {
                       style={{ height: 'auto', maxWidth: '60%' }}
                       fluid="true"
                     />
-                    <li>{item.product.name}</li>
+                    <h5>{item.product.name}</h5>
                     <li>
                       Qty: {item.product_quantity} @ ${item.product.price}
                     </li>
