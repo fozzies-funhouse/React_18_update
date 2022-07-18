@@ -16,14 +16,14 @@ const Footer = (props) => {
         <Container sx={{ display: 'flex' }}>
           <Box sx={{ flexDirection: 'row' }}>
             <Box sx={{ borderBottom: '1px solid white' }}>Help</Box>
-            {helpOptions.map((option) => (
-              <Box>{option}</Box>
+            {helpOptions.map((option, idx) => (
+              <Box key={idx}>{option}</Box>
             ))}
           </Box>
           <Box sx={{ flexDirection: 'row' }}>
             <Box sx={{ borderBottom: '1px solid white' }}>Account</Box>
-            {accountOptions.map((option) => (
-              <Box>{option}</Box>
+            {accountOptions.map((option, idx) => (
+              <Box key={idx}>{option}</Box>
             ))}
           </Box>
         </Container>
