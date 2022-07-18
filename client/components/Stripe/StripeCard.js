@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 
 const StripeCard = (props) => {
   const { stripeProps } = props;
-  const { checkout, cartTotal, userID, email } = stripeProps;
+  const { checkout, cartTotal, userID, email, history } = stripeProps;
   const stripe = useStripe();
   const elements = useElements();
   const options = useOptions();
@@ -26,10 +26,14 @@ const StripeCard = (props) => {
   }
 
   function redirectToHome() {
+    toggleModal();
+    console.log('props', props);
+
     const logo = document.querySelector(
-      '#app > div > header > div > div > a > p'
+      '#app > div > header > div > div > button:nth-child(1) > a'
     );
-    logo.click();
+    history.push('./');
+    // logo.click();
   }
 
   const spinnerDisplay = paymentLoading ? 'block' : 'none';
@@ -109,7 +113,6 @@ const StripeCard = (props) => {
 
         checkout(cartTotal, userID, email);
         toggleModal();
-        // redirectToHome();
       }
       setPaymentLoading(false);
     } catch (error) {
@@ -151,7 +154,6 @@ const StripeCard = (props) => {
         open={modalVisible}
         onClose={(_, reason) => {
           if (reason === 'backdropClick') {
-            toggleModal();
             redirectToHome();
           }
         }}
