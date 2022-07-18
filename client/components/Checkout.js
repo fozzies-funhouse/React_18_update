@@ -72,12 +72,11 @@ function Checkout(props) {
   };
 
   return (
-    <Container>
+    <Container style={{ minHeight: '90vh' }}>
       <h1
         style={{
           display: 'flex',
           justifyContent: 'center',
-          // color: '#808080',
         }}
       >
         Order Total: ${cartTotal}
