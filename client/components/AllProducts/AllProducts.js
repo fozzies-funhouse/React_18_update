@@ -44,7 +44,7 @@ const AllProducts = (props) => {
   tagsArray();
 
   const [page, setPage] = useState(1);
-  const PER_PAGE = 6;
+  const PER_PAGE = 3;
 
   const count = Math.ceil(productsArr.length / PER_PAGE);
   const _DATA = usePagination(productsArr, PER_PAGE);
@@ -93,7 +93,7 @@ const AllProducts = (props) => {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        style={{ marginBottom: 60 }} //Footer is overlapping this fixes it.
+        style={{ marginBottom: 60, height: '70vh' }} //Footer is overlapping this fixes it.
         spacing={5}
       >
         {_DATA.currentData().length > 0 ? (
