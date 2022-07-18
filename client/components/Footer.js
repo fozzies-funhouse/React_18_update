@@ -7,6 +7,7 @@ import { Signup } from './SignUpForm';
 const Footer = (props) => {
   const helpOptions = ['Contact', 'Support', 'Privacy'];
   const accountOptions = ['Login', 'Signup'];
+  const year = new Date().getFullYear()
   return (
     <footer
       style={{ background: 'rgba(0,0,0,0.8)', color: 'white', marginTop: 50  }}
@@ -27,7 +28,7 @@ const Footer = (props) => {
           </Box>
         </Container>
         <Box sx={{ textAlign: 'center', mt: 2 }}>
-          Copyright &reg; {new Date().getFullYear()} Hot Kicks Inc. All rights
+          Copyright &reg; {year} Hot Kicks Inc. All rights
           reserved.
         </Box>
       </Box>
