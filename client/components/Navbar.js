@@ -28,15 +28,16 @@ const Navigation = ({ handleLogout, isLoggedIn }) => {
         <Container maxWidth='xl'>
           <Toolbar disableGutters>
             <button {...style.navButton}>
-              <Link to='/' {...style.navLink}>
+              <Link to='/' {...style.logo}>
                 HOT KICKS
               </Link>
             </button>
-            <Box {...style.pageBox}>
+            <Box {...style.pageBox}></Box>
+            <button {...style.navButton}>
               <Link to={'/products'} onClick={closeUserMenu} {...style.navLink}>
-                <Typography>Products</Typography>
+                Products
               </Link>
-            </Box>
+            </button>
             <Box sx={{ display: 'flex' }}>
               <Tooltip title='Settings'>
                 <IconButton onClick={openUserMenu} sx={{ p: 0 }}>
