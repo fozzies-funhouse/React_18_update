@@ -38,7 +38,7 @@ const Footer = (props) => {
           </Box>
           <Box sx={{ flexDirection: 'row' }}>
             <Box sx={{ borderBottom: '1px solid white' }}>Account</Box>
-            {accountOptions.map((option, key) => (
+            {accountOptions.map((option, idx) => (
               <Box key={idx}>{option}</Box>
             ))}
           </Box>
